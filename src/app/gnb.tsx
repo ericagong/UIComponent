@@ -21,15 +21,16 @@ const ParentGnbItem = ({
   currentPath: ROUTE_PATH;
 }) => {
   const open = children.includes(currentPath);
+
   return (
     <li className={classNames('parent', `items-${children.length}`, { open })}>
       <Link href={link}>{name}</Link>
       <ul className='subRoutes'>
-        {/* 자식 route 존재하는 경우 재귀호출 */}
+        {/* 자식 route 재귀호출 */}
         {children.map((r) => {
           const route = routes[r];
           return (
-            <GnbItem route={route} currentPath={currentPath} key={route.key} />
+            <GnbItem key={route.key} route={route} currentPath={currentPath} />
           );
         })}
       </ul>

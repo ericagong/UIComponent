@@ -33,6 +33,7 @@ const VanillaWrapper = ({
 
 export default VanillaWrapper;
 
+// 순수 JS 코드
 // initiator(wrapper: HTMLDivElement) {
 //   const element = document.createElement('div');
 //   element.innerText = "Vanilla JS UI";

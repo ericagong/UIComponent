@@ -8,6 +8,7 @@ body {
   overflow-y: scroll;
   padding-left: 200px;
 
+  // modal 컴포넌트 내부 스크롤 차단
   &.no-scroll {
     overflow: hidden;
   }
@@ -122,7 +123,7 @@ aside {
     .subRoutes {
       opacity: 1;
     }
-    // 애니메이션 지정
+    // GNB 애니메이션 지정
     @for $i from 1 to 10 {
       &.items-#{$i} .subRoutes {
         height: calc(#{$i} * 40px);

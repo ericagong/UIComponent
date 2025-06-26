@@ -1,3 +1,5 @@
+import Accordions from './components/01_accordion';
+
 export const routePaths = [
   '/',
   '/accordion',
@@ -34,12 +36,12 @@ export type ChildRoute = BaseRoute & {
 };
 export type ROUTE = ParentRoute | ChildRoute;
 
-// Route 구조: ParentRoute -> ChildRoute -> ChildRoute -> ...
 export const routes: Record<ROUTE_PATH, ROUTE> = {
   '/': {
     key: '/',
     link: '/',
     name: 'root',
+    // gnbRootList.children
     children: [
       '/accordion',
       '/tabMenu',
@@ -65,7 +67,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/accordion',
     link: '/accordion',
     name: '01. 아코디언',
-    children: null,
+    children: Accordions,
   },
   '/tabMenu': {
     key: '/tabMenu',
@@ -171,7 +173,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
 };
 
-// GNB에서 사용하기 위해 ParentRoute인지 확인하는 함수
+// GNB에서 사용할 utils
 export const isParentRoute = (route: ROUTE): route is ParentRoute =>
   Array.isArray(route.children);
 

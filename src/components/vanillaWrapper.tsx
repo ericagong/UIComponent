@@ -23,7 +23,8 @@ const VanillaWrapper = ({
     <>
       {title && (
         <h3>
-          {title}. Vanilla {subTitle && <sub>{subTitle}</sub>}
+          {title}
+          {<sub>Vanilla</sub>}
         </h3>
       )}
       <div ref={wrapper} />

@@ -4,6 +4,7 @@ import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
 import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill';
 import InfiniteScrollEvent from './components/infiniteScroll/1_EventHandler';
 import InfiniteScrollIO from '@/components/infiniteScroll/2_IntersectionObserver';
+import HorizontalScrollBox from './components/horizontalScrollBox';
 
 export const routePaths = [
   '/',
@@ -20,7 +21,7 @@ export const routePaths = [
   '/infiniteScroll',
   '/infiniteScroll/1_EventHandler',
   '/infiniteScroll/2_IntersectionObserver',
-  '/scrollBox',
+  '/horizontalScrollBox',
   '/scrollSpy',
   '/snackbar',
   '/modal',
@@ -60,7 +61,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
       '/lineClamp',
       '/lazyLoading',
       '/infiniteScroll',
-      '/scrollBox',
+      '/horizontalScrollBox',
       '/scrollSpy',
       '/snackbar',
       '/modal',
@@ -159,11 +160,11 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: 'IO',
     children: InfiniteScrollIO,
   },
-  '/scrollBox': {
-    key: '/scrollBox',
-    link: '/scrollBox',
-    name: '08. 횡 스크롤 박스',
-    children: null,
+  '/horizontalScrollBox': {
+    key: '/horizontalScrollBox',
+    link: '/horizontalScrollBox',
+    name: '08. 수평 스크롤 박스',
+    children: HorizontalScrollBox,
   },
   '/scrollSpy': {
     key: '/scrollSpy',

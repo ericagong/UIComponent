@@ -1,5 +1,20 @@
 # UI-components
 
+## 구현 순서
+
+### step1. React로 각 컴포넌트 구현
+
+- 각 컴포넌트 별 PR 생성
+- 컴포넌트 구현 후 Wiki 작성 및 방법 별 장/단점 한계 정리
+
+### step2. Vanilla JS로 각 컴포넌트 재구현
+
+### step3. 리팩토링 및 배포
+
+- 재사용성/범용성 고려해 Headless UI / Compounded Compononet화
+- 스토리북 도입 고려
+- MonoRepo 고려
+
 ## 디렉토리 구조
 
 - `app`: app 전반에 대한 기본 view 제공

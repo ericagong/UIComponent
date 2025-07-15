@@ -1,4 +1,7 @@
-import Accordions from './components/01_accordion';
+import LazyLoadingScrollEvent from '@/components/lazyLoading/1_scrollEvent';
+import LazyLoadingIO from '@/components/lazyLoading/2_IntersectionObserver';
+import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
+import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill';
 
 export const routePaths = [
   '/',
@@ -8,6 +11,10 @@ export const routePaths = [
   '/textBox',
   '/lineClamp',
   '/lazyLoading',
+  '/lazyLoading/1_scrollEvent',
+  '/lazyLoading/2_IntersectionObserver',
+  '/lazyLoading/3_loadingAttribute',
+  '/lazyLoading/4_polyfill',
   '/infiniteScroll',
   '/scrollBox',
   '/scrollSpy',
@@ -41,7 +48,6 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/',
     link: '/',
     name: 'root',
-    // gnbRootList.children
     children: [
       '/accordion',
       '/tabMenu',
@@ -67,7 +73,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/accordion',
     link: '/accordion',
     name: '01. 아코디언',
-    children: Accordions,
+    children: null,
   },
   '/tabMenu': {
     key: '/tabMenu',
@@ -95,9 +101,38 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/lazyLoading': {
     key: '/lazyLoading',
-    link: '/lazyLoading',
+    link: '/lazyLoading/4_polyfill',
     name: '06. 지연 로딩',
-    children: null,
+    children: [
+      '/lazyLoading/1_scrollEvent',
+      '/lazyLoading/2_IntersectionObserver',
+      '/lazyLoading/3_loadingAttribute',
+      '/lazyLoading/4_polyfill',
+    ],
+  },
+  '/lazyLoading/1_scrollEvent': {
+    key: '/lazyLoading/1_scrollEvent',
+    link: '/lazyLoading/1_scrollEvent',
+    name: 'Scroll + Throttle',
+    children: LazyLoadingScrollEvent,
+  },
+  '/lazyLoading/2_IntersectionObserver': {
+    key: '/lazyLoading/2_IntersectionObserver',
+    link: '/lazyLoading/2_IntersectionObserver',
+    name: 'IO',
+    children: LazyLoadingIO,
+  },
+  '/lazyLoading/3_loadingAttribute': {
+    key: '/lazyLoading/3_loadingAttribute',
+    link: '/lazyLoading/3_loadingAttribute',
+    name: 'loading = lazy 속성',
+    children: LazyLoadingNative,
+  },
+  '/lazyLoading/4_polyfill': {
+    key: '/lazyLoading/4_polyfill',
+    link: '/lazyLoading/4_polyfill',
+    name: '폴리필',
+    children: LazyLoadingPolyfill,
   },
   '/infiniteScroll': {
     key: '/infiniteScroll',
@@ -173,7 +208,6 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
 };
 
-// GNB에서 사용할 utils
 export const isParentRoute = (route: ROUTE): route is ParentRoute =>
   Array.isArray(route.children);
 

@@ -1,0 +1,34 @@
+$gray: #aaa;
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fetchMore {
+  width: 100%;
+  height: 1px;
+  margin: 16px 0;
+  background: transparent;
+}
+
+.spinner {
+  display: block;
+  width: 36px;
+  margin: 0 auto;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 6px solid $gray;
+    border-color: $gray transparent $gray transparent;
+    animation: rotate 1.2s linear infinite;
+  }
+}

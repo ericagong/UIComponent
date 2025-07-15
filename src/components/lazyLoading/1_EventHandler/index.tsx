@@ -79,7 +79,7 @@ const LazyLoading = () => {
     window.addEventListener('scroll', throttledHandleImages);
     window.addEventListener('resize', throttledHandleImages);
 
-    // 최초 렌더링
+    // 최초 렌더링 시 트리거
     throttledHandleImages();
 
     return () => {
@@ -91,7 +91,7 @@ const LazyLoading = () => {
   return (
     <>
       <h2>지연 로딩</h2>
-      <h3>#1. Scroll Event + Throttle 기반 구현</h3>
+      <h3>#1. EventHandler(Scroll, Resize) + Throttle 기반 구현</h3>
       {data.map((src, index) => (
         <LazyImage
           key={index}

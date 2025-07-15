@@ -1,7 +1,9 @@
-import LazyLoadingScrollEvent from '@/components/lazyLoading/1_scrollEvent';
+import LazyLoadingScrollEvent from '@/components/lazyLoading/1_EventHandler';
 import LazyLoadingIO from '@/components/lazyLoading/2_IntersectionObserver';
 import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
 import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill';
+import InfiniteScrollEvent from './components/infiniteScroll/1_EventHandler';
+import InfiniteScrollIO from '@/components/infiniteScroll/2_IntersectionObserver';
 
 export const routePaths = [
   '/',
@@ -11,11 +13,13 @@ export const routePaths = [
   '/textBox',
   '/lineClamp',
   '/lazyLoading',
-  '/lazyLoading/1_scrollEvent',
+  '/lazyLoading/1_EventHandler',
   '/lazyLoading/2_IntersectionObserver',
   '/lazyLoading/3_loadingAttribute',
   '/lazyLoading/4_polyfill',
   '/infiniteScroll',
+  '/infiniteScroll/1_EventHandler',
+  '/infiniteScroll/2_IntersectionObserver',
   '/scrollBox',
   '/scrollSpy',
   '/snackbar',
@@ -104,15 +108,15 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: '/lazyLoading/4_polyfill',
     name: '06. 지연 로딩',
     children: [
-      '/lazyLoading/1_scrollEvent',
+      '/lazyLoading/1_EventHandler',
       '/lazyLoading/2_IntersectionObserver',
       '/lazyLoading/3_loadingAttribute',
       '/lazyLoading/4_polyfill',
     ],
   },
-  '/lazyLoading/1_scrollEvent': {
-    key: '/lazyLoading/1_scrollEvent',
-    link: '/lazyLoading/1_scrollEvent',
+  '/lazyLoading/1_EventHandler': {
+    key: '/lazyLoading/1_EventHandler',
+    link: '/lazyLoading/1_EventHandler',
     name: 'Scroll + Throttle',
     children: LazyLoadingScrollEvent,
   },
@@ -136,9 +140,24 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/infiniteScroll': {
     key: '/infiniteScroll',
-    link: '/infiniteScroll',
+    link: '/infiniteScroll/1_EventHandler',
     name: '07. 무한 스크롤',
-    children: null,
+    children: [
+      '/infiniteScroll/1_EventHandler',
+      '/infiniteScroll/2_IntersectionObserver',
+    ],
+  },
+  '/infiniteScroll/1_EventHandler': {
+    key: '/infiniteScroll/1_EventHandler',
+    link: '/infiniteScroll/1_EventHandler',
+    name: 'Scroll + Throttle',
+    children: InfiniteScrollEvent,
+  },
+  '/infiniteScroll/2_IntersectionObserver': {
+    key: '/infiniteScroll/2_IntersectionObserver',
+    link: '/infiniteScroll/2_IntersectionObserver',
+    name: 'IO',
+    children: InfiniteScrollIO,
   },
   '/scrollBox': {
     key: '/scrollBox',

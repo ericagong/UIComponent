@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import useLoading from '@/components/hook/useLoading';
 import cx from '../cx';
 import data from '../data';
 
@@ -12,20 +13,18 @@ export const LazyImage = ({
   height: number;
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoad = () => setIsLoading(false);
+  const { loading, setLoaded } = useLoading(true);
 
   return (
     <img
       ref={imgRef}
-      className={cx({ loading: isLoading })}
+      className={cx({ loading: loading })}
       alt=''
       width={width}
       height={height}
       src={src}
       loading='lazy'
-      onLoad={handleLoad}
+      onLoad={setLoaded}
     />
   );
 };

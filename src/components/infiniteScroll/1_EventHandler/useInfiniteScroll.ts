@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import useMockFetchAPI from '../useMockFetchAPI';
 import useThrottle from '@/components/hook/useThrottle';
 
 // TODO useThrottle 적용하기: stale closure 이슈
 const MORE_THRESHOLD = 10; // px
-// const DELAY = 1000; // ms
+const DELAY = 1000; // ms
 const useInfiniteScroll = () => {
   const { status, data, fetchMore } = useMockFetchAPI();
 
-  const handleInfiniteScroll = () => {
+  const handleInfiniteScroll = useCallback(() => {
+    // console.count('handleInfiniteScroll called');
     if (status === 'LOADING') return;
 
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -18,7 +19,7 @@ const useInfiniteScroll = () => {
     if (documentHeight - (scrollTop + viewportHeight) <= MORE_THRESHOLD) {
       fetchMore();
     }
-  };
+  }, [status, fetchMore]);
 
   // const throttledHandleInfiniteScroll = useThrottle(
   //   handleInfiniteScroll,

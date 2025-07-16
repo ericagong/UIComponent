@@ -1,11 +1,7 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import useLazyLoadHandler from './useLazyLoadHandler';
 import useThrottle from '@/components/hook/useThrottle';
+import useLoading from '@/components/hook/useLoading';
 import data from '../data';
 import cx from '../cx';
 
@@ -21,22 +17,9 @@ type LazyImageHandle = {
 
 const LazyImage = forwardRef<LazyImageHandle, LoadImageProps>(
   ({ src, width, height }, ref) => {
-    const imgRef = useRef<HTMLImageElement>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const handleLoad = () => setIsLoading(false);
-
-    const handleLazyLoad = () => {
-      const $img = imgRef.current;
-      // 이미 로드된 target 미처리
-      if (!$img || $img.getAttribute('src')) return;
-
-      const rect = $img.getBoundingClientRect();
-      // target 일부라도 viewport에 보이는 경우
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        $img.setAttribute('src', src);
-      }
-    };
+    const targetRef = useRef<HTMLImageElement>(null);
+    const { loading, setLoaded } = useLoading(true);
+    const { handleLazyLoad } = useLazyLoadHandler(targetRef);
 
     useImperativeHandle(
       ref,
@@ -48,13 +31,13 @@ const LazyImage = forwardRef<LazyImageHandle, LoadImageProps>(
 
     return (
       <img
-        ref={imgRef}
-        className={cx({ loading: isLoading })}
+        ref={targetRef}
+        className={cx({ loading: loading })}
         data-src={src}
         width={width}
         height={height}
         alt=''
-        onLoad={handleLoad}
+        onLoad={setLoaded}
       />
     );
   },
@@ -65,10 +48,10 @@ const HEIGHT = 320;
 const DELAY = 1000; // ms
 
 const LazyLoading = () => {
-  const imgRefs = useRef<(LazyImageHandle | null)[]>([]);
+  const targetRefs = useRef<(LazyImageHandle | null)[]>([]);
 
   const handleImages = () => {
-    imgRefs.current.forEach((ref) => {
+    targetRefs.current.forEach((ref) => {
       ref?.handleLazyLoad();
     });
   };
@@ -96,7 +79,7 @@ const LazyLoading = () => {
         <LazyImage
           key={index}
           ref={(el) => {
-            imgRefs.current[index] = el;
+            targetRefs.current[index] = el;
           }}
           src={src}
           width={WIDTH}

@@ -2,30 +2,53 @@ import { RefObject, useRef, useState, useEffect } from 'react';
 
 type Target = Element | null;
 
+const DefaultIOOptions: IntersectionObserverInit = {
+  threshold: 0,
+};
+
 const useIntersectionObserver = (
-  targetRef: RefObject<Target>,
-  options: IntersectionObserverInit = {
-    threshold: 0,
-  },
+  targetsRef: RefObject<Target | Target[]>,
+  options: IntersectionObserverInit = DefaultIOOptions,
 ) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [entries, setEntries] = useState<IntersectionObserverEntry[]>([]);
+  const [visibleEntries, setVisibleEntries] = useState<
+    IntersectionObserverEntry[]
+  >([]);
 
   useEffect(() => {
-    const $target = targetRef.current;
-    if (!$target) return;
+    if (!targetsRef.current) return;
 
-    observerRef.current = new IntersectionObserver(setEntries, options);
-    observerRef.current.observe($target);
+    const handleIntersect = (newEntries: IntersectionObserverEntry[]) => {
+      setVisibleEntries((prev) => {
+        const duplicableEntries = [...prev, ...newEntries];
 
-    return () => {
-      observerRef.current?.disconnect();
+        const entryMap = new Map(duplicableEntries.map((e) => [e.target, e]));
+
+        const uniqueEntries = Array.from(entryMap.values());
+
+        const visibleEntries = uniqueEntries.filter((e) => e.isIntersecting);
+
+        return visibleEntries;
+      });
     };
-  }, [targetRef, options]);
+
+    const observer = new IntersectionObserver(handleIntersect, options);
+    observerRef.current = observer;
+
+    const targets = Array.isArray(targetsRef.current)
+      ? targetsRef.current
+      : [targetsRef.current];
+
+    targets.forEach(($target) => {
+      if ($target) {
+        observer.observe($target);
+      }
+    });
+  }, [targetsRef, options]);
 
   return {
     observerRef,
-    entries,
+    visibleEntries,
   };
 };
 

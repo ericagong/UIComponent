@@ -5,6 +5,8 @@ import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill';
 import InfiniteScrollEvent from './components/infiniteScroll/1_EventHandler';
 import InfiniteScrollIO from '@/components/infiniteScroll/2_IntersectionObserver';
 import HorizontalScrollBox from './components/horizontalScrollBox';
+import ScrollSpyEvent from './components/scrollSpy/1_EventHandler';
+import ScrollSpy from './components/scrollSpy/2_IntersectionObserver';
 
 export const routePaths = [
   '/',
@@ -23,6 +25,8 @@ export const routePaths = [
   '/infiniteScroll/2_IntersectionObserver',
   '/horizontalScrollBox',
   '/scrollSpy',
+  '/scrollSpy/1_EventHandler',
+  '/scrollSpy/2_IntersectionObserver',
   '/snackbar',
   '/modal',
   '/popover',
@@ -168,9 +172,24 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/scrollSpy': {
     key: '/scrollSpy',
-    link: '/scrollSpy',
+    link: '/scrollSpy/1_EventHandler',
     name: '09. 스크롤 스파이',
-    children: null,
+    children: [
+      '/scrollSpy/1_EventHandler',
+      '/scrollSpy/2_IntersectionObserver',
+    ],
+  },
+  '/scrollSpy/1_EventHandler': {
+    key: '/scrollSpy/1_EventHandler',
+    link: '/scrollSpy/1_EventHandler',
+    name: 'Event Handler',
+    children: ScrollSpyEvent,
+  },
+  '/scrollSpy/2_IntersectionObserver': {
+    key: '/scrollSpy/2_IntersectionObserver',
+    link: '/scrollSpy/2_IntersectionObserver',
+    name: 'IO',
+    children: ScrollSpy,
   },
   '/snackbar': {
     key: '/snackbar',

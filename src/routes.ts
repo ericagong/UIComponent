@@ -1,3 +1,4 @@
+import Accordions from './components/accordion';
 import LazyLoadingScrollEvent from '@/components/lazyLoading/1_EventHandler';
 import LazyLoadingIO from '@/components/lazyLoading/2_IntersectionObserver';
 import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
@@ -82,7 +83,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/accordion',
     link: '/accordion',
     name: '01. 아코디언',
-    children: null,
+    children: Accordions,
   },
   '/tabMenu': {
     key: '/tabMenu',

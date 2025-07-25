@@ -1,10 +1,11 @@
 import { useRef, useEffect } from 'react';
 import cx from '../cx';
-import { clamp } from '../utils';
+import { clamp } from '@/components/utils';
 
 const MIN_LINES = 3;
 const MAX_LINES = 15;
 
+// TODO textbox, lineclamp 공통 사용 로직 hook으로 분리
 const TextBox = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const cloneRef = useRef<HTMLTextAreaElement>(null);
@@ -55,6 +56,7 @@ const TextBox = () => {
           ref={textareaRef}
           rows={MIN_LINES}
           aria-describedby='input-hint'
+          placeholder='텍스트를 입력해주세요.'
         />
         <p id='input-hint' className={cx('screen-reader-only')}>
           줄 수는 자동으로 조절됩니다. 최소 {MIN_LINES}줄, 최대 {MAX_LINES}

@@ -1,26 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
-import { clamp } from '../utils';
+import { calculateLines, clamp } from '@/components/utils';
 import cx from '../cx';
-
-export const getLines = ($textareaEl: HTMLElement, value: string) => {
-  if (!$textareaEl || !value) return 0;
-
-  const canvas = document.createElement('canvas');
-  const canvasContext: CanvasRenderingContext2D = canvas.getContext('2d')!;
-  const style = window.getComputedStyle($textareaEl);
-  canvasContext.font = `${style.getPropertyValue(
-    'font-size',
-  )} ${style.getPropertyValue('font-family')}`;
-
-  const totalRows = value.split('\n').reduce((acc, curr) => {
-    const elemWidth = $textareaEl.offsetWidth;
-    const totalWidth = canvasContext.measureText(curr).width;
-    const rows = Math.max(Math.ceil(totalWidth / elemWidth), 1);
-    return acc + rows;
-  }, 0);
-
-  return totalRows;
-};
 
 const MIN_LINES = 3;
 const MAX_LINES = 15;
@@ -32,7 +12,11 @@ const TextBox = () => {
   const handleChange = (e: SyntheticEvent) => {
     const $textareaEl = e.target as HTMLTextAreaElement;
     const value = $textareaEl.value;
-    const totalRows = clamp(getLines($textareaEl, value), MIN_LINES, MAX_LINES);
+    const totalRows = clamp(
+      calculateLines($textareaEl, value),
+      MIN_LINES,
+      MAX_LINES,
+    );
     setValue(value);
     setRows(totalRows);
   };

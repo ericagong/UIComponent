@@ -1,6 +1,7 @@
 import Accordions from './components/accordion';
 import TabMenus from './components/tabMenu';
 import TextBoxes from './components/textBox';
+import LineClamps from './components/lineClamp';
 import LazyLoadingScrollEvent from '@/components/lazyLoading/1_eventHandler';
 import LazyLoadingIO from '@/components/lazyLoading/2_intersectionObserver';
 import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
@@ -109,7 +110,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/lineClamp',
     link: '/lineClamp',
     name: '05. 여러줄 말줄임',
-    children: null,
+    children: LineClamps,
   },
   '/lazyLoading': {
     key: '/lazyLoading',

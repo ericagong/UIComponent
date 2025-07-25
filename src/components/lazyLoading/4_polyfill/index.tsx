@@ -1,5 +1,5 @@
 import { LazyImage as LazyImageNative } from '../3_loadingAttribiute';
-import { LazyImage as LazyImageIO } from '../2_IntersectionObserver';
+import { LazyImage as LazyImageIO } from '../2_intersectionObserver';
 import data from '../data';
 
 const IOOptions: IntersectionObserverInit = {

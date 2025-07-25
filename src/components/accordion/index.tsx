@@ -1,6 +1,6 @@
 import cx from './cx';
-import HiddenAttributeAccordion from './1.hiddenAttribute';
-import DetailSummaryAccordions from './2.detailsSummary';
+import HiddenAttributeAccordion from './1_hiddenAttribute';
+import DetailSummaryAccordions from './2_detailsSummary';
 
 const Accordions = () => {
   return (

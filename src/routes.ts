@@ -1,15 +1,15 @@
 import Accordions from './components/accordion';
 import TabMenus from './components/tabMenu';
 import TextBoxes from './components/textBox';
-import LazyLoadingScrollEvent from '@/components/lazyLoading/1_EventHandler';
-import LazyLoadingIO from '@/components/lazyLoading/2_IntersectionObserver';
+import LazyLoadingScrollEvent from '@/components/lazyLoading/1_eventHandler';
+import LazyLoadingIO from '@/components/lazyLoading/2_intersectionObserver';
 import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute';
 import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill';
-import InfiniteScrollEvent from './components/infiniteScroll/1_EventHandler';
-import InfiniteScrollIO from '@/components/infiniteScroll/2_IntersectionObserver';
+import InfiniteScrollEvent from './components/infiniteScroll/1_eventHandler';
+import InfiniteScrollIO from '@/components/infiniteScroll/2_intersectionObserver';
 import HorizontalScrollBox from './components/horizontalScrollBox';
-import ScrollSpyEvent from './components/scrollSpy/1_EventHandler';
-import ScrollSpy from './components/scrollSpy/2_IntersectionObserver';
+import ScrollSpyEvent from './components/scrollSpy/1_eventHandler';
+import ScrollSpy from './components/scrollSpy/2_intersectionObserver';
 
 export const routePaths = [
   '/',

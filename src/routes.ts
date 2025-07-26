@@ -1,5 +1,6 @@
 import Accordions from './components/accordion';
 import TabMenus from './components/tabMenu';
+import Tooltips from './components/tooltip';
 import TextBoxes from './components/textBox';
 import LineClamps from './components/lineClamp';
 import LazyLoadingScrollEvent from '@/components/lazyLoading/1_eventHandler';
@@ -98,7 +99,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/tooltip',
     link: '/tooltip',
     name: '03. 툴팁',
-    children: null,
+    children: Tooltips,
   },
   '/textBox': {
     key: '/textBox',

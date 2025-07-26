@@ -3,6 +3,7 @@ import cx from '../cx';
 import data from '../data';
 import { calculateLines } from '@/components/utils';
 
+// TODO resize Observer 추가
 const LineClampedText = ({
   id,
   text,

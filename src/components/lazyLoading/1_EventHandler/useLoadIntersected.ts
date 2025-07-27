@@ -6,8 +6,8 @@ const isIntersecting = ($target: HTMLElement) => {
   return rect.top < window.innerHeight && rect.bottom > 0;
 };
 
-const useLazyLoadHandler = (targetRef: RefObject<HTMLImageElement>) => {
-  const handleLazyLoad = () => {
+const useLoadIntersected = (targetRef: RefObject<HTMLImageElement>) => {
+  return () => {
     const $img = targetRef.current;
     // 이미 로드된 target 미처리
     if (!$img || $img.getAttribute('src')) return;
@@ -16,8 +16,6 @@ const useLazyLoadHandler = (targetRef: RefObject<HTMLImageElement>) => {
       $img.setAttribute('src', $img.dataset.src || '');
     }
   };
-
-  return { handleLazyLoad };
 };
 
-export default useLazyLoadHandler;
+export default useLoadIntersected;

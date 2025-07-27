@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from 'react';
 import useStable from '@/components/hook/useStable';
 
-export default function useThrottle(fn: () => void, delay: number = 1000) {
+export default function useThrottle(fn: () => void, delay = 1000) {
   const stableFn = useStable(fn);
   const lastCallRef = useRef(0);
 

@@ -72,10 +72,10 @@ const Accordion = () => {
       <ul className={cx('container')}>
         {data.map((d, i) => (
           <AccordionItem
-            {...d}
             key={d.id}
             current={currentId === d.id}
             toggle={toggleItem(d.id)}
+            {...d}
           />
         ))}
       </ul>

@@ -85,7 +85,7 @@ const Tooltips = () => {
         <>
           <h3>#1. Click 이벤트 기반 툴팁(state 기반 구현)</h3>
           {data.map((d) => (
-            <ClickTooltip {...d} key={d.id} />
+            <ClickTooltip key={d.id} {...d} />
           ))}
         </>
       </ViewportRectContextProvider>

@@ -1,30 +1,25 @@
 import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
-import useLazyLoadHandler from './useLazyLoadHandler';
+import useLoadIntersected from './useLoadIntersected';
 import useThrottle from '@/components/hook/useThrottle';
 import useLoading from '@/components/hook/useLoading';
 import data from '../data';
 import cx from '../cx';
-
-type LoadImageProps = {
-  src: string;
-  width: number;
-  height: number;
-};
+import { LazyImageProps } from '../types';
 
 type LazyImageHandle = {
-  handleLazyLoad: () => void;
+  handleLoad: () => void;
 };
 
-const LazyImage = forwardRef<LazyImageHandle, LoadImageProps>(
-  ({ src, width, height }, ref) => {
+const LazyImage = forwardRef<LazyImageHandle, LazyImageProps>(
+  ({ src, ...rest }, ref) => {
     const targetRef = useRef<HTMLImageElement>(null);
     const { loading, setLoaded } = useLoading(true);
-    const { handleLazyLoad } = useLazyLoadHandler(targetRef);
+    const handleLoad = useLoadIntersected(targetRef);
 
     useImperativeHandle(
       ref,
       () => ({
-        handleLazyLoad,
+        handleLoad,
       }),
       [src],
     );
@@ -34,10 +29,8 @@ const LazyImage = forwardRef<LazyImageHandle, LoadImageProps>(
         ref={targetRef}
         className={cx({ loading: loading })}
         data-src={src}
-        width={width}
-        height={height}
-        alt=''
         onLoad={setLoaded}
+        {...rest}
       />
     );
   },
@@ -52,7 +45,7 @@ const LazyLoading = () => {
 
   const handleImages = () => {
     targetRefs.current.forEach((ref) => {
-      ref?.handleLazyLoad();
+      ref?.handleLoad();
     });
   };
 
@@ -82,6 +75,7 @@ const LazyLoading = () => {
             targetRefs.current[index] = el;
           }}
           src={src}
+          alt=''
           width={WIDTH}
           height={HEIGHT}
         />

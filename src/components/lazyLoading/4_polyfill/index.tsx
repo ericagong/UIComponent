@@ -1,28 +1,31 @@
 import { LazyImage as LazyImageNative } from '../3_loadingAttribiute';
 import { LazyImage as LazyImageIO } from '../2_intersectionObserver';
+import cx from '../cx';
 import data from '../data';
+import { useEffect, useState } from 'react';
+import { LazyImageProps } from '../types';
 
 const IOOptions: IntersectionObserverInit = {
   threshold: 0,
 };
 
-export const LazyImage = ({
-  src,
-  width,
-  height,
-}: {
-  src: string;
-  width: number;
-  height: number;
-}) => {
-  const supportLazyLoading =
-    typeof window !== 'undefined' && 'loading' in HTMLImageElement.prototype;
+export const LazyImage = (props: LazyImageProps) => {
+  const [supportLazy, setSupportLazy] = useState<boolean | null>(null);
 
-  if (supportLazyLoading) {
-    return <LazyImageNative src={src} width={width} height={height} />;
-  } else {
-    return <LazyImageIO src={src} width={width} height={height} />;
+  useEffect(() => {
+    const supported = 'loading' in HTMLImageElement.prototype;
+    setSupportLazy(supported);
+  }, []);
+
+  if (supportLazy === null) {
+    return <div className={cx('spinner')} />;
   }
+
+  return supportLazy ? (
+    <LazyImageNative {...props} />
+  ) : (
+    <LazyImageIO {...props} />
+  );
 };
 
 const WIDTH = 600;

@@ -31,9 +31,9 @@ const InfiniteScroll = () => {
         {data.map((page, pageIdx) =>
           page.map((item: Datum, idx: number) => (
             <ListItem
-              {...item}
               key={item.id}
               number={pageIdx * DATA_PER_PAGE + idx + 1}
+              {...item}
             />
           )),
         )}

@@ -56,7 +56,7 @@ const LineClamp = () => {
     <>
       <h3>#1. Controlled Line Clamp(Canvas 기반 줄 개수 계산)</h3>
       {data.map((d) => (
-        <LineClampedText {...d} key={d.id} maxLines={MAX_LINE_COUNT} />
+        <LineClampedText key={d.id} maxLines={MAX_LINE_COUNT} {...d} />
       ))}
     </>
   );

@@ -32,16 +32,22 @@ const useScrollToEdge = (
     };
   };
 
-  const scrollToEdge = (direction: ButtonDirection) => {
-    const { $leftItem, $rightItem } = getVisibleItemsOnEdge();
-
-    const $target = direction === 'prev' ? $leftItem : $rightItem;
-
-    $target?.scrollIntoView({
+  const scrollItemIntoView = (
+    target: HTMLElement | null,
+    direction: 'prev' | 'next',
+  ) => {
+    target?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
       inline: direction === 'prev' ? 'end' : 'start',
     });
+  };
+
+  const scrollToEdge = (direction: ButtonDirection) => {
+    const { $leftItem, $rightItem } = getVisibleItemsOnEdge();
+    const $target = (direction === 'prev' ? $leftItem : $rightItem) ?? null;
+
+    scrollItemIntoView($target, direction);
   };
 
   return scrollToEdge;

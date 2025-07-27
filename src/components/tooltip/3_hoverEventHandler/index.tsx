@@ -66,7 +66,7 @@ const Tooltips = () => {
       <>
         <h3>#3. Hover 이벤트 기반 툴팁 (상태 기반 구현)</h3>
         {data.map((d) => (
-          <HoverTooltip {...d} key={d.id} />
+          <HoverTooltip key={d.id} {...d} />
         ))}
       </>
     </ViewportRectContextProvider>

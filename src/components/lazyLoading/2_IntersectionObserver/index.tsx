@@ -3,16 +3,9 @@ import useLoading from '@/components/hook/useLoading';
 import useLazyLoad from './useLazyLoad';
 import cx from '../cx';
 import data from '../data';
+import { LazyImageProps } from '../types';
 
-export const LazyImage = ({
-  src,
-  width,
-  height,
-}: {
-  src: string;
-  width: number;
-  height: number;
-}) => {
+export const LazyImage = ({ src, ...rest }: LazyImageProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   useLazyLoad(imgRef, src);
   const { loading, setLoaded } = useLoading(true);
@@ -21,10 +14,8 @@ export const LazyImage = ({
     <img
       ref={imgRef}
       className={cx({ loading })}
-      alt=''
-      width={width}
-      height={height}
       onLoad={setLoaded}
+      {...rest}
     />
   );
 };
@@ -38,7 +29,7 @@ const LazyLoading = () => {
       <h2>지연 로딩</h2>
       <h3>#2. Intersection Observer 기반 구현</h3>
       {data.map((url, index) => (
-        <LazyImage key={index} src={url} width={WIDTH} height={HEIGHT} />
+        <LazyImage key={index} src={url} alt='' width={WIDTH} height={HEIGHT} />
       ))}
     </>
   );

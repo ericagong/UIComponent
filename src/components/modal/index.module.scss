@@ -1,0 +1,128 @@
+$dimmed: rgba(0, 0, 0, 0.3);
+$box-shadow: rgba(0, 0, 0, 0.1);
+$panel-white: #fff;
+$divider-gray: #ccc;
+$button-black: #333;
+$border-black: #242424;
+
+.modal {
+  // overlay container
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // 배경 흐림 효과
+  :global(#modals-root) & {
+    &:last-child {
+      backdrop-filter: blur(2px);
+      background-color: $dimmed;
+    }
+  }
+
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px $box-shadow;
+    max-height: calc(100vh - 80px);
+    max-width: calc(100vw - 80px);
+    min-width: 250px;
+    border: 1px solid $border-black;
+    border-radius: 6px;
+    background-color: $panel-white;
+  }
+}
+
+.modal-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $divider-gray;
+
+  .title {
+    margin: 0 20px;
+    flex-grow: 1;
+  }
+
+  .close-trigger {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    text-align: center;
+    cursor: pointer;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 0;
+      border-top: 2px solid $button-black;
+      transform-origin: 50% 1px;
+      left: 10px;
+      top: 19px;
+    }
+    &::before {
+      transform: rotate(-45deg);
+    }
+    &::after {
+      transform: rotate(45deg);
+    }
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+      outline: none;
+    }
+  }
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 10px 20px;
+  text-align: right;
+}
+
+.Dialog {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid $border-black;
+  border-radius: 6px;
+  padding: 0;
+  max-height: calc(100vh - 80px);
+  max-width: calc(100vw - 80px);
+  min-width: 250px;
+  background-color: $panel-white;
+  box-shadow: 0 3px 6px $box-shadow;
+
+  &::backdrop {
+    backdrop-filter: blur(2px);
+    background-color: $dimmed;
+  }
+
+  &:not([open]) {
+    display: none;
+  }
+}

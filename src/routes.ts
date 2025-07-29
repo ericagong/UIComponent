@@ -14,6 +14,9 @@ import ScrollSpyEvent from './components/scrollSpy/1_eventHandler';
 import ScrollSpy from './components/scrollSpy/2_intersectionObserver';
 import ContextSnackbars from '@/components/snackbar/1_context';
 import PortalSnackbars from '@/components/snackbar/2_createPortal';
+import ContextModals from '@/components/modal/1_context';
+import PortalModals from '@/components/modal/2_portal';
+import DialogModals from '@/components/modal/3_dialog';
 
 export const routePaths = [
   '/',
@@ -38,6 +41,9 @@ export const routePaths = [
   '/snackbar/1_context',
   '/snackbar/2_createPortal',
   '/modal',
+  '/modal/1_context',
+  '/modal/2_portal',
+  '/modal/3_dialog',
   '/popover',
   '/imageSlide',
   '/carousel',
@@ -220,9 +226,27 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/modal': {
     key: '/modal',
-    link: '/modal',
+    link: '/modal/1_context',
     name: '11. 모달',
-    children: null,
+    children: ['/modal/1_context', '/modal/2_portal', '/modal/3_dialog'],
+  },
+  '/modal/1_context': {
+    key: '/modal/1_context',
+    link: '/modal/1_context',
+    name: 'Context API',
+    children: ContextModals,
+  },
+  '/modal/2_portal': {
+    key: '/modal/2_portal',
+    link: '/modal/2_portal',
+    name: 'createPortal',
+    children: PortalModals,
+  },
+  '/modal/3_dialog': {
+    key: '/modal/3_dialog',
+    link: '/modal/3_dialog',
+    name: 'Dialog',
+    children: DialogModals,
   },
   '/popover': {
     key: '/popover',

@@ -12,6 +12,8 @@ import InfiniteScrollIO from '@/components/infiniteScroll/2_intersectionObserver
 import HorizontalScrollBox from './components/horizontalScrollBox';
 import ScrollSpyEvent from './components/scrollSpy/1_eventHandler';
 import ScrollSpy from './components/scrollSpy/2_intersectionObserver';
+import ContextSnackbars from '@/components/snackbar/1_context';
+import PortalSnackbars from '@/components/snackbar/2_createPortal';
 
 export const routePaths = [
   '/',
@@ -21,18 +23,20 @@ export const routePaths = [
   '/textBox',
   '/lineClamp',
   '/lazyLoading',
-  '/lazyLoading/1_EventHandler',
-  '/lazyLoading/2_IntersectionObserver',
+  '/lazyLoading/1_eventHandler',
+  '/lazyLoading/2_intersectionObserver',
   '/lazyLoading/3_loadingAttribute',
   '/lazyLoading/4_polyfill',
   '/infiniteScroll',
-  '/infiniteScroll/1_EventHandler',
-  '/infiniteScroll/2_IntersectionObserver',
+  '/infiniteScroll/1_eventHandler',
+  '/infiniteScroll/2_intersectionObserver',
   '/horizontalScrollBox',
   '/scrollSpy',
-  '/scrollSpy/1_EventHandler',
-  '/scrollSpy/2_IntersectionObserver',
+  '/scrollSpy/1_eventHandler',
+  '/scrollSpy/2_intersectionObserver',
   '/snackbar',
+  '/snackbar/1_context',
+  '/snackbar/2_createPortal',
   '/modal',
   '/popover',
   '/imageSlide',
@@ -118,21 +122,21 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: '/lazyLoading/4_polyfill',
     name: '06. 지연 로딩',
     children: [
-      '/lazyLoading/1_EventHandler',
-      '/lazyLoading/2_IntersectionObserver',
+      '/lazyLoading/1_eventHandler',
+      '/lazyLoading/2_intersectionObserver',
       '/lazyLoading/3_loadingAttribute',
       '/lazyLoading/4_polyfill',
     ],
   },
-  '/lazyLoading/1_EventHandler': {
-    key: '/lazyLoading/1_EventHandler',
-    link: '/lazyLoading/1_EventHandler',
+  '/lazyLoading/1_eventHandler': {
+    key: '/lazyLoading/1_eventHandler',
+    link: '/lazyLoading/1_eventHandler',
     name: 'Scroll + Throttle',
     children: LazyLoadingScrollEvent,
   },
-  '/lazyLoading/2_IntersectionObserver': {
-    key: '/lazyLoading/2_IntersectionObserver',
-    link: '/lazyLoading/2_IntersectionObserver',
+  '/lazyLoading/2_intersectionObserver': {
+    key: '/lazyLoading/2_intersectionObserver',
+    link: '/lazyLoading/2_intersectionObserver',
     name: 'IO',
     children: LazyLoadingIO,
   },
@@ -150,22 +154,22 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/infiniteScroll': {
     key: '/infiniteScroll',
-    link: '/infiniteScroll/1_EventHandler',
+    link: '/infiniteScroll/1_eventHandler',
     name: '07. 무한 스크롤',
     children: [
-      '/infiniteScroll/1_EventHandler',
-      '/infiniteScroll/2_IntersectionObserver',
+      '/infiniteScroll/1_eventHandler',
+      '/infiniteScroll/2_intersectionObserver',
     ],
   },
-  '/infiniteScroll/1_EventHandler': {
-    key: '/infiniteScroll/1_EventHandler',
-    link: '/infiniteScroll/1_EventHandler',
+  '/infiniteScroll/1_eventHandler': {
+    key: '/infiniteScroll/1_eventHandler',
+    link: '/infiniteScroll/1_eventHandler',
     name: 'Scroll + Throttle',
     children: InfiniteScrollEvent,
   },
-  '/infiniteScroll/2_IntersectionObserver': {
-    key: '/infiniteScroll/2_IntersectionObserver',
-    link: '/infiniteScroll/2_IntersectionObserver',
+  '/infiniteScroll/2_intersectionObserver': {
+    key: '/infiniteScroll/2_intersectionObserver',
+    link: '/infiniteScroll/2_intersectionObserver',
     name: 'IO',
     children: InfiniteScrollIO,
   },
@@ -177,30 +181,42 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/scrollSpy': {
     key: '/scrollSpy',
-    link: '/scrollSpy/1_EventHandler',
+    link: '/scrollSpy/1_eventHandler',
     name: '09. 스크롤 스파이',
     children: [
-      '/scrollSpy/1_EventHandler',
-      '/scrollSpy/2_IntersectionObserver',
+      '/scrollSpy/1_eventHandler',
+      '/scrollSpy/2_intersectionObserver',
     ],
   },
-  '/scrollSpy/1_EventHandler': {
-    key: '/scrollSpy/1_EventHandler',
-    link: '/scrollSpy/1_EventHandler',
+  '/scrollSpy/1_eventHandler': {
+    key: '/scrollSpy/1_eventHandler',
+    link: '/scrollSpy/1_eventHandler',
     name: 'Event Handler',
     children: ScrollSpyEvent,
   },
-  '/scrollSpy/2_IntersectionObserver': {
-    key: '/scrollSpy/2_IntersectionObserver',
-    link: '/scrollSpy/2_IntersectionObserver',
+  '/scrollSpy/2_intersectionObserver': {
+    key: '/scrollSpy/2_intersectionObserver',
+    link: '/scrollSpy/2_intersectionObserver',
     name: 'IO',
     children: ScrollSpy,
   },
   '/snackbar': {
     key: '/snackbar',
-    link: '/snackbar',
+    link: '/snackbar/2_createPortal',
     name: '10. 스낵바',
-    children: null,
+    children: ['/snackbar/1_context', '/snackbar/2_createPortal'],
+  },
+  '/snackbar/1_context': {
+    key: '/snackbar/1_context',
+    link: '/snackbar/1_context',
+    name: 'Context',
+    children: ContextSnackbars,
+  },
+  '/snackbar/2_createPortal': {
+    key: '/snackbar/2_createPortal',
+    link: '/snackbar/2_createPortal',
+    name: 'createPortal',
+    children: PortalSnackbars,
   },
   '/modal': {
     key: '/modal',

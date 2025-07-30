@@ -17,6 +17,8 @@ import PortalSnackbars from '@/components/snackbar/2_createPortal';
 import ContextModals from '@/components/modal/1_context';
 import PortalModals from '@/components/modal/2_portal';
 import DialogModals from '@/components/modal/3_dialog';
+import HierarchyPopovers from '@/components/popover/1_hierarchy';
+import PortalPopovers from '@/components/popover/2_createPortal';
 
 export const routePaths = [
   '/',
@@ -45,6 +47,8 @@ export const routePaths = [
   '/modal/2_portal',
   '/modal/3_dialog',
   '/popover',
+  '/popover/1_hierarchy',
+  '/popover/2_createPortal',
   '/imageSlide',
   '/carousel',
   '/gallery',
@@ -250,9 +254,21 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
   },
   '/popover': {
     key: '/popover',
-    link: '/popover',
+    link: '/popover/1_hierarchy',
     name: '12. 팝오버',
-    children: null,
+    children: ['/popover/1_hierarchy', '/popover/2_createPortal'],
+  },
+  '/popover/1_hierarchy': {
+    key: '/popover/1_hierarchy',
+    link: '/popover/1_hierarchy',
+    name: 'Hierarchy',
+    children: HierarchyPopovers,
+  },
+  '/popover/2_createPortal': {
+    key: '/popover/2_createPortal',
+    link: '/popover/2_createPortal',
+    name: 'createPortal',
+    children: PortalPopovers,
   },
   '/imageSlide': {
     key: '/imageSlide',

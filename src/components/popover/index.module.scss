@@ -1,0 +1,76 @@
+$content-white: #fff;
+$border-color: #ccc;
+$current-color: #f0f0f0;
+
+.popovers {
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .list-item {
+    position: relative;
+    padding: 20px 40px 20px 20px;
+    margin: 10px 0;
+    border: 1px solid $border-color;
+    // overflow: hidden; -> hierarchy popover 구현 시, 문제 발생 가능 지점
+  }
+  .popover-trigger {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    border: 0;
+    background-color: transparent;
+    font-size: 1.3rem;
+    cursor: pointer;
+    &:before {
+      content: '\022ee';
+    }
+  }
+}
+
+.popover {
+  &::before {
+    // overlay
+    content: '';
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .panel {
+    position: absolute;
+    top: 40px;
+    right: 5px;
+    width: 160px;
+    margin: 0;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    padding: 0;
+    list-style: none;
+    background-color: $content-white;
+    overflow: hidden;
+    z-index: 2;
+
+    .content {
+      border-top: 1px solid $border-color;
+      padding: 10px 20px;
+      background-color: $content-white;
+      transition: background-color ease-out 0.2s;
+      cursor: pointer;
+
+      &:first-of-type {
+        border-top: 0;
+      }
+
+      &:hover {
+        background-color: $current-color;
+      }
+    }
+  }
+}

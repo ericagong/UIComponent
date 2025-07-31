@@ -3,8 +3,8 @@ $font-white: #fff;
 $label-overlay: rgba(0, 0, 0, 0.5);
 $button-overlay: #333;
 
-.ImageSlides {
-  .imageSlide {
+.Carousels {
+  .carousel {
     position: relative;
     width: 600px;
     height: 320px;
@@ -15,36 +15,48 @@ $button-overlay: #333;
 
   .track {
     position: relative;
-    display: flex;
-    flex-wrap: nowrap;
     padding: 0;
     margin: 0;
     list-style: none;
   }
 
-  .transformTrack {
-    transition: transform 0.5s ease-in-out;
+  .cloneTrack {
+    display: flex;
+    flex-wrap: nowrap;
   }
 
-  .scrollSnapTrack {
-    overflow-x: scroll;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior: contain;
+  .singleSlide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    transform: translateX(-200%);
+
+    &.left_current {
+      animation: left_current ease-out 0.3s forwards;
+    }
+    &.left_next {
+      animation: left_next ease-out 0.3s forwards;
+    }
+    &.right_current {
+      animation: right_current ease-out 0.3s forwards;
+    }
+    &.right_next {
+      animation: right_next ease-out 0.3s forwards;
+    }
+    &.current {
+      transform: translateX(0);
+    }
   }
 
   .slide {
     position: relative;
-    margin: 0;
-    padding: 0;
-
-    .content {
-      display: block;
-    }
+    flex-shrink: 0;
   }
 
-  .scrollSnapSlide {
-    scroll-snap-align: start;
+  .content {
+    display: block;
   }
 
   .label {
@@ -88,12 +100,6 @@ $button-overlay: #333;
     }
   }
 
-  .moveTrigger:disabled {
-    opacity: 0;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
   .moveLeft {
     left: 10px;
 
@@ -125,6 +131,40 @@ $button-overlay: #333;
 
     &::after {
       transform: rotate(-135deg);
+    }
+  }
+
+  @keyframes left_current {
+    0% {
+      left: 0;
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes left_next {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes right_current {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes right_next {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 }

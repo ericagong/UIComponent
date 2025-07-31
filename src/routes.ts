@@ -20,6 +20,7 @@ import DialogModals from '@/components/modal/3_dialog';
 import HierarchyPopovers from '@/components/popover/1_hierarchy';
 import PortalPopovers from '@/components/popover/2_createPortal';
 import ImageSlides from '@/components/imageSlide';
+import Carousels from './components/carousel';
 
 export const routePaths = [
   '/',
@@ -281,7 +282,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/carousel',
     link: '/carousel',
     name: '14. 캐러셀',
-    children: null,
+    children: Carousels,
   },
   '/gallery': {
     key: '/gallery',

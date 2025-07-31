@@ -29,10 +29,10 @@ const ImageSlide = () => {
 
   return (
     <>
-      <h3>#1. transition 기반 이동 이미지 슬라이드</h3>
+      <h3>#1. transform 기반 이동 이미지 슬라이드</h3>
       <div className={cx('imageSlide')} ref={rootElementRef}>
         <ul
-          className={cx('track', 'transitionTrack')}
+          className={cx('track', 'transformTrack')}
           style={{ transform: `translateX(-${currentIndex * SLIDE_WIDTH}px)` }}
           onTransitionEnd={endTransition}
         >

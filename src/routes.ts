@@ -21,6 +21,7 @@ import HierarchyPopovers from '@/components/popover/1_hierarchy';
 import PortalPopovers from '@/components/popover/2_createPortal';
 import ImageSlides from '@/components/imageSlide';
 import Carousels from './components/carousel';
+import Dropdowns from '@/components/dropdown';
 
 export const routePaths = [
   '/',
@@ -54,7 +55,7 @@ export const routePaths = [
   '/imageSlide',
   '/carousel',
   '/gallery',
-  '/selectBox',
+  '/dropdown',
   '/autoComplete',
   '/dnd',
 ] as const;
@@ -94,7 +95,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
       '/imageSlide',
       '/carousel',
       '/gallery',
-      '/selectBox',
+      '/dropdown',
       '/autoComplete',
       '/dnd',
     ],
@@ -290,11 +291,11 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '15. 갤러리',
     children: null,
   },
-  '/selectBox': {
-    key: '/selectBox',
-    link: '/selectBox',
-    name: '16. 셀렉트 박스',
-    children: null,
+  '/dropdown': {
+    key: '/dropdown',
+    link: '/dropdown',
+    name: '16. 드롭다운',
+    children: Dropdowns,
   },
   '/autoComplete': {
     key: '/autoComplete',

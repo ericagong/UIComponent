@@ -8,6 +8,13 @@ img.loading {
   background-color: $skeleton-color;
 }
 
+.skeleton {
+  background-color: $skeleton-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .spinner {
   width: 40px;
   height: 40px;

@@ -19,6 +19,7 @@ import PortalModals from '@/components/modal/2_portal';
 import DialogModals from '@/components/modal/3_dialog';
 import HierarchyPopovers from '@/components/popover/1_hierarchy';
 import PortalPopovers from '@/components/popover/2_createPortal';
+import ImageSlides from '@/components/imageSlide';
 
 export const routePaths = [
   '/',
@@ -274,7 +275,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: '/imageSlide',
     link: '/imageSlide',
     name: '13. 이미지 슬라이드',
-    children: null,
+    children: ImageSlides,
   },
   '/carousel': {
     key: '/carousel',

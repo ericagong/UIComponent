@@ -4,7 +4,13 @@ import useIntersectionObserver from '@/components/hook/useIntersectionObserver';
 
 const IOOptions: IntersectionObserverInit = { threshold: 0 };
 
-const useLazyLoad = (imgRef: RefObject<HTMLImageElement>, src: string) => {
+const useLazyLoad = (
+  imgRef: RefObject<HTMLImageElement>,
+  src: string,
+  rootElementRef?: RefObject<HTMLElement>,
+) => {
+  IOOptions.root = rootElementRef?.current || null;
+
   const { observerRef, visibleEntries } = useIntersectionObserver(
     imgRef,
     IOOptions,

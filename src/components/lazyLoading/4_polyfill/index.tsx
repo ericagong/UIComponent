@@ -18,7 +18,14 @@ export const LazyImage = (props: LazyImageProps) => {
   }, []);
 
   if (supportLazy === null) {
-    return <div className={cx('spinner')} />;
+    return (
+      <div
+        className={cx('skeleton')}
+        style={{ width: props.width, height: props.height }}
+      >
+        <div className={cx('spinner')} />
+      </div>
+    );
   }
 
   return supportLazy ? (

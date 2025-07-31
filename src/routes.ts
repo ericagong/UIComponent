@@ -22,6 +22,7 @@ import PortalPopovers from '@/components/popover/2_createPortal';
 import ImageSlides from '@/components/imageSlide';
 import Carousels from './components/carousel';
 import Dropdowns from '@/components/dropdown';
+import DraggableList from '@/components/draggableList';
 
 export const routePaths = [
   '/',
@@ -57,7 +58,7 @@ export const routePaths = [
   '/gallery',
   '/dropdown',
   '/autoComplete',
-  '/dnd',
+  '/draggableList',
 ] as const;
 export type ROUTE_PATH = (typeof routePaths)[number];
 
@@ -97,7 +98,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
       '/gallery',
       '/dropdown',
       '/autoComplete',
-      '/dnd',
+      '/draggableList',
     ],
   },
   '/accordion': {
@@ -303,11 +304,11 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: '17. 자동 완성',
     children: null,
   },
-  '/dnd': {
-    key: '/dnd',
-    link: '/dnd',
-    name: '18. D&D 리스트',
-    children: null,
+  '/draggableList': {
+    key: '/draggableList',
+    link: '/draggableList',
+    name: '18. 드래그 앤 드롭 리스트',
+    children: DraggableList,
   },
 };
 

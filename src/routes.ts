@@ -1,29 +1,30 @@
+import type { ComponentType } from 'react'
+
+import Accordions from '@/components/accordion'
+import Carousels from '@/components/carousel'
 import DraggableList from '@/components/draggableList'
 import Dropdowns from '@/components/dropdown'
+import HorizontalScrollBox from '@/components/horizontalScrollBox'
 import ImageSlides from '@/components/imageSlide'
+import InfiniteScrollEvent from '@/components/infiniteScroll/1_eventHandler'
 import InfiniteScrollIO from '@/components/infiniteScroll/2_intersectionObserver'
 import LazyLoadingScrollEvent from '@/components/lazyLoading/1_eventHandler'
 import LazyLoadingIO from '@/components/lazyLoading/2_intersectionObserver'
 import LazyLoadingNative from '@/components/lazyLoading/3_loadingAttribiute'
 import LazyLoadingPolyfill from '@/components/lazyLoading/4_polyfill'
+import LineClamps from '@/components/lineClamp'
 import ContextModals from '@/components/modal/1_context'
 import PortalModals from '@/components/modal/2_portal'
 import DialogModals from '@/components/modal/3_dialog'
 import HierarchyPopovers from '@/components/popover/1_hierarchy'
 import PortalPopovers from '@/components/popover/2_createPortal'
+import ScrollSpyEvent from '@/components/scrollSpy/1_eventHandler'
+import ScrollSpy from '@/components/scrollSpy/2_intersectionObserver'
 import ContextSnackbars from '@/components/snackbar/1_context'
 import PortalSnackbars from '@/components/snackbar/2_createPortal'
-
-import Accordions from './components/accordion'
-import Carousels from './components/carousel'
-import HorizontalScrollBox from './components/horizontalScrollBox'
-import InfiniteScrollEvent from './components/infiniteScroll/1_eventHandler'
-import LineClamps from './components/lineClamp'
-import ScrollSpyEvent from './components/scrollSpy/1_eventHandler'
-import ScrollSpy from './components/scrollSpy/2_intersectionObserver'
-import TabMenus from './components/tabMenu'
-import TextBoxes from './components/textBox'
-import Tooltips from './components/tooltip'
+import TabMenus from '@/components/tabMenu'
+import TextBoxes from '@/components/textBox'
+import Tooltips from '@/components/tooltip'
 
 export const routePaths = [
     '/',
@@ -71,8 +72,9 @@ type BaseRoute = {
 export type ParentRoute = BaseRoute & {
     children: ROUTE_PATH[]
 }
+
 export type ChildRoute = BaseRoute & {
-    children: ((props: unknown) => JSX.Element) | null
+    children: ComponentType<any> | null
 }
 export type ROUTE = ParentRoute | ChildRoute
 

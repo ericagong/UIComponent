@@ -19,4 +19,5 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </html>
     )
 }
+
 export default Layout

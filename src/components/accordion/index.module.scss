@@ -1,96 +1,87 @@
 $current-description: #eff;
 $border-gray: #ccc;
 $current-tab: #ace;
+$marker-default: '+ ';
+$marker-open: '- ';
 
-.Accordions {
-    .container {
-        overflow: hidden;
-        margin: 0;
-        border: 1px solid $border-gray;
-        padding: 0;
-        width: 100%;
-        border-bottom: 0;
-        list-style: none;
+.accordion-root {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid $border-gray;
+    padding: 0;
+    width: 100%;
+    border-bottom: 0;
+    list-style: none;
+}
+
+.accordion-item {
+    overflow: hidden;
+}
+
+.accordion-trigger {
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font: inherit;
+    line-height: 1.5;
+    text-align: left;
+    background: none;
+    cursor: pointer;
+    appearance: none;
+    border-bottom: 1px solid $border-gray;
+
+    &::before {
+        margin: 0 8px 0 -5px;
+        content: $marker-default;
     }
+}
 
-    .item {
-        overflow: hidden;
+.accordion-content {
+    overflow: hidden;
+    padding: 0 15px;
+    max-height: 0;
+    transition: max-height ease 0.3s;
+    border-bottom-width: 0;
+}
 
-        .trigger {
-            border: none;
-            padding: 0;
-            padding: 15px;
-            width: 100%;
-            font: inherit;
-            line-height: 1.5;
-            text-align: left;
-            background: none;
-            cursor: pointer;
-            // 버튼 일부 스타일 reset
-            appearance: none;
-            border-bottom: 1px solid $border-gray;
+.accordion-item.is-open {
+    .accordion-trigger {
+        background-color: $current-tab;
 
-            &::before {
-                margin: 0 8px 0 -5px;
-                content: '+';
-            }
-        }
-
-        .content {
-            overflow: hidden;
-            padding: 0 15px;
-            max-height: 0;
-            transition: max-height ease 0.3s;
-            border-bottom-width: 0;
-        }
-
-        &.current {
-            .trigger {
-                background-color: $current-tab;
-
-                &::before {
-                    content: '-';
-                }
-            }
-
-            .content {
-                padding: 15px;
-                max-height: 300px;
-                background-color: $current-description;
-                border-bottom: 1px solid $border-gray;
-            }
+        &::before {
+            content: $marker-open;
         }
     }
 
-    summary {
+    .accordion-content {
         padding: 15px;
-        cursor: pointer;
+        max-height: 300px;
+        background-color: $current-description;
         border-bottom: 1px solid $border-gray;
-
-        &::marker {
-            color: $border-gray;
-            content: '+ ';
-        }
     }
+}
 
-    details[open] {
-        & summary {
-            padding: 15px;
-            background-color: $current-tab;
-            border-bottom-width: 0;
+.accordion-summary {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid $border-gray;
 
-            &::marker {
-                content: '- ';
-            }
-        }
-
-        & .panel {
-            padding: 15px;
-            background-color: $current-description;
-            // max-height: 300px;
-            border-bottom: 1px solid $border-gray;
-        }
+    &::marker {
+        content: $marker-default;
     }
+}
 
-    
+details[open] > .accordion-summary {
+    background-color: $current-tab;
+    border-bottom-width: 0;
+
+    &::marker {
+        content: $marker-open;
+    }
+}
+
+details[open] > .accordion-panel {
+    padding: 15px;
+    background-color: $current-description;
+    border-bottom: 1px solid $border-gray;
 }

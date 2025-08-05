@@ -1,4 +1,5 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useCallback, useRef } from 'react';
+
 import useStable from '@/components/hook/useStable';
 
 export default function useThrottle(fn: () => void, delay = 1000) {
@@ -11,7 +12,7 @@ export default function useThrottle(fn: () => void, delay = 1000) {
       lastCallRef.current = now;
       stableFn();
     }
-  }, [delay]);
+  }, [delay, stableFn]);
 
   return throttledFn;
 }

@@ -12,7 +12,7 @@ const ModalsRoot = () => {
     let observer: MutationObserver;
     if (modalsRootRef.current) {
       observer = new MutationObserver(() => {
-        const size = modalsRootRef.current?.childNodes.length || 0;
+        const size = modalsRootRef.current?.childNodes.length ?? 0;
         const hasModals = size > 0;
         const toggleScroll = () =>
           document.body.classList.toggle('no-scroll', hasModals);

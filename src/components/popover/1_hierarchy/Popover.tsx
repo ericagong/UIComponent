@@ -1,6 +1,8 @@
 import { RefObject, useRef } from 'react';
-import cx from '../cx';
+
 import useAutoPlacement from '@/components/hook/useAutoPlacement';
+
+import cx from '../cx';
 
 const menuPosition = {
   top: 39,

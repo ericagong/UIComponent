@@ -6,14 +6,14 @@ const isIntersecting = ($target: HTMLElement) => {
   return rect.top < window.innerHeight && rect.bottom > 0;
 };
 
-const useLoadIntersected = (targetRef: RefObject<HTMLImageElement>) => {
+const useLoadIntersected = (targetRef: RefObject<HTMLImageElement | null>) => {
   return () => {
     const $img = targetRef.current;
     // 이미 로드된 target 미처리
     if (!$img || $img.getAttribute('src')) return;
 
     if (isIntersecting($img)) {
-      $img.setAttribute('src', $img.dataset.src || '');
+      $img.setAttribute('src', $img.dataset.src ?? '');
     }
   };
 };

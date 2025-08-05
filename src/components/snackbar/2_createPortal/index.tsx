@@ -1,5 +1,5 @@
-import data from '../data';
 import cx from '../cx';
+import data from '../data';
 import useSnackbar from './useSnackbar';
 
 const SnackbarPanel = ({

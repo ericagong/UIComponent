@@ -1,9 +1,11 @@
 import { useRef } from 'react';
+
 import useLoading from '@/components/hook/useLoading';
-import useLazyLoad from './useLazyLoad';
+
 import cx from '../cx';
 import data from '../data';
 import { LazyImageProps } from '../types';
+import useLazyLoad from './useLazyLoad';
 
 export const LazyImage = ({ src, ...rest }: LazyImageProps) => {
   const imgRef = useRef<HTMLImageElement>(null);

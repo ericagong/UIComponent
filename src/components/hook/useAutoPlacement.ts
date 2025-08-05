@@ -1,5 +1,6 @@
+import { RefObject, useEffect, useLayoutEffect, useState } from 'react';
+
 import { useViewportRectContext } from '@/context/ViewportRectContextProvider';
-import { RefObject, useState, useLayoutEffect, useEffect } from 'react';
 
 type Direction = 'top' | 'right' | 'bottom' | 'left';
 type PreferredPosition = Partial<Record<Direction, string | number>>;
@@ -42,32 +43,38 @@ const useAutoPlacement = (
           verticalPlacement === 'top'
             ? anchorAbsoluteTop +
               anchorRect.height +
-              +(preferredPosition.top || 0)
+              +(preferredPosition.top ?? 0)
             : viewportRect.height -
               anchorAbsoluteTop +
-              +(preferredPosition.bottom || 0),
+              +(preferredPosition.bottom ?? 0),
         [verticalPlacement === 'top' ? 'bottom' : 'top']: 'auto',
         [horizontalPlacement]:
           horizontalPlacement === 'left'
-            ? anchorRect.left - +(preferredPosition.left || 0)
+            ? anchorRect.left - +(preferredPosition.left ?? 0)
             : viewportRect.width -
               anchorRect.right +
-              +(preferredPosition.right || 0),
+              +(preferredPosition.right ?? 0),
         [horizontalPlacement === 'left' ? 'right' : 'left']: 'auto',
       });
     } else {
       // positionAttribute = 'relative'
       setStyle({
-        [verticalPlacement]: preferredPosition[verticalPlacement] || 0,
+        [verticalPlacement]: preferredPosition[verticalPlacement] ?? 0,
         [verticalPlacement === 'top' ? 'bottom' : 'top']: 'auto',
-        [horizontalPlacement]: preferredPosition[horizontalPlacement] || 0,
+        [horizontalPlacement]: preferredPosition[horizontalPlacement] ?? 0,
         [horizontalPlacement === 'left' ? 'right' : 'left']: 'auto',
       });
     }
-  }, [viewportRect, anchorRef, floatingRef, preferredPosition]);
+  }, [
+    viewportRect,
+    anchorRef,
+    floatingRef,
+    preferredPosition,
+    positionAttribute,
+  ]);
 
   useEffect(() => {
-    console.log('useAutoPlacement style:', style); // Debugging log
+    console.warn('useAutoPlacement style:', style); // Debugging log
   }, [style]);
 
   return style;

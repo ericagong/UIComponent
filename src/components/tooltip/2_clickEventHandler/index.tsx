@@ -1,11 +1,13 @@
-import cx from '../cx';
-import data from '../data';
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
-import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
+import { SyntheticEvent, useEffect, useRef } from 'react';
+
+import useAutoPlacement from '@/components/hook/useAutoPlacement';
 import SingleActiveItemProvider, {
   useSingleActiveItem,
 } from '@/context/SingleActiveItemProvider';
-import useAutoPlacement from '@/components/hook/useAutoPlacement';
+import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
+
+import cx from '../cx';
+import data from '../data';
 
 const preferredTooltipPosition = {
   top: '100%',

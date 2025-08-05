@@ -1,8 +1,10 @@
-import { LazyImageProps } from '../types';
 import { ReactEventHandler } from 'react';
+
 import useLoading from '@/components/hook/useLoading';
+
 import cx from '../cx';
 import data from '../data';
+import { LazyImageProps } from '../types';
 
 export const LazyImage = ({
   onLoad,
@@ -22,6 +24,8 @@ export const LazyImage = ({
       className={cx({ loading: loading })}
       loading='lazy'
       onLoad={handleLoad}
+      onError={onError}
+      onClick={onClick}
       {...rest}
     />
   );

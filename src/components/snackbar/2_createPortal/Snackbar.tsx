@@ -1,5 +1,6 @@
+import { useEffect,useRef, useState } from 'react';
+
 import cx from '../cx';
-import { useRef, useState, useEffect } from 'react';
 import type { SnackbarProps } from './useSnackbar';
 
 const Snackbar = ({

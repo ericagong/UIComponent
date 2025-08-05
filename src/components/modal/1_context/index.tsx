@@ -1,9 +1,11 @@
+import { ReactNode, useState } from 'react';
+
 import ModalContextProvider, {
   useSetModals,
 } from '@/context/ModalContextProvider';
-import { AlertModal, ConfirmModal, FormModal } from './ModalComponents';
-import { ReactNode, useState } from 'react';
+
 import Placeholders from '../Placeholders';
+import { AlertModal, ConfirmModal, FormModal } from './ModalComponents';
 
 const AlertTrigger = ({ id, content }: { id: string; content: string }) => {
   const { openModal } = useSetModals();
@@ -60,8 +62,8 @@ const ConfirmTrigger = ({
 const FormTrigger = ({ id }: { id: string }) => {
   const { openModal } = useSetModals();
 
-  const handleSubmit = (data: any) => {
-    console.log('Form submitted:', Array.from(data));
+  const handleSubmit = (data: FormData) => {
+    console.warn('Form submitted:', Array.from(data));
   };
 
   const openFormModal = () => {

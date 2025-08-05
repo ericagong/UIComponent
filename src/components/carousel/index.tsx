@@ -1,6 +1,6 @@
-import cx from './cx';
 import SingleSlideCarousel from './1_singleSlide';
 import CloneSlideCarousel from './2_clone';
+import cx from './cx';
 
 const Carousels = () => {
   return (

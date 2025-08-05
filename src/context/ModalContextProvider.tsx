@@ -1,13 +1,13 @@
 import {
+  createContext,
   Dispatch,
+  Fragment,
   ReactNode,
   SetStateAction,
-  createContext,
-  useState,
-  useEffect,
-  Fragment,
-  useContext,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
 
 type ModalState = Map<string, ReactNode>;

@@ -1,13 +1,14 @@
-import { LazyImage as LazyImageNative } from '../3_loadingAttribiute';
+import { useEffect, useState } from 'react';
+
 import { LazyImage as LazyImageIO } from '../2_intersectionObserver';
+import { LazyImage as LazyImageNative } from '../3_loadingAttribiute';
 import cx from '../cx';
 import data from '../data';
-import { useEffect, useState } from 'react';
 import { LazyImageProps } from '../types';
 
-const IOOptions: IntersectionObserverInit = {
-  threshold: 0,
-};
+// const IOOptions: IntersectionObserverInit = {
+//   threshold: 0,
+// };
 
 export const LazyImage = (props: LazyImageProps) => {
   const [supportLazy, setSupportLazy] = useState<boolean | null>(null);

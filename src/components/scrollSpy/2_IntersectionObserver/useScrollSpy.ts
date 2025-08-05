@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import useIntersectionObserver from '@/components/hook/useIntersectionObserver';
 
 type Elem = Element | null;
@@ -26,7 +27,7 @@ const useScrollSpy = () => {
     const $item = contentItemsRef.current[index];
     if (!$item) return;
 
-    const currentScrollTop = document.scrollingElement?.scrollTop || 0;
+    const currentScrollTop = document.scrollingElement?.scrollTop ?? 0;
     const adjustedScrollTop = currentScrollTop - STICKY_HEADER_HEIGHT;
     const itemTop = $item.getBoundingClientRect().top;
     const targetTop = adjustedScrollTop + itemTop;
@@ -64,9 +65,9 @@ const useScrollSpy = () => {
     const navigationBar = navigationBarRef.current;
     const targetItem = navigationItemsRef.current[currentIndex];
 
-    const targetLeft = targetItem?.offsetLeft || 0;
+    const targetLeft = targetItem?.offsetLeft ?? 0;
     const barWidth = navigationBar.offsetWidth;
-    const targetWidth = targetItem?.offsetWidth || 0;
+    const targetWidth = targetItem?.offsetWidth ?? 0;
 
     const scrollLeft = targetLeft - barWidth / 2 + targetWidth / 2;
     navigationBar.scrollTo({

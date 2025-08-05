@@ -1,10 +1,12 @@
+import { useEffect,useRef, useState } from 'react';
+
+import type { SnackbarProps } from '@/context/SnackbarsContextProvider';
 import {
   useSetSnackbar,
   useSnackbars,
 } from '@/context/SnackbarsContextProvider';
-import type { SnackbarProps } from '@/context/SnackbarsContextProvider';
+
 import cx from '../cx';
-import { useRef, useState, useEffect } from 'react';
 
 const Snackbar = ({
   id,

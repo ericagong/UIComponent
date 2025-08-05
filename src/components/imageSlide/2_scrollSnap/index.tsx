@@ -1,7 +1,9 @@
-import data from '../data';
-import cx from '../cx';
+import { useEffect,useRef, useState } from 'react';
+
 import { LazyImage } from '@/components/lazyLoading/4_polyfill';
-import { useState, useRef, useEffect } from 'react';
+
+import cx from '../cx';
+import data from '../data';
 
 type Direction = 'left' | 'right';
 const slideLength = data.length;

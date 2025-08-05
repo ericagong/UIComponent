@@ -1,6 +1,8 @@
+import { useRef, useState } from 'react';
+
 import useInfiniteScroll from '@/components/infiniteScroll/2_intersectionObserver/useInfiniteScroll';
 import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
-import { useRef, useState } from 'react';
+
 import cx from '../cx';
 import Popover from './Popover';
 

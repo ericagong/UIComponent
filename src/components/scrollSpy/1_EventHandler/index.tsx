@@ -1,6 +1,7 @@
+import { forwardRef, Ref, useRef } from 'react';
+
 import cx from '../cx';
 import data from '../data';
-import { forwardRef, Ref, useRef } from 'react';
 import useScrollSpy from './useScrollSpy';
 
 const ContentItem = forwardRef(

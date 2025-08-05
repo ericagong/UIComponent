@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState, SyntheticEvent } from 'react';
+import { SyntheticEvent,useEffect, useRef, useState } from 'react';
+
 import cx from '../cx';
 import data from '../data';
 

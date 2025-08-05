@@ -2,11 +2,9 @@ import { useEffect, useRef } from 'react';
 
 const VanillaWrapper = ({
   title = '',
-  subTitle = '',
   initiator,
 }: {
   title?: string;
-  subTitle?: string;
   initiator: (wrapper: HTMLDivElement) => void;
 }) => {
   const wrapper = useRef<HTMLDivElement>(null);

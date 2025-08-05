@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+
 import cx from '../cx';
 import data from '../data';
 
@@ -70,7 +71,7 @@ const Accordion = () => {
         #1. 단일 열림 아코디언 (hidden = "until-found" 기반 ctrl + F UX 제공)
       </h3>
       <ul className={cx('container')}>
-        {data.map((d, i) => (
+        {data.map((d) => (
           <AccordionItem
             key={d.id}
             current={currentId === d.id}

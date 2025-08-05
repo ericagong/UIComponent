@@ -1,6 +1,7 @@
-import data from '../data';
+import { useCallback, useRef, useState } from 'react';
+
 import cx from '../cx';
-import { useState, useRef, useCallback } from 'react';
+import data from '../data';
 
 type Direction = 'left' | 'right';
 const slideLength = data.length;
@@ -60,7 +61,7 @@ const Carousel = ({
       const nextIndex = (currentIndex + moveBy + slideLength) % slideLength;
       replaceSlideTo(nextIndex);
     },
-    [images, currentIndex],
+    [currentIndex, replaceSlideTo],
   );
 
   return (
@@ -74,7 +75,9 @@ const Carousel = ({
               className={cx('singleSlide', {
                 current: index === currentIndex,
               })}
-              ref={(el) => (slidesRef.current[index] = el)}
+              ref={(el) => {
+                slidesRef.current[index] = el;
+              }}
             >
               <img
                 className={cx('content')}

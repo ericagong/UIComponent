@@ -1,6 +1,6 @@
-import cx from './cx';
 import CanvasLineClamp from './1_canvas';
 import CloneLineClamp from './2_clone';
+import cx from './cx';
 
 const LineClamps = () => (
   <div className={cx('LineClamps')}>

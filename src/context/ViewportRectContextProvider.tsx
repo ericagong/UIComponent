@@ -1,4 +1,4 @@
-import { createContext, useSyncExternalStore, useContext } from 'react';
+import { createContext, useContext,useSyncExternalStore } from 'react';
 
 type Rect = Pick<DOMRect, 'left' | 'top' | 'width' | 'height'> & {
   scrollHeight: number;

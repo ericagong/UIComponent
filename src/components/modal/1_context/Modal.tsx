@@ -1,6 +1,8 @@
-import cx from '../cx';
 import { ReactNode } from 'react';
+
 import { useSetModals } from '@/context/ModalContextProvider';
+
+import cx from '../cx';
 
 const Modal = ({
   id,

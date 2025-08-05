@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, RefObject } from 'react';
+import { RefObject,useEffect, useRef, useState } from 'react';
 
 type MaybeArray<T> = T | T[];
 

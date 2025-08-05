@@ -1,6 +1,7 @@
-import { useState, useCallback } from 'react';
-import { waitFor, randomize, getRandomNumber } from './utils';
+import { useCallback, useState } from 'react';
+
 import mockData from './data';
+import { getRandomNumber, randomize, waitFor } from './utils';
 
 export type Datum = {
   index: number;
@@ -47,7 +48,7 @@ const useMockFetchAPI = (): FetchResult<Datum> => {
       setStatus('SUCCESS');
     } catch (e) {
       setStatus('ERROR');
-      throw new Error(`[FETCH ERROR] ${e}`);
+      throw new Error(`[FETCH ERROR] ${String(e)}`);
     }
   }, []);
 

@@ -1,6 +1,7 @@
-import cx from '../cx';
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useEffect,useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import cx from '../cx';
 
 const Modal = ({
   id,
@@ -20,7 +21,7 @@ const Modal = ({
   useEffect(() => {
     const $modalsRoot = document.body.querySelector(
       '#modals-root',
-    ) as Element | null;
+    );
     if ($modalsRoot) setRoot($modalsRoot);
   }, []);
 

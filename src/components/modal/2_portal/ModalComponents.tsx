@@ -1,5 +1,6 @@
-import Modal from './Modal';
 import { ReactNode, SyntheticEvent } from 'react';
+
+import Modal from './Modal';
 
 const AlertModal = ({
   id,

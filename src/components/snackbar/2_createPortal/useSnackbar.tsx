@@ -1,14 +1,15 @@
 import {
+  Dispatch,
   EventHandler,
   ReactNode,
   SetStateAction,
   useCallback,
-  useState,
-  Dispatch,
-  useRef,
   useEffect,
+  useRef,
+  useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+
 import Snackbar from './Snackbar';
 
 type SnackbarStatus = 'open' | 'close' | null;
@@ -47,7 +48,7 @@ const useSnackbar = (children: ReactNode) => {
   useEffect(() => {
     const $snackbarsRoot = document.querySelector(
       '#snackbars-root',
-    ) as HTMLDivElement | null;
+    );
     if ($snackbarsRoot) setRoot($snackbarsRoot);
   }, []);
 

@@ -1,4 +1,5 @@
-import { forwardRef, useState, useRef } from 'react';
+import { forwardRef, useRef,useState } from 'react';
+
 import cx from '../cx';
 import data from '../data';
 
@@ -84,7 +85,7 @@ const TabMenu = () => {
         <TabPanel
           id={data[currentIndex].id}
           content={data[currentIndex].content}
-          current={true}
+          current
         />
       </div>
     </>

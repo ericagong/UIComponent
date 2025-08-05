@@ -1,4 +1,5 @@
 import { DragEvent, ForwardedRef, forwardRef, useRef, useState } from 'react';
+
 import cx from './cx';
 import data from './data';
 
@@ -53,7 +54,7 @@ const DraggableList = () => {
 
   const handleDragStart = (e: DragEvent) => {
     cachedListRef.current = list;
-    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.effectAllowed = 'move'; // eslint-disable-line no-param-reassign
   };
 
   const isDragTrigger = ($element: HTMLElement) => {
@@ -69,7 +70,7 @@ const DraggableList = () => {
     const { clientY } = e;
 
     // 마우스 위치보다 아래 있는 리스트 항목 중 첫 번째 요소 찾기
-    const $dropTargetElement = itemsRef.current!.find(
+    const $dropTargetElement = itemsRef.current.find(
       (el) => el && el.offsetTop - el.offsetHeight / 2 >= clientY,
     );
 

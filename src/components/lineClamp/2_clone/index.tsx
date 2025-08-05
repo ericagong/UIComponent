@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+
 import cx from '../cx';
 import data from '../data';
 
@@ -22,7 +23,7 @@ const LineClampedText = ({
       const totalmaxLines = Math.floor(scrollHeight / lineHeight);
       setIsClamped(totalmaxLines > maxLines);
     }
-  }, [text]);
+  }, [text, maxLines]);
 
   return (
     <div

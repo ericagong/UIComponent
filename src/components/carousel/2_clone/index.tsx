@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
-import data from '../data';
+import { useRef,useState } from 'react';
+
 import cx from '../cx';
+import data from '../data';
 
 const SLIDE_WIDTH = 600;
 

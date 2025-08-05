@@ -1,8 +1,9 @@
-import data from '../data';
-import cx from '../cx';
 import SnackbarsContextProvider, {
   useSetSnackbar,
 } from '@/context/SnackbarsContextProvider';
+
+import cx from '../cx';
+import data from '../data';
 
 const SnackbarPanel = ({
   id,

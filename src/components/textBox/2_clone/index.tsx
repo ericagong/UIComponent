@@ -1,6 +1,8 @@
-import { useRef, useEffect } from 'react';
-import cx from '../cx';
+import { useEffect,useRef } from 'react';
+
 import { clamp } from '@/components/utils';
+
+import cx from '../cx';
 
 const MIN_LINES = 3;
 const MAX_LINES = 15;

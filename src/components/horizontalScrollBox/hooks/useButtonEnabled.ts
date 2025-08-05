@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import useIntersectionObserver from '@/components/hook/useIntersectionObserver';
 
 export type ButtonDirection = 'prev' | 'next';

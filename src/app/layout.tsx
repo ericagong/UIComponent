@@ -1,5 +1,7 @@
-import type { Metadata } from 'next';
 import './globals.scss';
+
+import type { Metadata } from 'next';
+
 import Gnb from './gnb';
 
 export const metadata: Metadata = {

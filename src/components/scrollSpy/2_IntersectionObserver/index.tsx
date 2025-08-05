@@ -1,7 +1,7 @@
 import cx from '../cx';
 import data from '../data';
-import useScrollSpy from './useScrollSpy';
 import ContentItem from './ContentItem';
+import useScrollSpy from './useScrollSpy';
 
 const ScrollSpy = () => {
   const {

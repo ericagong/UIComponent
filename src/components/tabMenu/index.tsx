@@ -1,6 +1,6 @@
-import cx from './cx';
 import DisplayAttributeTabMenu from './1.displayAttribute';
 import SelectiveRenderTabMenu from './2.selectiveRender';
+import cx from './cx';
 
 const TabMenus = () => {
   return (

@@ -1,8 +1,10 @@
+import { useEffect,useRef } from 'react';
+
+import useAutoPlacement from '@/components/hook/useAutoPlacement';
+import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
+
 import cx from '../cx';
 import data from '../data';
-import { useRef, useEffect } from 'react';
-import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
-import useAutoPlacement from '@/components/hook/useAutoPlacement';
 
 const preferredTooltipPosition = {
   top: '100%', // 아래쪽으로 띄울 땐 top에서 100% 떨어지게 (바로 아래)

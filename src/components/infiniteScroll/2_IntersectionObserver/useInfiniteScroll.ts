@@ -1,6 +1,8 @@
-import { useRef, useEffect } from 'react';
-import useMockFetchAPI from '../useMockFetchAPI';
+import { useEffect, useRef } from 'react';
+
 import useIntersectionObserver from '@/components/hook/useIntersectionObserver';
+
+import useMockFetchAPI from '../useMockFetchAPI';
 
 const IOOptions = {
   threshold: 1,
@@ -13,8 +15,8 @@ const useInfiniteScroll = () => {
   const isIntersecting = targetEntry?.isIntersecting || false;
 
   useEffect(() => {
-    if (isIntersecting) fetchMore();
-  }, [isIntersecting]);
+    if (isIntersecting) void fetchMore();
+  }, [isIntersecting, fetchMore]);
 
   return { moreRef, status, data };
 };

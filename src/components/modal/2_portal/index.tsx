@@ -1,8 +1,9 @@
-import useModal from './useModal';
-import { AlertModal, ConfirmModal, FormModal } from './ModalComponents';
 import { ReactNode, useState } from 'react';
+
 import ModalsRoot from '../ModalsRoot';
 import Placeholders from '../Placeholders';
+import { AlertModal, ConfirmModal, FormModal } from './ModalComponents';
+import useModal from './useModal';
 
 const AlertTrigger = ({ id, content }: { id: string; content: string }) => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -62,8 +63,8 @@ const ConfirmTrigger = ({
 const FormTrigger = ({ id }: { id: string }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
-  const handleSubmit = (data: any) => {
-    console.log('Form submitted:', Array.from(data));
+  const handleSubmit = (data: FormData) => {
+    console.warn('Form submitted:', Array.from(data));
   };
 
   return (

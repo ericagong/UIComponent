@@ -1,5 +1,6 @@
+import { ReactNode, RefObject, SyntheticEvent, useCallback } from 'react';
+
 import cx from '../cx';
-import { RefObject, ReactNode, useCallback, SyntheticEvent } from 'react';
 
 const Modal = ({
   className,
@@ -25,7 +26,7 @@ const Modal = ({
         close();
       }
     },
-    [closeOnClickOutside],
+    [closeOnClickOutside, modalRef, onClose, close],
   );
 
   return (

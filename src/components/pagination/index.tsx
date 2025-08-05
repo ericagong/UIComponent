@@ -1,6 +1,7 @@
-import cx from './cx';
 import { useMemo } from 'react';
+
 import { clamp } from '../utils';
+import cx from './cx';
 
 const Pagination = ({
   totalPages,
@@ -18,7 +19,7 @@ const Pagination = ({
     [totalPages],
   );
 
-  const viewCount = Math.min(visibleCount || totalPages, totalPages);
+  const viewCount = Math.min(visibleCount ?? totalPages, totalPages);
   const halfCount = Math.floor(viewCount / 2);
   const visibleMin = clamp(currentIndex - halfCount, 0, totalPages - viewCount);
   // [visibleMin, visibleMin + viewCount) 범위의 페이지 인덱스

@@ -1,7 +1,9 @@
-import { RefObject, useRef, useState, useEffect } from 'react';
-import cx from '../cx';
-import useAutoPlacement from '@/components/hook/useAutoPlacement';
+import { RefObject, useEffect,useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import useAutoPlacement from '@/components/hook/useAutoPlacement';
+
+import cx from '../cx';
 
 const menuPosition = {
   top: -4,

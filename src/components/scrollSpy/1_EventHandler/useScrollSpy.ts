@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ItemRecord = {
   index: number;
@@ -44,9 +44,9 @@ const useScrollSpy = (
     const navigationBar = navigationBarRef.current;
     const targetItem = navigationItemsRef.current[currentIndex];
 
-    const targetLeft = targetItem?.offsetLeft || 0;
+    const targetLeft = targetItem?.offsetLeft ?? 0;
     const barWidth = navigationBar.offsetWidth;
-    const targetWidth = targetItem?.offsetWidth || 0;
+    const targetWidth = targetItem?.offsetWidth ?? 0;
 
     const scrollLeft = targetLeft - barWidth / 2 + targetWidth / 2;
     navigationBar.scrollTo({
@@ -55,39 +55,39 @@ const useScrollSpy = (
     });
   });
 
-  const calculateItems = () => {
-    const scrollTop = document.scrollingElement?.scrollTop || 0;
-    contentItemsRef.current?.forEach(($item, index) => {
-      if (!$item) return;
-      const { top, height } = $item.getBoundingClientRect();
-
-      itemsRecordRef.current[index] = {
-        index,
-        top: top + scrollTop,
-        height: height,
-      };
-    });
-    console.log('calculateItems', itemsRecordRef.current);
-  };
-
-  const handleScroll = () => {
-    calculateItems();
-
-    const viewportTop = document.scrollingElement?.scrollTop || 0;
-    const adjustedViewportTop = viewportTop + STICKY_HEADER_HEIGHT;
-    const targetItem = itemsRecordRef.current.find((itemRecord) => {
-      return (
-        itemRecord &&
-        itemRecord.top <= adjustedViewportTop &&
-        itemRecord.top + itemRecord.height > adjustedViewportTop
-      );
-    });
-    if (targetItem) {
-      setCurrentIndex(targetItem.index);
-    }
-  };
-
   useEffect(() => {
+    const calculateItems = () => {
+      const scrollTop = document.scrollingElement?.scrollTop ?? 0;
+      contentItemsRef.current?.forEach(($item, index) => {
+        if (!$item) return;
+        const { top, height } = $item.getBoundingClientRect();
+
+        itemsRecordRef.current[index] = {
+          index,
+          top: top + scrollTop,
+          height: height,
+        };
+      });
+      // console.warn('calculateItems', itemsRecordRef.current);
+    };
+
+    const handleScroll = () => {
+      calculateItems();
+
+      const viewportTop = document.scrollingElement?.scrollTop ?? 0;
+      const adjustedViewportTop = viewportTop + STICKY_HEADER_HEIGHT;
+      const targetItem = itemsRecordRef.current.find((itemRecord) => {
+        return (
+          itemRecord &&
+          itemRecord.top <= adjustedViewportTop &&
+          itemRecord.top + itemRecord.height > adjustedViewportTop
+        );
+      });
+      if (targetItem) {
+        setCurrentIndex(targetItem.index);
+      }
+    };
+
     calculateItems();
 
     window.addEventListener('scroll', handleScroll);
@@ -98,7 +98,7 @@ const useScrollSpy = (
       window.removeEventListener('scroll', handleScroll);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [contentItemsRef]);
 
   return {
     navigationBarRef,

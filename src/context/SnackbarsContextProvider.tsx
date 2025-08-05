@@ -1,12 +1,13 @@
 import {
-  EventHandler,
-  ReactNode,
   createContext,
   Dispatch,
-  useReducer,
-  useContext,
+  EventHandler,
+  ReactNode,
   useCallback,
+  useContext,
+  useReducer,
 } from 'react';
+
 import SnackbarsRoot from '@/components/snackbar/1_context/SnackbarsRoot';
 
 type SnackbarProps = {
@@ -83,38 +84,44 @@ const useSnackbars = () => useContext(SnackbarsContext);
 const useSetSnackbar = () => {
   const dispatch = useContext(SnackbarsSetContext);
 
-  const upsertSnackbar = useCallback((id: string, children: ReactNode) => {
-    const closeSnackbar = () => {
-      dispatch({
-        type: 'upsert',
-        payload: { id, isOpen: false, timeoutId: null },
-      });
-    };
+  const upsertSnackbar = useCallback(
+    (id: string, children: ReactNode) => {
+      const closeSnackbar = () => {
+        dispatch({
+          type: 'upsert',
+          payload: { id, isOpen: false, timeoutId: null },
+        });
+      };
 
-    const startAutoCloseTimer = () =>
-      window.setTimeout(closeSnackbar, TIMEOUT_DURATION);
+      const startAutoCloseTimer = () =>
+        window.setTimeout(closeSnackbar, TIMEOUT_DURATION);
 
-    const newSnackbar: SnackbarProps = {
-      id,
-      children,
-      isOpen: true,
-      timeoutId: startAutoCloseTimer(),
-      onMouseEnter: () => {
-        if (newSnackbar.timeoutId) {
-          clearTimeout(newSnackbar.timeoutId);
-        }
-      },
-      onMouseLeave: () => {
-        newSnackbar.timeoutId = startAutoCloseTimer();
-      },
-    };
+      const newSnackbar: SnackbarProps = {
+        id,
+        children,
+        isOpen: true,
+        timeoutId: startAutoCloseTimer(),
+        onMouseEnter: () => {
+          if (newSnackbar.timeoutId) {
+            clearTimeout(newSnackbar.timeoutId);
+          }
+        },
+        onMouseLeave: () => {
+          newSnackbar.timeoutId = startAutoCloseTimer();
+        },
+      };
 
-    dispatch({ type: 'upsert', payload: newSnackbar });
-  }, []);
+      dispatch({ type: 'upsert', payload: newSnackbar });
+    },
+    [dispatch],
+  );
 
-  const removeSnackbar = useCallback((id: string) => {
-    dispatch({ type: 'remove', payload: { id } });
-  }, []);
+  const removeSnackbar = useCallback(
+    (id: string) => {
+      dispatch({ type: 'remove', payload: { id } });
+    },
+    [dispatch],
+  );
 
   return {
     upsertSnackbar,
@@ -123,5 +130,5 @@ const useSetSnackbar = () => {
 };
 
 export default SnackbarsContextProvider;
-export { useSnackbars, useSetSnackbar };
+export { useSetSnackbar, useSnackbars };
 export type { SnackbarProps };

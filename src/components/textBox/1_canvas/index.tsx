@@ -1,5 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
+
 import { calculateLines, clamp } from '@/components/utils';
+
 import cx from '../cx';
 
 const MIN_LINES = 3;

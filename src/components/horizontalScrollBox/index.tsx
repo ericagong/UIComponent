@@ -1,7 +1,8 @@
-import data from './data';
+import { useRef } from 'react';
+
 // import { LazyImage } from '../lazyLoading/4_polyfill';
 import cx from './cx';
-import { useRef } from 'react';
+import data from './data';
 import useButtonEnabled from './hooks/useButtonEnabled';
 import useScrollToEdge from './hooks/useScrollToEdge';
 
@@ -19,7 +20,7 @@ const Item = ({
 }) => {
   return (
     <>
-      <img src={imgUrl} width={WIDTH} height={HEIGHT} />
+      <img key={id} src={imgUrl} width={WIDTH} height={HEIGHT} />
       <span>{description}</span>
     </>
   );

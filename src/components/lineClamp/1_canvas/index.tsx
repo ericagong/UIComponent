@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+
+import { calculateLines } from '@/components/utils';
+
 import cx from '../cx';
 import data from '../data';
-import { calculateLines } from '@/components/utils';
 
 // TODO resize Observer 추가
 const LineClampedText = ({

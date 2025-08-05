@@ -1,5 +1,6 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
+
 import useIntersectionObserver from '@/components/hook/useIntersectionObserver';
 
 const IOOptions: IntersectionObserverInit = { threshold: 0 };
@@ -9,7 +10,7 @@ const useLazyLoad = (
   src: string,
   rootElementRef?: RefObject<HTMLElement>,
 ) => {
-  IOOptions.root = rootElementRef?.current || null;
+  IOOptions.root = rootElementRef?.current ?? null;
 
   const { observerRef, visibleEntries } = useIntersectionObserver(
     imgRef,
@@ -25,7 +26,7 @@ const useLazyLoad = (
         observerRef.current?.disconnect();
       }
     }
-  }, [src, visibleEntries]);
+  }, [src, visibleEntries, imgRef, observerRef]);
 };
 
 export default useLazyLoad;

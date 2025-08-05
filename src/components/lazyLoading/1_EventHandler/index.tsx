@@ -1,10 +1,12 @@
-import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
-import useLoadIntersected from './useLoadIntersected';
-import useThrottle from '@/components/hook/useThrottle';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+
 import useLoading from '@/components/hook/useLoading';
-import data from '../data';
+import useThrottle from '@/components/hook/useThrottle';
+
 import cx from '../cx';
+import data from '../data';
 import { LazyImageProps } from '../types';
+import useLoadIntersected from './useLoadIntersected';
 
 type LazyImageHandle = {
   handleLoad: () => void;
@@ -12,7 +14,7 @@ type LazyImageHandle = {
 
 const LazyImage = forwardRef<LazyImageHandle, LazyImageProps>(
   ({ src, ...rest }, ref) => {
-    const targetRef = useRef<HTMLImageElement>(null);
+    const targetRef = useRef<HTMLImageElement | null>(null);
     const { loading, setLoaded } = useLoading(true);
     const handleLoad = useLoadIntersected(targetRef);
 
@@ -21,7 +23,7 @@ const LazyImage = forwardRef<LazyImageHandle, LazyImageProps>(
       () => ({
         handleLoad,
       }),
-      [src],
+      [handleLoad],
     );
 
     return (

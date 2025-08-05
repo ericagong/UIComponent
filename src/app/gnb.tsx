@@ -1,17 +1,19 @@
 'use client';
 
+import classNames from 'classnames';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+
 import {
   ChildRoute,
-  ParentRoute,
-  ROUTE_PATH,
   gnbRootList,
   isParentRoute,
+  ParentRoute,
+  ROUTE_PATH,
   routes,
 } from '@/routes';
+
 import { ROUTE } from '../routes';
-import Link from 'next/link';
-import classNames from 'classnames';
-import { useParams } from 'next/navigation';
 
 const ParentGnbItem = ({
   route: { name, link, children },

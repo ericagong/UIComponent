@@ -1,6 +1,6 @@
-import cx from './cx';
 import CanvasTextBox from './1_canvas';
 import CloneTextBox from './2_clone';
+import cx from './cx';
 
 const TextBoxes = () => {
   return (

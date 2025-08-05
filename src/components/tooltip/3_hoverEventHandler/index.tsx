@@ -1,9 +1,11 @@
-import cx from '../cx';
-import data from '../data';
 import { useRef } from 'react';
+
+import useAutoPlacement from '@/components/hook/useAutoPlacement';
 import useHover from '@/components/hook/useHover';
 import ViewportRectContextProvider from '@/context/ViewportRectContextProvider';
-import useAutoPlacement from '@/components/hook/useAutoPlacement';
+
+import cx from '../cx';
+import data from '../data';
 
 const preferredTooltipPosition = {
   top: '100%',

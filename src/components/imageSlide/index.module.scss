@@ -1,24 +1,24 @@
 $border-gray: #ccc;
 $font-white: #fff;
-$label-overlay: rgba(0, 0, 0, 0.5);
+$label-overlay: rgb(0 0 0 / 50%);
 $button-overlay: #333;
 
 .ImageSlides {
     .imageSlide {
         position: relative;
-        width: 600px;
-        height: 320px;
         overflow: hidden;
         border: 1px solid $border-gray;
-        font-family: 'sans-serif';
+        width: 600px;
+        height: 320px;
+        font-family: sans-serif;
     }
 
     .track {
         position: relative;
         display: flex;
         flex-wrap: nowrap;
-        padding: 0;
         margin: 0;
+        padding: 0;
         list-style: none;
     }
 
@@ -28,9 +28,9 @@ $button-overlay: #333;
 
     .scrollSnapTrack {
         overflow-x: scroll;
-        scrollbar-width: none;
-        scroll-snap-type: x mandatory;
         overscroll-behavior: contain;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
     }
 
     .slide {
@@ -49,28 +49,28 @@ $button-overlay: #333;
 
     .label {
         position: absolute;
-        top: 0px;
-        left: 0px;
-        background-color: $label-overlay;
-        color: $font-white;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        padding: 3px 10px;
         font-size: 2rem;
         font-weight: bold;
-        padding: 3px 10px;
-        z-index: 10;
+        color: $font-white;
+        background-color: $label-overlay;
     }
 
     .moveTrigger {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        z-index: 20;
+        border: none;
         width: 40px;
         height: 40px;
+        opacity: 0.3;
+        transform: translateY(-50%);
+        cursor: pointer;
         background-color: $button-overlay;
         border-radius: 50%;
-        border: none;
-        opacity: 0.3;
-        cursor: pointer;
-        z-index: 20;
 
         &:hover {
             opacity: 1;
@@ -78,12 +78,12 @@ $button-overlay: #333;
 
         &::before,
         &::after {
-            content: '';
             position: absolute;
+            top: 5px;
             width: 6px;
             height: 17px;
-            top: 5px;
             background-color: $font-white;
+            content: '';
             transform-origin: 3px 14px;
         }
     }

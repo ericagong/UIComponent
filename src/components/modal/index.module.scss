@@ -1,5 +1,5 @@
-$dimmed: rgba(0, 0, 0, 0.3);
-$box-shadow: rgba(0, 0, 0, 0.1);
+$dimmed: rgb(0 0 0 / 30%);
+$box-shadow: rgb(0 0 0 / 10%);
 $panel-white: #fff;
 $divider-gray: #ccc;
 $button-black: #333;
@@ -9,14 +9,14 @@ $border-black: #242424;
     // overlay container
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     z-index: 100;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     // 배경 흐림 효과
     :global(#modals-root) & {
@@ -27,19 +27,19 @@ $border-black: #242424;
     }
 
     .panel {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
         position: absolute;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         box-sizing: border-box;
-        box-shadow: 0 3px 6px $box-shadow;
-        max-height: calc(100vh - 80px);
-        max-width: calc(100vw - 80px);
-        min-width: 250px;
+        overflow: hidden;
         border: 1px solid $border-black;
-        border-radius: 6px;
+        min-width: 250px;
+        max-width: calc(100vw - 80px);
+        max-height: calc(100vh - 80px);
+        box-shadow: 0 3px 6px $box-shadow;
         background-color: $panel-white;
+        border-radius: 6px;
     }
 }
 
@@ -57,31 +57,35 @@ $border-black: #242424;
 
     .close-trigger {
         position: relative;
-        width: 40px;
-        height: 40px;
         flex: 0 0 40px;
         border: 0;
         padding: 0;
-        background-color: transparent;
+        width: 40px;
+        height: 40px;
         text-align: center;
         cursor: pointer;
+        background-color: transparent;
+
         &::before,
         &::after {
-            content: '';
             position: absolute;
+            top: 19px;
+            left: 10px;
             width: 20px;
             height: 0;
             border-top: 2px solid $button-black;
+            content: '';
             transform-origin: 50% 1px;
-            left: 10px;
-            top: 19px;
         }
+
         &::before {
             transform: rotate(-45deg);
         }
+
         &::after {
             transform: rotate(45deg);
         }
+
         &:hover,
         &:focus {
             transform: scale(1.1);
@@ -102,20 +106,19 @@ $border-black: #242424;
 .Dialog {
     position: fixed;
     display: flex;
-    flex-direction: column;
     flex: 1;
-
+    flex-direction: column;
     justify-content: center;
-    overflow: hidden;
     box-sizing: border-box;
+    overflow: hidden;
     border: 1px solid $border-black;
-    border-radius: 6px;
     padding: 0;
-    max-height: calc(100vh - 80px);
-    max-width: calc(100vw - 80px);
     min-width: 250px;
-    background-color: $panel-white;
+    max-width: calc(100vw - 80px);
+    max-height: calc(100vh - 80px);
     box-shadow: 0 3px 6px $box-shadow;
+    background-color: $panel-white;
+    border-radius: 6px;
 
     &::backdrop {
         backdrop-filter: blur(2px);

@@ -1,22 +1,22 @@
 $border-gray: #ccc;
 $font-white: #fff;
-$label-overlay: rgba(0, 0, 0, 0.5);
+$label-overlay: rgb(0 0 0 / 50%);
 $button-overlay: #333;
 
 .Carousels {
     .carousel {
         position: relative;
-        width: 600px;
-        height: 320px;
         overflow: hidden;
         border: 1px solid $border-gray;
-        font-family: 'sans-serif';
+        width: 600px;
+        height: 320px;
+        font-family: sans-serif;
     }
 
     .track {
         position: relative;
-        padding: 0;
         margin: 0;
+        padding: 0;
         list-style: none;
     }
 
@@ -33,18 +33,22 @@ $button-overlay: #333;
         padding: 0;
         transform: translateX(-200%);
 
-        &.left_current {
-            animation: left_current ease-out 0.3s forwards;
+        &.left-current {
+            animation: left-current ease-out 0.3s forwards;
         }
-        &.left_next {
-            animation: left_next ease-out 0.3s forwards;
+
+        &.left-next {
+            animation: left-next ease-out 0.3s forwards;
         }
-        &.right_current {
-            animation: right_current ease-out 0.3s forwards;
+
+        &.right-current {
+            animation: right-current ease-out 0.3s forwards;
         }
-        &.right_next {
-            animation: right_next ease-out 0.3s forwards;
+
+        &.right-next {
+            animation: right-next ease-out 0.3s forwards;
         }
+
         &.current {
             transform: translateX(0);
         }
@@ -61,28 +65,28 @@ $button-overlay: #333;
 
     .label {
         position: absolute;
-        top: 0px;
-        left: 0px;
-        background-color: $label-overlay;
-        color: $font-white;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        padding: 3px 10px;
         font-size: 2rem;
         font-weight: bold;
-        padding: 3px 10px;
-        z-index: 10;
+        color: $font-white;
+        background-color: $label-overlay;
     }
 
     .moveTrigger {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        z-index: 20;
+        border: none;
         width: 40px;
         height: 40px;
+        opacity: 0.3;
+        transform: translateY(-50%);
+        cursor: pointer;
         background-color: $button-overlay;
         border-radius: 50%;
-        border: none;
-        opacity: 0.3;
-        cursor: pointer;
-        z-index: 20;
 
         &:hover {
             opacity: 1;
@@ -90,12 +94,12 @@ $button-overlay: #333;
 
         &::before,
         &::after {
-            content: '';
             position: absolute;
+            top: 5px;
             width: 6px;
             height: 17px;
-            top: 5px;
             background-color: $font-white;
+            content: '';
             transform-origin: 3px 14px;
         }
     }
@@ -134,35 +138,39 @@ $button-overlay: #333;
         }
     }
 
-    @keyframes left_current {
+    @keyframes left-current {
         0% {
             left: 0;
             transform: translateX(0);
         }
+
         100% {
             transform: translateX(100%);
         }
     }
-    @keyframes left_next {
+    @keyframes left-next {
         0% {
             transform: translateX(-100%);
         }
+
         100% {
             transform: translateX(0);
         }
     }
-    @keyframes right_current {
+    @keyframes right-current {
         0% {
             transform: translateX(0);
         }
+
         100% {
             transform: translateX(-100%);
         }
     }
-    @keyframes right_next {
+    @keyframes right-next {
         0% {
             transform: translateX(100%);
         }
+
         100% {
             transform: translateX(0);
         }

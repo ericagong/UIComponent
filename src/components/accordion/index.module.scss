@@ -4,45 +4,44 @@ $current-tab: #ace;
 
 .Accordions {
     .container {
+        overflow: hidden;
         margin: 0;
+        border: 1px solid $border-gray;
         padding: 0;
         width: 100%;
-        overflow: hidden;
-        list-style: none;
-        border: 1px solid $border-gray;
         border-bottom: 0;
+        list-style: none;
     }
 
     .item {
         overflow: hidden;
 
         .trigger {
-            // 버튼 일부 스타일 reset
-            appearance: none;
             border: none;
-            background: none;
             padding: 0;
-
-            cursor: pointer;
+            padding: 15px;
+            width: 100%;
             font: inherit;
             line-height: 1.5;
             text-align: left;
-            width: 100%;
-            padding: 15px;
+            background: none;
+            cursor: pointer;
+            // 버튼 일부 스타일 reset
+            appearance: none;
             border-bottom: 1px solid $border-gray;
 
             &::before {
-                content: '+';
                 margin: 0 8px 0 -5px;
+                content: '+';
             }
         }
 
         .content {
+            overflow: hidden;
             padding: 0 15px;
             max-height: 0;
-            overflow: hidden;
-            border-bottom-width: 0;
             transition: max-height ease 0.3s;
+            border-bottom-width: 0;
         }
 
         &.current {
@@ -57,16 +56,27 @@ $current-tab: #ace;
             .content {
                 padding: 15px;
                 max-height: 300px;
-                border-bottom: 1px solid $border-gray;
                 background-color: $current-description;
+                border-bottom: 1px solid $border-gray;
             }
+        }
+    }
+
+    summary {
+        padding: 15px;
+        cursor: pointer;
+        border-bottom: 1px solid $border-gray;
+
+        &::marker {
+            color: $border-gray;
+            content: '+ ';
         }
     }
 
     details[open] {
         & summary {
-            background-color: $current-tab;
             padding: 15px;
+            background-color: $current-tab;
             border-bottom-width: 0;
 
             &::marker {
@@ -76,20 +86,11 @@ $current-tab: #ace;
 
         & .panel {
             padding: 15px;
+            background-color: $current-description;
             // max-height: 300px;
             border-bottom: 1px solid $border-gray;
-            background-color: $current-description;
         }
     }
 
-    summary {
-        padding: 15px;
-        border-bottom: 1px solid $border-gray;
-        cursor: pointer;
-
-        &::marker {
-            content: '+ ';
-            color: $border-gray;
-        }
-    }
+    
 }

@@ -1,7 +1,7 @@
 html,
 body {
-    height: 100%;
     margin: 0;
+    height: 100%;
 }
 
 body {
@@ -22,105 +22,100 @@ aside {
     --bg-list-open: #457;
 
     position: fixed;
-    left: 0;
     top: 0;
     bottom: 0;
+    left: 0;
     margin: 0;
     padding: 0;
     width: 199px;
-    border-right: 1px solid var(--bg-default);
-    background-color: var(--bg-default);
     color: #fff;
+    background-color: var(--bg-default);
+    border-right: 1px solid var(--bg-default);
 
     a {
         color: inherit;
         text-decoration: none;
     }
+
     button {
         display: block;
-        width: 100%;
-        border: 0;
-        background-color: inherit;
-        color: inherit;
-        font-size: inherit;
         margin: 0;
-        text-align: left;
+        border: 0;
         padding: 10px 20px;
+        width: 100%;
+        font-size: inherit;
+        color: inherit;
+        text-align: left;
         cursor: pointer;
+        background-color: inherit;
     }
 
     h1 {
+        overflow: hidden;
         margin: 0;
         padding: 20px;
-        overflow: hidden;
 
         sub {
-            float: right;
             opacity: 0.7;
+            float: right;
         }
     }
 
     ul {
-        list-style: none;
         margin: 0;
         padding: 0;
         background-color: var(--bg-list);
+        list-style: none;
     }
-    li {
-        border-top: 1px solid var(--bg-default);
-        transition: background-color ease 0.3s;
 
-        &.active {
-            background-color: var(--bg-list-active);
-            font-weight: 700;
-        }
-        &.open {
-            background-color: var(--bg-list-open);
-            font-weight: 700;
-        }
-        a {
-            display: block;
-            padding: 10px 20px 10px 25px;
-        }
-        &.disabled {
-            display: block;
-            padding: 10px 20px 10px 25px;
-            color: #666;
-            background-color: var(--bg-list-disabled);
-            cursor: not-allowed;
-        }
-    }
+
     .subRoutes {
-        height: 0;
         overflow: hidden;
+        height: 0;
         opacity: 0;
         background-color: var(--bg-list-open);
+        transition-duration: 0.3s;
         transition-property: height, opacity;
         transition-timing-function: ease;
-        transition-duration: 0.3s;
+
         a {
             padding-left: 33px;
+
             &::before {
-                content: '';
                 display: inline-block;
                 border: 2px solid #fff;
                 border-radius: 2px;
+                content: '';
                 margin-right: 8px;
                 vertical-align: middle;
             }
         }
     }
+
     li.parent > a::before {
-        content: '';
         display: inline-block;
-        vertical-align: 2px;
         border: 4px solid transparent;
         border-left-color: #fff;
-        margin-right: 4px;
+        content: '';
         margin-left: -12px;
+        margin-right: 4px;
+        vertical-align: 2px;
     }
-    li.open {
-        .subRoutes {
+
+    li {
+        transition: background-color ease 0.3s;
+        border-top: 1px solid var(--bg-default);
+
+        &.active {
+            font-weight: 700;
+            background-color: var(--bg-list-active);
+        }
+
+        &.open {
+            font-weight: 700;
+            background-color: var(--bg-list-open);
+
+            .subRoutes {
             opacity: 1;
         }
         // GNB 애니메이션 지정
@@ -129,31 +124,51 @@ aside {
                 height: calc(#{$i} * 40px);
             }
         }
+
         &.parent > a::before {
-            border-top-color: #fff;
             border-left-color: transparent;
-            vertical-align: 0px;
-            margin-right: 6px;
+            border-top-color: #fff;
             margin-left: -14px;
+            margin-right: 6px;
+            vertical-align: 0;
+        }
+        }
+
+        /* stylelint-disable-next-line no-descending-specificity */
+        a {
+            display: block;
+            padding: 10px 20px 10px 25px;
+        }
+
+        &.disabled {
+            display: block;
+            padding: 10px 20px 10px 25px;
+            color: #666;
+            cursor: not-allowed;
+            background-color: var(--bg-list-disabled);
         }
     }
+
+    
+
+    
 }
 
 main {
     box-sizing: border-box;
-    min-height: 100%;
     padding: 20px;
+    min-height: 100%;
 
-    h3 > sub:before {
-        content: '|';
+    h3 > sub::before {
         margin: 0 5px 0 10px;
         color: #999;
+        content: '|';
     }
 }
 
 .markdown {
-    max-width: 800px;
     margin: 0 auto;
+    max-width: 800px;
     line-height: 1.67;
 
     ul,
@@ -161,24 +176,27 @@ main {
         margin: 0.5rem 0;
         padding-left: 20px;
     }
+
     li {
         margin: 0.2rem 0;
     }
+
     code {
-        background-color: #eee;
         padding: 3px;
+        background-color: #eee;
         border-radius: 3px;
         white-space: pre;
     }
 
     pre {
-        padding: 1rem;
         margin: 0;
+        padding: 1rem;
         background-color: #eee;
         border-radius: 5px;
+
         code {
-            background: none;
             padding: 0;
+            background: none;
             border-radius: 0;
         }
     }

@@ -38,8 +38,8 @@ const Carousel = ({ images, initialIndex = 0 }: { images: string[]; initialIndex
             }
 
             $currentSlide.addEventListener('animationend', handleAnimationEnd)
-            $currentSlide.classList.add(cx(`${moveTo}_current`))
-            $nextSlide.classList.add(cx(`${moveTo}_next`))
+            $currentSlide.classList.add(cx(`${moveTo}-current`))
+            $nextSlide.classList.add(cx(`${moveTo}-next`))
         },
         [currentIndex]
     )

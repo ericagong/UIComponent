@@ -1,6 +1,6 @@
 $font-gray: #fff;
-$background-dimmed: rgba(17, 17, 17, 0.95);
-$box-shadow: rgba(0, 0, 0, 0.15);
+$background-dimmed: rgb(17 17 17 / 95%);
+$box-shadow: rgb(0 0 0 / 15%);
 $hightlight-color: #03c75a;
 
 .trigger-container {
@@ -9,63 +9,64 @@ $hightlight-color: #03c75a;
 }
 
 .snackbars-root {
-    --Snackbars-marginBottom: 24px;
+    --snackbars-margin-bottom: 24px;
+
     position: fixed;
-    left: 50%;
     bottom: 0;
+    left: 50%;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: var(--Snackbars-marginBottom);
-    z-index: 100;
     transform: translateX(-50%);
+    margin-bottom: var(--snackbars-margin-bottom);
 }
 
 .snackbar {
     position: relative;
     display: flex;
     justify-content: center;
-
-    margin-top: 5px;
+    padding: 15px 14px 12px;
     width: 100%;
     min-width: 300px;
     max-width: 680px;
-    border-radius: 8px;
-    padding: 15px 14px 12px;
-    box-shadow: 0px 4px 4px $box-shadow;
-    background-color: $background-dimmed;
     font-size: 1.1rem;
     line-height: 1.47;
     color: $font-gray;
+    box-shadow: 0 4px 4px $box-shadow;
     opacity: 0;
+    background-color: $background-dimmed;
+    border-radius: 8px;
+    margin-top: 5px;
 
     .close-trigger {
         position: absolute;
         top: 8px;
         right: 8px;
+        border: none;
+        padding: 0;
         width: 20px;
         height: 20px;
         background: transparent;
-        border: none;
-        padding: 0;
         cursor: pointer;
 
         &::before,
         &::after {
-            content: '';
             position: absolute;
-            left: 50%;
             top: 50%;
+            left: 50%;
             width: 14px;
             height: 2px;
-            background-color: $font-gray;
-            transform-origin: center;
             transition: background-color 150ms ease;
+            background-color: $font-gray;
+            content: '';
+            transform-origin: center;
         }
 
         &::before {
             transform: translate(-50%, -50%) rotate(45deg);
         }
+
         &::after {
             transform: translate(-50%, -50%) rotate(-45deg);
         }
@@ -79,8 +80,8 @@ $hightlight-color: #03c75a;
 
     .panel {
         margin: 0;
-        line-height: 1.47;
         font-size: 1.1rem;
+        line-height: 1.47;
         text-align: center;
     }
 
@@ -89,8 +90,8 @@ $hightlight-color: #03c75a;
     }
 
     &.show {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 
     &.exit {
@@ -100,22 +101,24 @@ $hightlight-color: #03c75a;
 
 @keyframes enter {
     0% {
-        transform: translate(0, 50px);
         opacity: 0;
+        transform: translate(0, 50px);
     }
+
     100% {
-        transform: translate(0, 0);
         opacity: 1;
+        transform: translate(0, 0);
     }
 }
 
 @keyframes exit {
     0% {
-        transform: translate(0, 0);
         opacity: 1;
+        transform: translate(0, 0);
     }
+
     100% {
-        transform: translate(0, 50px);
         opacity: 0;
+        transform: translate(0, 50px);
     }
 }

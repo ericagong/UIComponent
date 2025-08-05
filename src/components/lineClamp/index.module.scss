@@ -5,8 +5,8 @@ $button-black: #333;
     .content {
         position: relative;
         margin: 10px 0;
-        padding: 10px;
         border: 1px solid $border-gray;
+        padding: 10px;
         line-height: 1.67;
     }
 
@@ -22,40 +22,40 @@ $button-black: #333;
         padding: 0;
         width: 20px;
         height: 20px;
-        background-color: transparent;
         cursor: pointer;
+        background-color: transparent;
 
         // 아래 화살표
         &::before {
-            content: '';
             display: inline-block;
-            vertical-align: middle;
             width: 5px;
             height: 5px;
-            border-width: 1px;
-            border-style: solid;
-            border-color: transparent $button-black $button-black transparent;
             transform: rotate(45deg);
+            border-color: transparent $button-black $button-black transparent;
+            border-style: solid;
+            border-width: 1px;
+            content: '';
+            vertical-align: middle;
         }
     }
 
     .content.clamped {
         .text {
-            overflow: hidden;
-            text-overflow: ellipsis;
             display: -webkit-box;
+            overflow: hidden;
             -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
         }
     }
 
     .text-clone {
         position: absolute;
-        box-sizing: border-box;
-        left: 10px;
         top: 10px;
-        white-space: pre-line;
-        visibility: hidden;
-        opacity: 0;
+        left: 10px;
         z-index: -1;
+        box-sizing: border-box;
+        opacity: 0;
+        visibility: hidden;
+        white-space: pre-line;
     }
 }

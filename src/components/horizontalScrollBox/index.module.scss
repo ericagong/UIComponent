@@ -1,4 +1,4 @@
-$dimmed-black: rgba(0, 0, 0, 0.5);
+$dimmed-black: rgb(0 0 0 / 50%);
 $white: #fff;
 
 .scrollBox {
@@ -8,9 +8,9 @@ $white: #fff;
 .list {
     display: flex;
     flex-wrap: nowrap;
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -25,20 +25,21 @@ $white: #fff;
 }
 
 .scroll-button {
-    display: none;
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 40px;
-    background-color: $dimmed-black;
+    display: none;
     border: 0;
-    border-radius: 5px;
+    width: 40px;
     cursor: pointer;
+    background-color: $dimmed-black;
+    border-radius: 5px;
 
     &.on {
         display: block;
         opacity: 0.5;
         transition: opacity ease-out 0.2s;
+
         &:hover {
             opacity: 1;
         }
@@ -47,15 +48,17 @@ $white: #fff;
     // 버튼 위치
     &::before,
     &::after {
-        content: '';
         position: absolute;
         width: 4px;
         height: 12px;
         background-color: $white;
+        content: '';
     }
+
     &::before {
         top: calc(50% - 10px);
     }
+
     &::after {
         top: calc(50% + 2px);
     }
@@ -63,32 +66,36 @@ $white: #fff;
     // <- 좌측 버튼
     &.prev {
         left: 0;
+
         &::before {
             left: 13px;
-            transform-origin: 0 100%;
             rotate: 30deg;
+            transform-origin: 0 100%;
         }
+
         &::after {
             left: 13px;
-            transform-origin: 0 0;
             rotate: -30deg;
+            transform-origin: 0 0;
         }
     }
 
     // -> 우측 버튼
     &.next {
         right: 0;
+
         &::before {
-            right: 13px;
             top: calc(50% - 10px);
-            transform-origin: 100% 100%;
-            rotate: -30deg;
-        }
-        &::after {
             right: 13px;
+            rotate: -30deg;
+            transform-origin: 100% 100%;
+        }
+
+        &::after {
             top: calc(50% + 2px);
-            transform-origin: 100% 0;
+            right: 13px;
             rotate: 30deg;
+            transform-origin: 100% 0;
         }
     }
 }

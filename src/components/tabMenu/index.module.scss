@@ -9,24 +9,24 @@ $current: #bde;
     .tabList {
         display: flex;
         flex-wrap: nowrap;
-        width: 100%;
         margin: 0;
         padding: 0;
+        width: 100%;
         border-bottom: 1px solid $border-gray;
     }
 
     .tabTrigger {
         flex: 1;
-        background: none;
-        border: none;
-        border-left: 1px solid $border-gray;
         box-sizing: border-box;
+        overflow: hidden;
+        border: none;
         padding: 15px;
         font: inherit;
+        background: none;
         cursor: pointer;
-        overflow: hidden;
-        white-space: nowrap;
+        border-left: 1px solid $border-gray;
         text-overflow: ellipsis;
+        white-space: nowrap;
 
         &:first-child {
             border-left: none;

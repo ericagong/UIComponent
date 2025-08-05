@@ -6,83 +6,83 @@ $font-gray: #666;
 $font-white: #fff;
 
 .ScrollSpy {
-  .floating-header {
-    position: sticky;
-    box-sizing: border-box;
-    margin: -20px -20px 0;
-    top: -70px; // title(45px) + subtitle(25px)
-  }
-  .title {
-    // 45px
-    top: 0;
-    margin: 5px 0 0 35px;
-    line-height: 40px;
-    padding: 0 20px;
-    background-color: $bg-gray-light;
-  }
-  .sub-title {
-    // 25px
-    top: 0;
-    margin: 1px 0 4px 35px;
-    line-height: 20px;
-    padding: 0 20px;
-    background-color: $bg-gray-light;
-  }
-
-  .navigation-bar {
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 50px; // sticky 이후 HEADER_HEIGHT
-    border-bottom: 1px solid $bg-black-transparent;
-    background-color: $bg-gray-light;
-    list-style: none;
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-      background-color: transparent;
+    .floating-header {
+        position: sticky;
+        box-sizing: border-box;
+        margin: -20px -20px 0;
+        top: -70px; // title(45px) + subtitle(25px)
+    }
+    .title {
+        // 45px
+        top: 0;
+        margin: 5px 0 0 35px;
+        line-height: 40px;
+        padding: 0 20px;
+        background-color: $bg-gray-light;
+    }
+    .sub-title {
+        // 25px
+        top: 0;
+        margin: 1px 0 4px 35px;
+        line-height: 20px;
+        padding: 0 20px;
+        background-color: $bg-gray-light;
     }
 
-    &:hover::-webkit-scrollbar-thumb {
-      background-color: $bg-black-transparent;
-    }
-  }
+    .navigation-bar {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 50px; // sticky 이후 HEADER_HEIGHT
+        border-bottom: 1px solid $bg-black-transparent;
+        background-color: $bg-gray-light;
+        list-style: none;
+        overflow-x: auto;
+        overflow-y: hidden;
 
-  .navigation-item {
-    button {
-      display: block;
-      border: 0;
-      padding: 0 18px;
-      color: $font-gray;
-      font-size: 1.25rem;
-      line-height: 44px;
-      background-color: transparent;
-      transition: ease-out 0.2s;
+        &::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+            background-color: transparent;
+        }
 
-      &:hover {
-        background-color: $bg-gray-highlight;
-      }
+        &:hover::-webkit-scrollbar-thumb {
+            background-color: $bg-black-transparent;
+        }
     }
-    &.current button {
-      font-weight: 700;
-      color: $font-white;
-      background-color: $bg-blue-light;
-    }
-  }
 
-  .content-items {
-    overflow: hidden;
-    list-style: none;
-    h4 {
-      margin: 0;
-      padding: 10px 0;
+    .navigation-item {
+        button {
+            display: block;
+            border: 0;
+            padding: 0 18px;
+            color: $font-gray;
+            font-size: 1.25rem;
+            line-height: 44px;
+            background-color: transparent;
+            transition: ease-out 0.2s;
+
+            &:hover {
+                background-color: $bg-gray-highlight;
+            }
+        }
+        &.current button {
+            font-weight: 700;
+            color: $font-white;
+            background-color: $bg-blue-light;
+        }
     }
-  }
+
+    .content-items {
+        overflow: hidden;
+        list-style: none;
+        h4 {
+            margin: 0;
+            padding: 10px 0;
+        }
+    }
 }

@@ -1,48 +1,48 @@
 $button-black: #000;
 
 .Pagination {
-  display: flex;
-  justify-content: center;
-
-  .pages {
     display: flex;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+    justify-content: center;
 
-  .pageMoveTrigger {
-    button {
-      position: relative;
-      display: block;
-      width: 100%;
-      outline: 0;
-      border: 0;
-      padding: 25px 10px 10px;
-      background: none;
-      text-align: center;
-      cursor: pointer;
-
-      &::before {
-        content: '';
-        position: absolute;
-        display: block;
-        width: 7px;
-        height: 7px;
-        border: 1px solid $button-black;
-        border-radius: 50%;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+    .pages {
+        display: flex;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
 
-    &.current button {
-      font-weight: 700;
-      &::before {
-        background-color: $button-black;
-      }
+    .pageMoveTrigger {
+        button {
+            position: relative;
+            display: block;
+            width: 100%;
+            outline: 0;
+            border: 0;
+            padding: 25px 10px 10px;
+            background: none;
+            text-align: center;
+            cursor: pointer;
+
+            &::before {
+                content: '';
+                position: absolute;
+                display: block;
+                width: 7px;
+                height: 7px;
+                border: 1px solid $button-black;
+                border-radius: 50%;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        &.current button {
+            font-weight: 700;
+            &::before {
+                background-color: $button-black;
+            }
+        }
     }
-  }
 }

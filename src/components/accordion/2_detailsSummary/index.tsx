@@ -1,13 +1,13 @@
-import MultiOpenAccordion from './MultiOpenAccordion';
-import SingleOpenAccordion from './SingleOpenAccordion';
+import MultiOpenAccordion from './MultiOpenAccordion'
+import SingleOpenAccordion from './SingleOpenAccordion'
 
 const Accordions = () => {
-  return (
-    <>
-      <MultiOpenAccordion />
-      <SingleOpenAccordion />
-    </>
-  );
-};
+    return (
+        <>
+            <MultiOpenAccordion />
+            <SingleOpenAccordion />
+        </>
+    )
+}
 
-export default Accordions;
+export default Accordions

@@ -1,89 +1,87 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 
-import useLoading from '@/components/hook/useLoading';
-import useThrottle from '@/components/hook/useThrottle';
+import useLoading from '@/components/hook/useLoading'
+import useThrottle from '@/components/hook/useThrottle'
 
-import cx from '../cx';
-import data from '../data';
-import { LazyImageProps } from '../types';
-import useLoadIntersected from './useLoadIntersected';
+import cx from '../cx'
+import data from '../data'
+import { LazyImageProps } from '../types'
+import useLoadIntersected from './useLoadIntersected'
 
 type LazyImageHandle = {
-  handleLoad: () => void;
-};
+    handleLoad: () => void
+}
 
-const LazyImage = forwardRef<LazyImageHandle, LazyImageProps>(
-  ({ src, ...rest }, ref) => {
-    const targetRef = useRef<HTMLImageElement | null>(null);
-    const { loading, setLoaded } = useLoading(true);
-    const handleLoad = useLoadIntersected(targetRef);
+const LazyImage = forwardRef<LazyImageHandle, LazyImageProps>(({ src, ...rest }, ref) => {
+    const targetRef = useRef<HTMLImageElement | null>(null)
+    const { loading, setLoaded } = useLoading(true)
+    const handleLoad = useLoadIntersected(targetRef)
 
     useImperativeHandle(
-      ref,
-      () => ({
-        handleLoad,
-      }),
-      [handleLoad],
-    );
+        ref,
+        () => ({
+            handleLoad,
+        }),
+        [handleLoad]
+    )
 
     return (
-      <img
-        ref={targetRef}
-        className={cx({ loading: loading })}
-        data-src={src}
-        onLoad={setLoaded}
-        {...rest}
-      />
-    );
-  },
-);
+        <img
+            ref={targetRef}
+            className={cx({ loading: loading })}
+            data-src={src}
+            onLoad={setLoaded}
+            {...rest}
+        />
+    )
+})
 
-const WIDTH = 600;
-const HEIGHT = 320;
-const DELAY = 1000; // ms
+const WIDTH = 600
+const HEIGHT = 320
+const DELAY = 1000 // ms
 
 const LazyLoading = () => {
-  const targetRefs = useRef<(LazyImageHandle | null)[]>([]);
+    const targetRefs = useRef<(LazyImageHandle | null)[]>([])
 
-  const handleImages = () => {
-    targetRefs.current.forEach((ref) => {
-      ref?.handleLoad();
-    });
-  };
+    const handleImages = () => {
+        targetRefs.current.forEach(ref => {
+            ref?.handleLoad()
+        })
+    }
 
-  const throttledHandleImages = useThrottle(handleImages, DELAY);
+    const throttledHandleImages = useThrottle(handleImages, DELAY)
 
-  useEffect(() => {
-    window.addEventListener('scroll', throttledHandleImages);
-    window.addEventListener('resize', throttledHandleImages);
+    useEffect(() => {
+        window.addEventListener('scroll', throttledHandleImages)
+        window.addEventListener('resize', throttledHandleImages)
 
-    // 최초 렌더링 시 트리거
-    throttledHandleImages();
+        // 최초 렌더링 시 트리거
+        throttledHandleImages()
 
-    return () => {
-      window.removeEventListener('scroll', throttledHandleImages);
-      window.removeEventListener('resize', throttledHandleImages);
-    };
-  }, [throttledHandleImages]);
+        return () => {
+            window.removeEventListener('scroll', throttledHandleImages)
+            window.removeEventListener('resize', throttledHandleImages)
+        }
+    }, [throttledHandleImages])
 
-  return (
-    <>
-      <h2>지연 로딩</h2>
-      <h3>#1. EventHandler(Scroll, Resize) + Throttle 기반 구현</h3>
-      {data.map((src, index) => (
-        <LazyImage
-          key={index}
-          ref={(el) => {
-            targetRefs.current[index] = el;
-          }}
-          src={src}
-          alt=''
-          width={WIDTH}
-          height={HEIGHT}
-        />
-      ))}
-    </>
-  );
-};
+    return (
+        <>
+            <h2>지연 로딩</h2>
+            <h3>#1. EventHandler(Scroll, Resize) + Throttle 기반 구현</h3>
+            {data.map((src, index) => (
+                <LazyImage
+                    key={index}
+                    ref={el => {
+                        targetRefs.current[index] = el
+                    }}
+                    src={src}
+                    alt=""
+                    width={WIDTH}
+                    height={HEIGHT}
+                />
+            ))}
+        </>
+    )
+}
 
-export default LazyLoading;
+export default LazyLoading

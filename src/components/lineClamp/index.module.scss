@@ -2,60 +2,60 @@ $border-gray: #ccc;
 $button-black: #333;
 
 .LineClamps {
-  .content {
-    position: relative;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid $border-gray;
-    line-height: 1.67;
-  }
-
-  .text {
-    white-space: pre-line;
-  }
-
-  .more-button {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    border: 0;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    cursor: pointer;
-
-    // 아래 화살표
-    &::before {
-      content: '';
-      display: inline-block;
-      vertical-align: middle;
-      width: 5px;
-      height: 5px;
-      border-width: 1px;
-      border-style: solid;
-      border-color: transparent $button-black $button-black transparent;
-      transform: rotate(45deg);
+    .content {
+        position: relative;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid $border-gray;
+        line-height: 1.67;
     }
-  }
 
-  .content.clamped {
     .text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
+        white-space: pre-line;
     }
-  }
 
-  .text-clone {
-    position: absolute;
-    box-sizing: border-box;
-    left: 10px;
-    top: 10px;
-    white-space: pre-line;
-    visibility: hidden;
-    opacity: 0;
-    z-index: -1;
-  }
+    .more-button {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        border: 0;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        cursor: pointer;
+
+        // 아래 화살표
+        &::before {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            width: 5px;
+            height: 5px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent $button-black $button-black transparent;
+            transform: rotate(45deg);
+        }
+    }
+
+    .content.clamped {
+        .text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .text-clone {
+        position: absolute;
+        box-sizing: border-box;
+        left: 10px;
+        top: 10px;
+        white-space: pre-line;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -1;
+    }
 }

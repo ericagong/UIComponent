@@ -4,127 +4,127 @@ $label-overlay: rgba(0, 0, 0, 0.5);
 $button-overlay: #333;
 
 .ImageSlides {
-  .imageSlide {
-    position: relative;
-    width: 600px;
-    height: 320px;
-    overflow: hidden;
-    border: 1px solid $border-gray;
-    font-family: 'sans-serif';
-  }
-
-  .track {
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .transformTrack {
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .scrollSnapTrack {
-    overflow-x: scroll;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior: contain;
-  }
-
-  .slide {
-    position: relative;
-    margin: 0;
-    padding: 0;
-
-    .content {
-      display: block;
-    }
-  }
-
-  .scrollSnapSlide {
-    scroll-snap-align: start;
-  }
-
-  .label {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: $label-overlay;
-    color: $font-white;
-    font-size: 2rem;
-    font-weight: bold;
-    padding: 3px 10px;
-    z-index: 10;
-  }
-
-  .moveTrigger {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: $button-overlay;
-    border-radius: 50%;
-    border: none;
-    opacity: 0.3;
-    cursor: pointer;
-    z-index: 20;
-
-    &:hover {
-      opacity: 1;
+    .imageSlide {
+        position: relative;
+        width: 600px;
+        height: 320px;
+        overflow: hidden;
+        border: 1px solid $border-gray;
+        font-family: 'sans-serif';
     }
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      height: 17px;
-      top: 5px;
-      background-color: $font-white;
-      transform-origin: 3px 14px;
-    }
-  }
-
-  .moveTrigger:disabled {
-    opacity: 0;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  .moveLeft {
-    left: 10px;
-
-    &::before,
-    &::after {
-      left: 11px;
+    .track {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 
-    &::before {
-      transform: rotate(45deg);
+    .transformTrack {
+        transition: transform 0.5s ease-in-out;
     }
 
-    &::after {
-      transform: rotate(135deg);
-    }
-  }
-
-  .moveRight {
-    right: 10px;
-
-    &::before,
-    &::after {
-      right: 11px;
+    .scrollSnapTrack {
+        overflow-x: scroll;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior: contain;
     }
 
-    &::before {
-      transform: rotate(-45deg);
+    .slide {
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        .content {
+            display: block;
+        }
     }
 
-    &::after {
-      transform: rotate(-135deg);
+    .scrollSnapSlide {
+        scroll-snap-align: start;
     }
-  }
+
+    .label {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: $label-overlay;
+        color: $font-white;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 3px 10px;
+        z-index: 10;
+    }
+
+    .moveTrigger {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: $button-overlay;
+        border-radius: 50%;
+        border: none;
+        opacity: 0.3;
+        cursor: pointer;
+        z-index: 20;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 17px;
+            top: 5px;
+            background-color: $font-white;
+            transform-origin: 3px 14px;
+        }
+    }
+
+    .moveTrigger:disabled {
+        opacity: 0;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .moveLeft {
+        left: 10px;
+
+        &::before,
+        &::after {
+            left: 11px;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(135deg);
+        }
+    }
+
+    .moveRight {
+        right: 10px;
+
+        &::before,
+        &::after {
+            right: 11px;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(-135deg);
+        }
+    }
 }

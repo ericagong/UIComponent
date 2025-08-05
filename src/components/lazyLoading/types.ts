@@ -1,10 +1,10 @@
-import { ImgHTMLAttributes, RefObject } from 'react';
+import { ImgHTMLAttributes, RefObject } from 'react'
 
 type LazyImageProps = {
-  src: string;
-  width: number;
-  height: number;
-  rootElementRef?: RefObject<HTMLElement>;
-} & ImgHTMLAttributes<HTMLImageElement>;
+    src: string
+    width: number
+    height: number
+    rootElementRef?: RefObject<HTMLElement>
+} & ImgHTMLAttributes<HTMLImageElement>
 
-export type { LazyImageProps };
+export type { LazyImageProps }

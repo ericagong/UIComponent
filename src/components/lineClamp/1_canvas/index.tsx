@@ -1,67 +1,62 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
-import { calculateLines } from '@/components/utils';
+import { calculateLines } from '@/components/utils'
 
-import cx from '../cx';
-import data from '../data';
+import cx from '../cx'
+import data from '../data'
 
 // TODO resize Observer 추가
 const LineClampedText = ({
-  id,
-  text,
-  maxLines,
+    id,
+    text,
+    maxLines,
 }: {
-  id: string;
-  text: string;
-  maxLines: number;
+    id: string
+    text: string
+    maxLines: number
 }) => {
-  const elemRef = useRef<HTMLDivElement>(null);
-  const [isClamped, setIsClamped] = useState(true);
+    const elemRef = useRef<HTMLDivElement>(null)
+    const [isClamped, setIsClamped] = useState(true)
 
-  useEffect(() => {
-    if (text && elemRef.current) {
-      const measuredLines = calculateLines(elemRef.current, text);
-      setIsClamped(measuredLines > maxLines);
-    }
-  }, [text, maxLines]);
+    useEffect(() => {
+        if (text && elemRef.current) {
+            const measuredLines = calculateLines(elemRef.current, text)
+            setIsClamped(measuredLines > maxLines)
+        }
+    }, [text, maxLines])
 
-  return (
-    <div
-      className={cx('content', { clamped: isClamped })}
-      aria-expanded={!isClamped}
-      aria-describedby={id}
-    >
-      <div
-        className={cx('text')}
-        id={id}
-        ref={elemRef}
-        style={{ WebkitLineClamp: maxLines }}
-      >
-        {text}
-      </div>
-      {isClamped && (
-        <button
-          className={cx('more-button')}
-          onClick={() => setIsClamped(false)}
-          aria-label='전체 텍스트 펼치기'
-          aria-expanded='false'
-          aria-controls={id}
-        />
-      )}
-    </div>
-  );
-};
+    return (
+        <div
+            className={cx('content', { clamped: isClamped })}
+            aria-expanded={!isClamped}
+            aria-describedby={id}
+        >
+            <div className={cx('text')} id={id} ref={elemRef} style={{ WebkitLineClamp: maxLines }}>
+                {text}
+            </div>
+            {isClamped && (
+                <button
+                    className={cx('more-button')}
+                    onClick={() => setIsClamped(false)}
+                    aria-label="전체 텍스트 펼치기"
+                    aria-expanded="false"
+                    aria-controls={id}
+                />
+            )}
+        </div>
+    )
+}
 
-const MAX_LINE_COUNT = 3;
+const MAX_LINE_COUNT = 3
 const LineClamp = () => {
-  return (
-    <>
-      <h3>#1. Controlled Line Clamp(Canvas 기반 줄 개수 계산)</h3>
-      {data.map((d) => (
-        <LineClampedText key={d.id} maxLines={MAX_LINE_COUNT} {...d} />
-      ))}
-    </>
-  );
-};
+    return (
+        <>
+            <h3>#1. Controlled Line Clamp(Canvas 기반 줄 개수 계산)</h3>
+            {data.map(d => (
+                <LineClampedText key={d.id} maxLines={MAX_LINE_COUNT} {...d} />
+            ))}
+        </>
+    )
+}
 
-export default LineClamp;
+export default LineClamp

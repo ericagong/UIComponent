@@ -4,167 +4,167 @@ $label-overlay: rgba(0, 0, 0, 0.5);
 $button-overlay: #333;
 
 .Carousels {
-  .carousel {
-    position: relative;
-    width: 600px;
-    height: 320px;
-    overflow: hidden;
-    border: 1px solid $border-gray;
-    font-family: 'sans-serif';
-  }
-
-  .track {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .cloneTrack {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .singleSlide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    transform: translateX(-200%);
-
-    &.left_current {
-      animation: left_current ease-out 0.3s forwards;
-    }
-    &.left_next {
-      animation: left_next ease-out 0.3s forwards;
-    }
-    &.right_current {
-      animation: right_current ease-out 0.3s forwards;
-    }
-    &.right_next {
-      animation: right_next ease-out 0.3s forwards;
-    }
-    &.current {
-      transform: translateX(0);
-    }
-  }
-
-  .slide {
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .content {
-    display: block;
-  }
-
-  .label {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: $label-overlay;
-    color: $font-white;
-    font-size: 2rem;
-    font-weight: bold;
-    padding: 3px 10px;
-    z-index: 10;
-  }
-
-  .moveTrigger {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: $button-overlay;
-    border-radius: 50%;
-    border: none;
-    opacity: 0.3;
-    cursor: pointer;
-    z-index: 20;
-
-    &:hover {
-      opacity: 1;
+    .carousel {
+        position: relative;
+        width: 600px;
+        height: 320px;
+        overflow: hidden;
+        border: 1px solid $border-gray;
+        font-family: 'sans-serif';
     }
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      height: 17px;
-      top: 5px;
-      background-color: $font-white;
-      transform-origin: 3px 14px;
-    }
-  }
-
-  .moveLeft {
-    left: 10px;
-
-    &::before,
-    &::after {
-      left: 11px;
+    .track {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 
-    &::before {
-      transform: rotate(45deg);
+    .cloneTrack {
+        display: flex;
+        flex-wrap: nowrap;
     }
 
-    &::after {
-      transform: rotate(135deg);
-    }
-  }
+    .singleSlide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        transform: translateX(-200%);
 
-  .moveRight {
-    right: 10px;
-
-    &::before,
-    &::after {
-      right: 11px;
+        &.left_current {
+            animation: left_current ease-out 0.3s forwards;
+        }
+        &.left_next {
+            animation: left_next ease-out 0.3s forwards;
+        }
+        &.right_current {
+            animation: right_current ease-out 0.3s forwards;
+        }
+        &.right_next {
+            animation: right_next ease-out 0.3s forwards;
+        }
+        &.current {
+            transform: translateX(0);
+        }
     }
 
-    &::before {
-      transform: rotate(-45deg);
+    .slide {
+        position: relative;
+        flex-shrink: 0;
     }
 
-    &::after {
-      transform: rotate(-135deg);
+    .content {
+        display: block;
     }
-  }
 
-  @keyframes left_current {
-    0% {
-      left: 0;
-      transform: translateX(0);
+    .label {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: $label-overlay;
+        color: $font-white;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 3px 10px;
+        z-index: 10;
     }
-    100% {
-      transform: translateX(100%);
+
+    .moveTrigger {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: $button-overlay;
+        border-radius: 50%;
+        border: none;
+        opacity: 0.3;
+        cursor: pointer;
+        z-index: 20;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 17px;
+            top: 5px;
+            background-color: $font-white;
+            transform-origin: 3px 14px;
+        }
     }
-  }
-  @keyframes left_next {
-    0% {
-      transform: translateX(-100%);
+
+    .moveLeft {
+        left: 10px;
+
+        &::before,
+        &::after {
+            left: 11px;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(135deg);
+        }
     }
-    100% {
-      transform: translateX(0);
+
+    .moveRight {
+        right: 10px;
+
+        &::before,
+        &::after {
+            right: 11px;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(-135deg);
+        }
     }
-  }
-  @keyframes right_current {
-    0% {
-      transform: translateX(0);
+
+    @keyframes left_current {
+        0% {
+            left: 0;
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(100%);
+        }
     }
-    100% {
-      transform: translateX(-100%);
+    @keyframes left_next {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
     }
-  }
-  @keyframes right_next {
-    0% {
-      transform: translateX(100%);
+    @keyframes right_current {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
     }
-    100% {
-      transform: translateX(0);
+    @keyframes right_next {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
     }
-  }
 }

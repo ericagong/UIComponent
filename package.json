@@ -1,35 +1,39 @@
 {
-  "name": "ui-components",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "eslint": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
-  },
-  "dependencies": {
-    "classnames": "^2.5.1",
-    "next": "^15.4.5",
-    "react": "^19",
-    "react-dom": "^19",
-    "react-markdown": "^10.1.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@types/node": "^24",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "sass": "^1.89.2",
-    "typescript": "^5",
-    "typescript-eslint": "^8.39.0"
-  }
+    "name": "ui-components",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "eslint": "eslint src --ext .js,.jsx,.ts,.tsx",
+        "eslint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+        "format": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,scss}\" \"*.{js,json,md}\"",
+        "format:fix": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,scss}\" \"*.{js,json,md}\""
+    },
+    "dependencies": {
+        "classnames": "^2.5.1",
+        "next": "^15.4.5",
+        "react": "^19",
+        "react-dom": "^19",
+        "react-markdown": "^10.1.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.32.0",
+        "@types/node": "^24",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "eslint": "^9",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "prettier": "^3.6.2",
+        "sass": "^1.89.2",
+        "typescript": "^5",
+        "typescript-eslint": "^8.39.0"
+    }
 }

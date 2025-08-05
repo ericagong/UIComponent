@@ -1,84 +1,81 @@
-import { forwardRef, useRef,useState } from 'react';
+import { forwardRef, useRef, useState } from 'react'
 
-import cx from '../cx';
-import data from '../data';
+import cx from '../cx'
+import data from '../data'
 
 const Tab = forwardRef<
-  HTMLButtonElement,
-  {
-    title: string;
-    current: boolean;
-    handleClick: () => void;
-    handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
-  }
+    HTMLButtonElement,
+    {
+        title: string
+        current: boolean
+        handleClick: () => void
+        handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void
+    }
 >(({ title, current, handleClick, handleKeyDown }, ref) => {
-  return (
-    <button
-      ref={ref}
-      className={cx('tabTrigger', { current })}
-      role='tab'
-      aria-selected={current}
-      tabIndex={current ? 0 : -1}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-    >
-      {title}
-    </button>
-  );
-});
+    return (
+        <button
+            ref={ref}
+            className={cx('tabTrigger', { current })}
+            role="tab"
+            aria-selected={current}
+            tabIndex={current ? 0 : -1}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+        >
+            {title}
+        </button>
+    )
+})
 
 const TabPanel = ({ id, content }: { id: string; content: string }) => {
-  return (
-    <div
-      className={cx('tabPanel', 'current')}
-      id={`panel-${id}`}
-      role='tabpanel'
-      aria-labelledby={`tab-${id}`}
-    >
-      {content}
-    </div>
-  );
-};
+    return (
+        <div
+            className={cx('tabPanel', 'current')}
+            id={`panel-${id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${id}`}
+        >
+            {content}
+        </div>
+    )
+}
 
 const TabMenu = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
-  const focusNextTab = (
-    e: React.KeyboardEvent<HTMLButtonElement>,
-    index: number,
-  ) => {
-    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const focusNextTab = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
 
-    const moveBy = e.key === 'ArrowRight' ? 1 : -1;
-    const nextIndex = (index + moveBy + data.length) % data.length;
+        const moveBy = e.key === 'ArrowRight' ? 1 : -1
+        const nextIndex = (index + moveBy + data.length) % data.length
 
-    setCurrentIndex(nextIndex);
-    tabRefs.current[nextIndex]?.focus();
-  };
+        setCurrentIndex(nextIndex)
+        tabRefs.current[nextIndex]?.focus()
+    }
 
-  const selected = data[currentIndex];
+    const selected = data[currentIndex]
 
-  return (
-    <>
-      <h3>#2. 단일 패널 렌더링 방식(성능 최적화)</h3>
-      <div className={cx('container')}>
-        <ul className={cx('tabList')} role='tablist'>
-          {data.map((d, idx) => (
-            <Tab
-              key={d.id}
-              ref={(el) => (tabRefs.current[idx] = el)}
-              title={d.title}
-              current={currentIndex === idx}
-              handleClick={() => setCurrentIndex(idx)}
-              handleKeyDown={(e) => focusNextTab(e, idx)}
-            />
-          ))}
-        </ul>
-        <TabPanel id={selected.id} content={selected.content} />
-      </div>
-    </>
-  );
-};
+    return (
+        <>
+            <h3>#2. 단일 패널 렌더링 방식(성능 최적화)</h3>
+            <div className={cx('container')}>
+                <ul className={cx('tabList')} role="tablist">
+                    {data.map((d, idx) => (
+                        <Tab
+                            key={d.id}
+                            ref={el => (tabRefs.current[idx] = el)}
+                            title={d.title}
+                            current={currentIndex === idx}
+                            handleClick={() => setCurrentIndex(idx)}
+                            handleKeyDown={e => focusNextTab(e, idx)}
+                        />
+                    ))}
+                </ul>
+                <TabPanel id={selected.id} content={selected.content} />
+            </div>
+        </>
+    )
+}
 
-export default TabMenu;
+export default TabMenu

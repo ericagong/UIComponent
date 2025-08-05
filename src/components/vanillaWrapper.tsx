@@ -1,36 +1,36 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
 
 const VanillaWrapper = ({
-  title = '',
-  initiator,
+    title = '',
+    initiator,
 }: {
-  title?: string;
-  initiator: (wrapper: HTMLDivElement) => void;
+    title?: string
+    initiator: (wrapper: HTMLDivElement) => void
 }) => {
-  const wrapper = useRef<HTMLDivElement>(null);
-  const isInit = useRef(false);
+    const wrapper = useRef<HTMLDivElement>(null)
+    const isInit = useRef(false)
 
-  useEffect(() => {
-    if (!isInit.current && !!wrapper.current) {
-      initiator(wrapper.current);
-      isInit.current = true;
-    }
-  }, [initiator]);
+    useEffect(() => {
+        if (!isInit.current && !!wrapper.current) {
+            initiator(wrapper.current)
+            isInit.current = true
+        }
+    }, [initiator])
 
-  return (
-    <>
-      {title && (
-        <h3>
-          {title}
-          {<sub>Vanilla</sub>}
-        </h3>
-      )}
-      <div ref={wrapper} />
-    </>
-  );
-};
+    return (
+        <>
+            {title && (
+                <h3>
+                    {title}
+                    {<sub>Vanilla</sub>}
+                </h3>
+            )}
+            <div ref={wrapper} />
+        </>
+    )
+}
 
-export default VanillaWrapper;
+export default VanillaWrapper
 
 // 순수 JS 코드
 // initiator(wrapper: HTMLDivElement) {

@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import Markdown from 'react-markdown';
+import Markdown from 'react-markdown'
 
-import README from '/README.md';
+import README from '/README.md'
 
 const MainPage = () => (
-  <div className='markdown'>
-    <Markdown>{README}</Markdown>
-  </div>
-);
+    <div className="markdown">
+        <Markdown>{README}</Markdown>
+    </div>
+)
 
-export default MainPage;
+export default MainPage

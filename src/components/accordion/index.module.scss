@@ -3,93 +3,93 @@ $border-gray: #ccc;
 $current-tab: #ace;
 
 .Accordions {
-  .container {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow: hidden;
-    list-style: none;
-    border: 1px solid $border-gray;
-    border-bottom: 0;
-  }
-
-  .item {
-    overflow: hidden;
-
-    .trigger {
-      // 버튼 일부 스타일 reset
-      appearance: none;
-      border: none;
-      background: none;
-      padding: 0;
-
-      cursor: pointer;
-      font: inherit;
-      line-height: 1.5;
-      text-align: left;
-      width: 100%;
-      padding: 15px;
-      border-bottom: 1px solid $border-gray;
-
-      &::before {
-        content: '+';
-        margin: 0 8px 0 -5px;
-      }
+    .container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+        list-style: none;
+        border: 1px solid $border-gray;
+        border-bottom: 0;
     }
 
-    .content {
-      padding: 0 15px;
-      max-height: 0;
-      overflow: hidden;
-      border-bottom-width: 0;
-      transition: max-height ease 0.3s;
-    }
+    .item {
+        overflow: hidden;
 
-    &.current {
-      .trigger {
-        background-color: $current-tab;
+        .trigger {
+            // 버튼 일부 스타일 reset
+            appearance: none;
+            border: none;
+            background: none;
+            padding: 0;
 
-        &::before {
-          content: '-';
+            cursor: pointer;
+            font: inherit;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+            padding: 15px;
+            border-bottom: 1px solid $border-gray;
+
+            &::before {
+                content: '+';
+                margin: 0 8px 0 -5px;
+            }
         }
-      }
 
-      .content {
+        .content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            border-bottom-width: 0;
+            transition: max-height ease 0.3s;
+        }
+
+        &.current {
+            .trigger {
+                background-color: $current-tab;
+
+                &::before {
+                    content: '-';
+                }
+            }
+
+            .content {
+                padding: 15px;
+                max-height: 300px;
+                border-bottom: 1px solid $border-gray;
+                background-color: $current-description;
+            }
+        }
+    }
+
+    details[open] {
+        & summary {
+            background-color: $current-tab;
+            padding: 15px;
+            border-bottom-width: 0;
+
+            &::marker {
+                content: '- ';
+            }
+        }
+
+        & .panel {
+            padding: 15px;
+            // max-height: 300px;
+            border-bottom: 1px solid $border-gray;
+            background-color: $current-description;
+        }
+    }
+
+    summary {
         padding: 15px;
-        max-height: 300px;
         border-bottom: 1px solid $border-gray;
-        background-color: $current-description;
-      }
+        cursor: pointer;
+
+        &::marker {
+            content: '+ ';
+            color: $border-gray;
+        }
     }
-  }
-
-  details[open] {
-    & summary {
-      background-color: $current-tab;
-      padding: 15px;
-      border-bottom-width: 0;
-
-      &::marker {
-        content: '- ';
-      }
-    }
-
-    & .panel {
-      padding: 15px;
-      // max-height: 300px;
-      border-bottom: 1px solid $border-gray;
-      background-color: $current-description;
-    }
-  }
-
-  summary {
-    padding: 15px;
-    border-bottom: 1px solid $border-gray;
-    cursor: pointer;
-
-    &::marker {
-      content: '+ ';
-      color: $border-gray;
-    }
-  }
 }

@@ -1,77 +1,75 @@
 import {
-  Dispatch,
-  EventHandler,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { createPortal } from 'react-dom';
+    Dispatch,
+    EventHandler,
+    ReactNode,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
+import { createPortal } from 'react-dom'
 
-import Snackbar from './Snackbar';
+import Snackbar from './Snackbar'
 
-type SnackbarStatus = 'open' | 'close' | null;
+type SnackbarStatus = 'open' | 'close' | null
 type SnackbarProps = {
-  children: ReactNode;
-  status: SnackbarStatus;
-  setStatus: Dispatch<SetStateAction<SnackbarStatus>>;
-  onMouseEnter?: EventHandler<any>;
-  onMouseLeave?: EventHandler<any>;
-};
+    children: ReactNode
+    status: SnackbarStatus
+    setStatus: Dispatch<SetStateAction<SnackbarStatus>>
+    onMouseEnter?: EventHandler<any>
+    onMouseLeave?: EventHandler<any>
+}
 
-const SNACKBAR_DURATION = 3000;
+const SNACKBAR_DURATION = 3000
 const useSnackbar = (children: ReactNode) => {
-  const timeoutId = useRef<number | null>(null);
-  const [status, setStatus] = useState<SnackbarStatus>(null);
-  const [root, setRoot] = useState<HTMLDivElement | null>(null);
+    const timeoutId = useRef<number | null>(null)
+    const [status, setStatus] = useState<SnackbarStatus>(null)
+    const [root, setRoot] = useState<HTMLDivElement | null>(null)
 
-  const startAutoCloseTimer = () =>
-    window.setTimeout(() => {
-      setStatus('close');
-    }, SNACKBAR_DURATION);
+    const startAutoCloseTimer = () =>
+        window.setTimeout(() => {
+            setStatus('close')
+        }, SNACKBAR_DURATION)
 
-  const openSnackbar = useCallback(() => {
-    setStatus('open');
-    timeoutId.current = startAutoCloseTimer();
-  }, []);
+    const openSnackbar = useCallback(() => {
+        setStatus('open')
+        timeoutId.current = startAutoCloseTimer()
+    }, [])
 
-  const removeTimer = () => {
-    if (timeoutId.current) clearTimeout(timeoutId.current);
-  };
+    const removeTimer = () => {
+        if (timeoutId.current) clearTimeout(timeoutId.current)
+    }
 
-  const resetTimer = () => {
-    timeoutId.current = startAutoCloseTimer();
-  };
+    const resetTimer = () => {
+        timeoutId.current = startAutoCloseTimer()
+    }
 
-  useEffect(() => {
-    const $snackbarsRoot = document.querySelector(
-      '#snackbars-root',
-    );
-    if ($snackbarsRoot) setRoot($snackbarsRoot);
-  }, []);
+    useEffect(() => {
+        const $snackbarsRoot = document.querySelector('#snackbars-root')
+        if ($snackbarsRoot) setRoot($snackbarsRoot)
+    }, [])
 
-  const $snackbarEl =
-    root && status
-      ? createPortal(
-          <Snackbar
-            status={status}
-            setStatus={setStatus}
-            onMouseEnter={removeTimer}
-            onMouseLeave={resetTimer}
-          >
-            {children}
-          </Snackbar>,
-          root,
-        )
-      : null;
+    const $snackbarEl =
+        root && status
+            ? createPortal(
+                  <Snackbar
+                      status={status}
+                      setStatus={setStatus}
+                      onMouseEnter={removeTimer}
+                      onMouseLeave={resetTimer}
+                  >
+                      {children}
+                  </Snackbar>,
+                  root
+              )
+            : null
 
-  return {
-    $snackbarEl,
-    openSnackbar,
-  };
-};
+    return {
+        $snackbarEl,
+        openSnackbar,
+    }
+}
 
-export default useSnackbar;
-export type { SnackbarProps };
+export default useSnackbar
+export type { SnackbarProps }

@@ -9,6 +9,7 @@ const useAccordionItem = () => {
     if (!context) {
         throwContextError('useAccordionItem', 'AccordionItemContext')
     }
+
     return context
 }
 

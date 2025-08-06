@@ -5,8 +5,10 @@ import useAccordion from '../hooks/useAccordion'
 import useAccordionItem from '../hooks/useAccordionItem'
 
 const AccordionTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleItem } = useAccordion()
+    const { openItemId, toggleContent } = useAccordion()
+
     const { id, triggerId, contentId } = useAccordionItem()
+
     const isOpen = openItemId === id
 
     return (
@@ -15,7 +17,7 @@ const AccordionTrigger = ({ children, className }: { children: ReactNode; classN
             id={triggerId}
             aria-controls={contentId}
             aria-expanded={isOpen}
-            onClick={() => toggleItem(id)}
+            onClick={() => toggleContent(id)}
         >
             {children}
         </button>

@@ -14,7 +14,9 @@ const AccordionItem = ({
     className?: string
 }) => {
     const { openItemId } = useAccordion()
+
     const isOpen = openItemId === id
+
     const triggerId = `accordion_trigger_${id}`
     const contentId = `accordion_content_${id}`
 

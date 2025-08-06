@@ -7,7 +7,7 @@ import useOnBeforeMatch from '../hooks/useOnBeforeMatch'
 import useUntilFound from '../hooks/useUntilFound'
 
 const AccordionContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleItem } = useAccordion()
+    const { openItemId, toggleContent } = useAccordion()
     const { id, triggerId, contentId } = useAccordionItem()
 
     const contentRef = useRef<HTMLDivElement>(null)
@@ -15,11 +15,11 @@ const AccordionContent = ({ children, className }: { children: ReactNode; classN
 
     useUntilFound(contentRef, isOpen)
 
-    const onBeforeMatch = useCallback(() => {
-        toggleItem(id)
-    }, [toggleItem, id])
+    const handleBeforeMatch = useCallback(() => {
+        toggleContent(id)
+    }, [toggleContent, id])
 
-    useOnBeforeMatch(contentRef, onBeforeMatch)
+    useOnBeforeMatch(contentRef, handleBeforeMatch)
 
     return (
         <div

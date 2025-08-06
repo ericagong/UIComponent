@@ -14,12 +14,12 @@ const AccordionRoot = ({
 }) => {
     const [openItemId, setOpenItemId] = useState<string | null>(defaultOpenId)
 
-    const toggleItem = (id: string) => {
+    const toggleContent = (id: string) => {
         setOpenItemId(prev => (prev === id ? null : id))
     }
 
     return (
-        <AccordionContext.Provider value={{ openItemId, toggleItem }}>
+        <AccordionContext.Provider value={{ openItemId, toggleContent }}>
             <ul className={cx('accordion-root', className)}>{children}</ul>
         </AccordionContext.Provider>
     )

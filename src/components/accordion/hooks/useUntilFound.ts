@@ -5,6 +5,7 @@ const useUntilFound = (contentRef: RefObject<HTMLElement | null>, isOpen: boolea
     useEffect(() => {
         const $content = contentRef.current
         if (!$content) return
+
         if (!isOpen) $content.setAttribute('hidden', 'until-found')
         else $content.removeAttribute('hidden')
     }, [isOpen, contentRef])

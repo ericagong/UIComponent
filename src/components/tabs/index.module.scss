@@ -1,0 +1,46 @@
+$border-gray: #ccc;
+$current: #bde;
+
+.tabs-root {
+    border: 1px solid $border-gray;
+}
+
+.tabs-list {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px solid $border-gray;
+}
+
+.tabs-trigger {
+    flex: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: none;
+    padding: 15px;
+    font: inherit;
+    background: none;
+    cursor: pointer;
+    border-left: 1px solid $border-gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:first-child {
+        border-left: none;
+    }
+
+    &.is-open {
+        background-color: $current;
+    }
+}
+
+.tabs-content {
+    display: none;
+
+    &.is-open {
+        display: block;
+        padding: 15px;
+    }
+}

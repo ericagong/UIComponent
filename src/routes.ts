@@ -22,7 +22,7 @@ import ScrollSpyEvent from '@/components/scrollSpy/1_eventHandler'
 import ScrollSpy from '@/components/scrollSpy/2_intersectionObserver'
 import ContextSnackbars from '@/components/snackbar/1_context'
 import PortalSnackbars from '@/components/snackbar/2_createPortal'
-import TabMenus from '@/components/tabMenu'
+import TabMenus from '@/components/tabs'
 import TextBoxes from '@/components/textBox'
 import Tooltips from '@/components/tooltip'
 

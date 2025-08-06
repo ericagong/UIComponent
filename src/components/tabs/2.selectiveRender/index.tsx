@@ -7,34 +7,33 @@ const Tab = forwardRef<
     HTMLButtonElement,
     {
         title: string
-        current: boolean
+        isOpen: boolean
         handleClick: () => void
         handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void
     }
->(({ title, current, handleClick, handleKeyDown }, ref) => {
+>(({ title, isOpen, handleClick, handleKeyDown }, ref) => {
     return (
         <button
             ref={ref}
-            className={cx('tabTrigger', { current })}
+            className={cx('tabs-trigger', { 'is-open': isOpen })}
             role="tab"
-            aria-selected={current}
-            tabIndex={current ? 0 : -1}
+            aria-selected={isOpen}
+            tabIndex={isOpen ? 0 : -1}
             onClick={handleClick}
             onKeyDown={handleKeyDown}
-            type="button"
         >
             {title}
         </button>
     )
 })
 
-const TabPanel = ({ id, content, current }: { id: string; content: string; current: boolean }) => {
+const TabPanel = ({ id, content }: { id: string; content: string }) => {
     return (
         <div
-            className={cx('tabPanel', { current })}
+            className={cx('tabs-content', { 'is-open': true })}
             id={`panel-${id}`}
             role="tabpanel"
-            aria-hidden={!current}
+            aria-labelledby={`tab-${id}`}
         >
             {content}
         </div>
@@ -55,23 +54,27 @@ const TabMenu = () => {
         tabRefs.current[nextIndex]?.focus()
     }
 
+    const selected = data[currentIndex]
+
     return (
         <>
-            <h3>#1. button 기반 탭 + 접근성 최적화</h3>
-            <div className={cx('container')}>
-                <div role="tablist" className={cx('tabList')}>
+            <h3>#2. 단일 패널 렌더링 방식(성능 최적화)</h3>
+            <div className={cx('tabs-root')}>
+                <ul className={cx('tabs-list')} role="tablist">
                     {data.map((d, idx) => (
                         <Tab
                             key={d.id}
-                            ref={el => (tabRefs.current[idx] = el)}
+                            ref={el => {
+                                tabRefs.current[idx] = el
+                            }}
                             title={d.title}
-                            current={currentIndex === idx}
+                            isOpen={currentIndex === idx}
                             handleClick={() => setCurrentIndex(idx)}
                             handleKeyDown={e => focusNextTab(e, idx)}
                         />
                     ))}
-                </div>
-                <TabPanel id={data[currentIndex].id} content={data[currentIndex].content} current />
+                </ul>
+                <TabPanel id={selected.id} content={selected.content} />
             </div>
         </>
     )

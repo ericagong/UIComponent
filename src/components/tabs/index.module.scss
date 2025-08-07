@@ -1,5 +1,5 @@
 $border-gray: #ccc;
-$current: #bde;
+$open-tab: #bde;
 
 .tabs-root {
     border: 1px solid $border-gray;
@@ -32,12 +32,16 @@ $current: #bde;
     }
 
     &.is-open {
-        background-color: $current;
+        background-color: $open-tab;
     }
 }
 
 .tabs-content {
     display: none;
+
+    &[hidden] {
+        display: block;
+    }
 
     &.is-open {
         display: block;

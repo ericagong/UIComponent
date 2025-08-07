@@ -39,7 +39,8 @@ const MultipleOpenAccordion = () => {
     )
 }
 
-// REFACTOR 외부 상태 제어 기능 추가: Controlled Accordion 추가
+// TODO 완전한 Headless UI로 확장: asChild
+// TODO 외부 상태 제어 기능 추가: Controlled Accordion 추가
 const Examples = () => {
     return (
         <>

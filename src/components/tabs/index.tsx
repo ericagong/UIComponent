@@ -1,15 +1,32 @@
-import DisplayAttributeTabMenu from './1.displayAttribute'
-import SelectiveRenderTabMenu from './2.selectiveRender'
-import cx from './cx'
+import { useState } from 'react'
 
-const TabMenus = () => {
+import data from './data'
+import Tabs from './Tabs'
+
+// TODO 완전한 Headless UI로 확장: asChild
+// TODO Controlled로 확장
+const Example = () => {
+    const [items] = useState(data)
+
     return (
-        <div className={cx('TabMenus')}>
-            <h2>탭메뉴</h2>
-            <DisplayAttributeTabMenu />
-            <SelectiveRenderTabMenu />
-        </div>
+        <>
+            <h3>#1. Button 기반 Tabs </h3>
+            <Tabs defaultOpenIndex={0}>
+                <Tabs.List>
+                    {items.map((d, index) => (
+                        <Tabs.Trigger key={d.id} index={index}>
+                            {d.title}
+                        </Tabs.Trigger>
+                    ))}
+                </Tabs.List>
+                {items.map((d, index) => (
+                    <Tabs.Content key={d.id} index={index}>
+                        {d.content}
+                    </Tabs.Content>
+                ))}
+            </Tabs>
+        </>
     )
 }
 
-export default TabMenus
+export default Example

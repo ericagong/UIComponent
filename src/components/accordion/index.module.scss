@@ -60,28 +60,3 @@ $marker-open: '- ';
         border-bottom: 1px solid $border-gray;
     }
 }
-
-.accordion-summary {
-    padding: 15px;
-    cursor: pointer;
-    border-bottom: 1px solid $border-gray;
-
-    &::marker {
-        content: $marker-default;
-    }
-}
-
-details[open] > .accordion-summary {
-    background-color: $current-tab;
-    border-bottom-width: 0;
-
-    &::marker {
-        content: $marker-open;
-    }
-}
-
-details[open] > .accordion-panel {
-    padding: 15px;
-    background-color: $current-description;
-    border-bottom: 1px solid $border-gray;
-}

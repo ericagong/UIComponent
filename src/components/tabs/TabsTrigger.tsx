@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 
-import cx from '../cx'
-import useKeyboardTabMove from '../hooks/useKeyboardTabMove'
-import useTabsContext from '../hooks/useTabsContext'
+import { useTabsContext } from './context/TabsContext'
+import cx from './cx'
+import useArrowKeyNavigation from './hooks/useArrowKeyNavigation'
 
 const TabsTrigger = ({ index, children }: { index: number; children: ReactNode }) => {
-    const { openIndex, setOpenIndex, tabRefs } = useTabsContext()
+    const { openIndex, openTab, tabRefs } = useTabsContext()
     const isOpen = openIndex === index
-    const { moveToNextTab } = useKeyboardTabMove(index, setOpenIndex, tabRefs)
+    const { navigate } = useArrowKeyNavigation(index, openTab, tabRefs)
 
     return (
         <button
@@ -16,8 +16,8 @@ const TabsTrigger = ({ index, children }: { index: number; children: ReactNode }
                 tabRefs.current[index] = el
             }}
             className={cx('tabs-trigger', { 'is-open': isOpen })}
-            onClick={() => setOpenIndex(index)}
-            onKeyDown={moveToNextTab}
+            onClick={() => openTab(index)}
+            onKeyDown={navigate}
             role="tab"
             aria-selected={isOpen}
             tabIndex={isOpen ? 0 : -1}

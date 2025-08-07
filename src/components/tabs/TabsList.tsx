@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import cx from '../cx'
+import cx from './cx'
 
 const TabsList = ({ children }: { children: ReactNode }) => {
     return (

@@ -3,8 +3,8 @@ import { createContext, useContext } from 'react'
 import ContextError from '@/utils/ContextError'
 
 type AccordionContextType = {
-    openItemId: string | null
-    toggleContent: (id: string) => void
+    isItemOpen: (id: string) => boolean
+    toggleAccordionItem: (id: string) => void
 }
 
 const AccordionContext = createContext<AccordionContextType | null>(null)

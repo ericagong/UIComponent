@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 
+import { useAccordionContext } from '../context/AccordionContext'
+import { useAccordionItemContext } from '../context/AccordionItemContext'
 import cx from '../cx'
-import useAccordion from '../hooks/useAccordion'
-import useAccordionItem from '../hooks/useAccordionItem'
 
 const AccordionTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleContent } = useAccordion()
+    const { openItemId, toggleContent } = useAccordionContext()
 
-    const { id, triggerId, contentId } = useAccordionItem()
+    const { id, triggerId, contentId } = useAccordionItemContext()
 
     const isOpen = openItemId === id
 

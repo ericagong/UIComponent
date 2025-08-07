@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from 'react'
 
 const useUntilFound = (contentRef: RefObject<HTMLElement | null>, isOpen: boolean) => {
-    // hidden="until-found" 강제 부여
+    // hidden="until-found" 속성 HTML Element 강제 부여
     useEffect(() => {
         const $content = contentRef.current
         if (!$content) return

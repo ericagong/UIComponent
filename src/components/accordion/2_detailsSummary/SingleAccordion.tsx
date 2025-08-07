@@ -1,10 +1,8 @@
 import { ReactNode, useCallback, useRef, useState } from 'react'
 
-import AccordionContext from '../context/AccordionContext'
-import AccordionItemContext from '../context/AccordionItemContext'
+import AccordionContext, { useAccordionContext } from '../context/AccordionContext'
+import AccordionItemContext, { useAccordionItemContext } from '../context/AccordionItemContext'
 import cx from '../cx'
-import useAccordion from '../hooks/useAccordion'
-import useAccordionItem from '../hooks/useAccordionItem'
 import useOnBeforeMatch from '../hooks/useOnBeforeMatch'
 
 const Accordion = ({
@@ -18,12 +16,12 @@ const Accordion = ({
 }) => {
     const [openItemId, setOpenItemId] = useState<string | null>(defaultOpenId)
 
-    const toggleItem = (id: string) => {
+    const toggleContent = (id: string) => {
         setOpenItemId(prev => (prev === id ? null : id))
     }
 
     return (
-        <AccordionContext.Provider value={{ openItemId, toggleItem }}>
+        <AccordionContext.Provider value={{ openItemId, toggleContent }}>
             <ul className={cx('accordion-root', className)}>{children}</ul>
         </AccordionContext.Provider>
     )
@@ -38,7 +36,7 @@ const AccordionItem = ({
     children: ReactNode
     className?: string
 }) => {
-    const { openItemId } = useAccordion()
+    const { openItemId } = useAccordionContext()
     const isOpen = openItemId === id
     const triggerId = `accordion_trigger_${id}`
     const contentId = `accordion_content_${id}`
@@ -53,13 +51,13 @@ const AccordionItem = ({
 }
 
 const AccordionTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleItem } = useAccordion()
-    const { id, triggerId, contentId } = useAccordionItem()
+    const { openItemId, toggleContent } = useAccordionContext()
+    const { id, triggerId, contentId } = useAccordionItemContext()
     const isOpen = openItemId === id
 
     const handleClick = (event: React.MouseEvent) => {
         event.preventDefault()
-        toggleItem(id)
+        toggleContent(id)
     }
 
     return (
@@ -76,14 +74,14 @@ const AccordionTrigger = ({ children, className }: { children: ReactNode; classN
 }
 
 const AccordionContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleItem } = useAccordion()
-    const { id, triggerId, contentId } = useAccordionItem()
+    const { openItemId, toggleContent } = useAccordionContext()
+    const { id, triggerId, contentId } = useAccordionItemContext()
     const isOpen = openItemId === id
     const contentRef = useRef<HTMLDivElement>(null)
 
     const onBeforeMatch = useCallback(() => {
-        toggleItem(id)
-    }, [toggleItem, id])
+        toggleContent(id)
+    }, [toggleContent, id])
 
     useOnBeforeMatch(contentRef, onBeforeMatch)
 

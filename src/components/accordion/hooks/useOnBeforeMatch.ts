@@ -7,6 +7,7 @@ const useOnBeforeMatch = (
     // ctrl+F 사용성 위한 beforematch 이벤트 처리
     useEffect(() => {
         const $content = contentRef.current
+
         if (!$content) return
 
         $content.addEventListener('beforematch', handleBeforeMatch)

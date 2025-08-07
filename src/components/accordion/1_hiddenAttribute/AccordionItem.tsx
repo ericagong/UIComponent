@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 
+import { useAccordionContext } from '../context/AccordionContext'
 import AccordionItemContext from '../context/AccordionItemContext'
 import cx from '../cx'
-import useAccordion from '../hooks/useAccordion'
 
 const AccordionItem = ({
     id,
@@ -13,15 +13,15 @@ const AccordionItem = ({
     children: ReactNode
     className?: string
 }) => {
-    const { openItemId } = useAccordion()
-
-    const isOpen = openItemId === id
-
     const triggerId = `accordion_trigger_${id}`
     const contentId = `accordion_content_${id}`
+    const contextValue = useMemo(() => ({ id, triggerId, contentId }), [id, triggerId, contentId])
+
+    const { openItemId } = useAccordionContext()
+    const isOpen = openItemId === id
 
     return (
-        <AccordionItemContext.Provider value={{ id, triggerId, contentId }}>
+        <AccordionItemContext.Provider value={contextValue}>
             <li className={cx('accordion-item', className, { 'is-open': isOpen })}>{children}</li>
         </AccordionItemContext.Provider>
     )

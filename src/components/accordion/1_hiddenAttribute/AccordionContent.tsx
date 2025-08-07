@@ -1,14 +1,14 @@
 import { ReactNode, useCallback, useRef } from 'react'
 
+import { useAccordionContext } from '../context/AccordionContext'
+import { useAccordionItemContext } from '../context/AccordionItemContext'
 import cx from '../cx'
-import useAccordion from '../hooks/useAccordion'
-import useAccordionItem from '../hooks/useAccordionItem'
 import useOnBeforeMatch from '../hooks/useOnBeforeMatch'
 import useUntilFound from '../hooks/useUntilFound'
 
 const AccordionContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-    const { openItemId, toggleContent } = useAccordion()
-    const { id, triggerId, contentId } = useAccordionItem()
+    const { openItemId, toggleContent } = useAccordionContext()
+    const { id, triggerId, contentId } = useAccordionItemContext()
 
     const contentRef = useRef<HTMLDivElement>(null)
     const isOpen = openItemId === id

@@ -41,7 +41,7 @@ export default [
                 { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
             ],
             'prefer-const': 'warn',
-            'no-param-reassign': ['warn', { props: true }],
+            'no-param-reassign': ['warn', { props: true, ignorePropertyModificationsFor: ['ref'] }],
             'no-else-return': 'warn',
             'default-case': 'warn',
             'object-curly-spacing': ['warn', 'always'],

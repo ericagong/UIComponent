@@ -1,15 +1,9 @@
-import DetailsSummaryTooltips from './1_detailsSummary'
-import ClickEventTooltips from './2_clickEventHandler'
-import HoverEventTooltips from './3_hoverEventHandler'
 import cx from './cx'
 
 const Tooltips = () => {
     return (
         <div className={cx('Tooltips')} style={{ marginBottom: 500 }}>
             <h2>툴팁</h2>
-            <DetailsSummaryTooltips />
-            <ClickEventTooltips />
-            <HoverEventTooltips />
         </div>
     )
 }

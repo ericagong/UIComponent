@@ -1,22 +1,32 @@
 import type { ReactNode } from 'react'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 
 import TooltipContext from './context/TooltipContext'
-import useTooltip from './hooks/useTooltip'
-import type { UseTooltipOptions } from './types'
+import cx from './cx'
+import useTooltipVisibility from './hooks/useTooltipVisibility'
 
-const TooltipRoot = ({
-    options,
-    children,
-}: {
-    options?: UseTooltipOptions
-    children: ReactNode
-}) => {
-    const tooltip = useTooltip(options)
+const TooltipRoot = ({ children }: { children: ReactNode }) => {
+    const { isOpen, requestOpen, requestClose, requestOpenWithDelay, requestCloseWithDelay } =
+        useTooltipVisibility()
+    const triggerRef = useRef<HTMLElement | null>(null)
 
-    const value = useMemo(() => ({ tooltip }), [tooltip])
+    const contextValue = useMemo(
+        () => ({
+            isOpen,
+            requestOpen,
+            requestClose,
+            requestOpenWithDelay,
+            requestCloseWithDelay,
+            triggerRef,
+        }),
+        [isOpen, requestOpen, requestClose, requestOpenWithDelay, requestCloseWithDelay, triggerRef]
+    )
 
-    return <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
+    return (
+        <div className={cx('tooltip-root')}>
+            <TooltipContext.Provider value={contextValue}>{children}</TooltipContext.Provider>
+        </div>
+    )
 }
 
 export default TooltipRoot

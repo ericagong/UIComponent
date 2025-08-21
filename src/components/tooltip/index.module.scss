@@ -1,60 +1,36 @@
 $border-gray: #ccc;
 $tooltip-bg-gray: #fff;
 
-.Tooltips {
-    .provider {
-        position: relative;
-        display: inline-block;
-        margin-right: 10px;
-    }
+.tooltip-root {
+    position: relative;
+}
 
-    .trigger {
-        display: inline-block;
-        margin: 0;
-        border: 0;
-        padding: 0;
-        font-size: 1rem;
-        line-height: 1.3rem;
-        text-align: initial;
-        background-color: transparent;
-        outline: 0;
+.tooltip-trigger {
+    position: relative;
+}
 
-        &::after {
-            display: inline-block;
-            border: 1px solid $border-gray;
-            width: 1rem;
-            height: 1rem;
-            font-size: 0.8rem;
-            line-height: 1rem;
-            text-align: center;
-            border-radius: 50%;
-            content: '!';
-            margin-left: 5px;
-            vertical-align: text-bottom;
-        }
-    }
+.tooltip-content {
+    position: absolute;
+    top: 1.5rem;
+    z-index: 2;
+    display: none;
+    border: 1px solid $border-gray;
+    padding: 10px;
+    background-color: $tooltip-bg-gray;
+}
 
-    .content {
-        position: absolute;
-        top: 1.4rem;
-        left: 30px;
-        z-index: 2;
-        display: block;
-        border: 1px solid $border-gray;
-        padding: 10px;
-        min-width: 40vw;
-        background-color: $tooltip-bg-gray;
-    }
+.tooltip-content.is-open {
+    display: block;
+}
 
-    .screen-reader-only {
-        position: absolute;
-        overflow: hidden;
-        margin: -1px;
-        border: 0;
-        padding: 0;
-        width: 1px;
-        height: 1px;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
-    }
+.screen-reader-only {
+    position: absolute;
+    overflow: hidden;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }

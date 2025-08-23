@@ -1,26 +1,19 @@
-import type { RefObject } from 'react'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { RefObject } from 'react'
 
-type PlacementStyle = {
-    position: 'absolute'
-    top: number
-    left: number
-}
+import type { PlacementStyle } from '@/utils/placement'
+import {
+    alignLeft,
+    alignRight,
+    isHorizontallyOutOfViewport,
+    isVerticallyOutOfViewport,
+    placeAbove,
+    placeBelow,
+} from '@/utils/placement'
 
-const isVerticallyOutOfViewport = (triggerRect: DOMRect, contentRect: DOMRect) =>
-    triggerRect.bottom + contentRect.height > window.innerHeight
+import useAutoUpdatePosition from './useAutoUpdatePosition'
 
-const isHorizontallyOutOfViewport = (triggerRect: DOMRect, contentRect: DOMRect) =>
-    triggerRect.left + contentRect.width > window.innerWidth
-
-const placeBelow = (triggerRect: DOMRect) => triggerRect.bottom + window.scrollY
-const placeAbove = (triggerRect: DOMRect, contentRect: DOMRect) =>
-    triggerRect.top - contentRect.height + window.scrollY
-const alignLeft = (triggerRect: DOMRect) => triggerRect.left + window.scrollX
-const alignRight = (triggerRect: DOMRect, contentRect: DOMRect) =>
-    triggerRect.right - contentRect.width + window.scrollX
-
-const calculateContentPlacement = (triggerRect: DOMRect, contentRect: DOMRect): PlacementStyle => {
+const calculatePlacementStyle = (triggerRect: DOMRect, contentRect: DOMRect): PlacementStyle => {
     const top = !isVerticallyOutOfViewport(triggerRect, contentRect)
         ? placeBelow(triggerRect)
         : placeAbove(triggerRect, contentRect)
@@ -29,37 +22,41 @@ const calculateContentPlacement = (triggerRect: DOMRect, contentRect: DOMRect): 
         ? alignLeft(triggerRect)
         : alignRight(triggerRect, contentRect)
 
-    return { top, left, position: 'absolute' }
+    return { position: 'absolute', top, left }
+}
+
+const isEqualPlacementStyle = (prevStyle: PlacementStyle, nextStyle: PlacementStyle) => {
+    return (
+        prevStyle.top === nextStyle.top &&
+        prevStyle.left === nextStyle.left &&
+        prevStyle.position === nextStyle.position
+    )
 }
 
 const useTooltipContentPlacement = (triggerRef: RefObject<HTMLElement | null>) => {
     const contentRef = useRef<HTMLDivElement | null>(null)
     const [style, setStyle] = useState<PlacementStyle>({
+        position: 'absolute',
         top: 0,
         left: 0,
-        position: 'absolute',
     })
 
-    useLayoutEffect(() => {
+    const updatePosition = () => {
         const $trigger = triggerRef.current
         const $content = contentRef.current
+
         if (!$trigger || !$content) return
 
-        const updatePosition = () => {
-            const triggerRect = $trigger.getBoundingClientRect()
-            const contentRect = $content.getBoundingClientRect()
-            setStyle(calculateContentPlacement(triggerRect, contentRect))
-        }
+        const triggerRect = $trigger.getBoundingClientRect()
+        const contentRect = $content.getBoundingClientRect()
 
-        updatePosition()
-        window.addEventListener('resize', updatePosition)
-        window.addEventListener('scroll', updatePosition, true)
+        setStyle(prevStyle => {
+            const nextStyle = calculatePlacementStyle(triggerRect, contentRect)
+            return isEqualPlacementStyle(prevStyle, nextStyle) ? prevStyle : nextStyle
+        })
+    }
 
-        return () => {
-            window.removeEventListener('resize', updatePosition)
-            window.removeEventListener('scroll', updatePosition, true)
-        }
-    }, [triggerRef])
+    useAutoUpdatePosition(triggerRef, contentRef, updatePosition)
 
     return { contentRef, style }
 }

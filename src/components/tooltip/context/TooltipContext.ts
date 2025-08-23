@@ -8,7 +8,7 @@ type TooltipContext = {
     requestClose: () => void
     requestOpenWithDelay: () => void
     requestCloseWithDelay: () => void
-    triggerRef: RefObject<HTMLElement | null>
+    triggerRef: RefObject<HTMLElement>
 }
 
 const TooltipContext = createContext<TooltipContext | null>(null)

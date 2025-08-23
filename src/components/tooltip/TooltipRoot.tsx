@@ -23,7 +23,7 @@ const TooltipRoot = ({ children }: { children: ReactNode }) => {
     )
 
     return (
-        <div className={cx('tooltip-root')}>
+        <div className={cx('root')}>
             <TooltipContext.Provider value={contextValue}>{children}</TooltipContext.Provider>
         </div>
     )

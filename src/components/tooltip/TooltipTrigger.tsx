@@ -1,6 +1,7 @@
 import { cloneElement, isValidElement } from 'react'
 
 import { useTooltipContext } from './context/TooltipContext'
+import cx from './cx'
 import useTooltipFocusEvents from './hooks/useTooltipFocusEvents'
 import useTooltipHoverEvents from './hooks/useTooltipHoverEvents'
 
@@ -19,6 +20,7 @@ const TooltipTrigger = ({ children }: TooltipTriggerProps) => {
 
     return cloneElement(children, {
         ref: triggerRef,
+        className: cx('trigger'),
         ...hoverEvents,
         ...focusEvents,
     } as React.DOMAttributes<HTMLElement>)

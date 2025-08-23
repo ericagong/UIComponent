@@ -1,25 +1,22 @@
 $border-gray: #ccc;
 $tooltip-bg-gray: #fff;
 
-.tooltip-root {
+.root {
     position: relative;
+    display: inline-block;
+    padding: 0 5px;
 }
 
-.tooltip-trigger {
-    position: relative;
-}
-
-.tooltip-content {
+.content {
     position: absolute;
-    top: 1.5rem;
-    z-index: 2;
+    z-index: 999;
     display: none;
     border: 1px solid $border-gray;
     padding: 10px;
     background-color: $tooltip-bg-gray;
 }
 
-.tooltip-content.is-open {
+.content.is-open {
     display: block;
 }
 

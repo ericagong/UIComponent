@@ -1,0 +1,62 @@
+$current-description: #eff;
+$border-gray: #ccc;
+$current-tab: #ace;
+$marker-default: '+ ';
+$marker-open: '- ';
+
+.root {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid $border-gray;
+    padding: 0;
+    width: 100%;
+    border-bottom: 0;
+    list-style: none;
+}
+
+.item {
+    overflow: hidden;
+}
+
+.trigger {
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font: inherit;
+    line-height: 1.5;
+    text-align: left;
+    background: none;
+    cursor: pointer;
+    appearance: none;
+    border-bottom: 1px solid $border-gray;
+
+    &::before {
+        margin: 0 8px 0 -5px;
+        content: $marker-default;
+    }
+}
+
+.content {
+    overflow: hidden;
+    padding: 0 15px;
+    max-height: 0;
+    transition: max-height ease 0.3s;
+    border-bottom-width: 0;
+}
+
+.item.is-open {
+    .trigger {
+        background-color: $current-tab;
+
+        &::before {
+            content: $marker-open;
+        }
+    }
+
+    .content {
+        padding: 15px;
+        max-height: 500px;
+        background-color: $current-description;
+        border-bottom: 1px solid $border-gray;
+    }
+}

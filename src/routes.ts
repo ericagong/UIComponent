@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import Accordions from '@/components/accordion'
+// v1
 import Carousels from '@/components/carousel'
 import DraggableList from '@/components/draggableList'
 import Dropdowns from '@/components/dropdown'
@@ -25,6 +25,8 @@ import PortalSnackbars from '@/components/snackbar/2_createPortal'
 import TabMenus from '@/components/tabs'
 import TextBoxes from '@/components/textBox'
 import Tooltips from '@/components/tooltip'
+// v2
+import Accordions from '@/components_v2/1_accordion'
 
 export const routePaths = [
     '/',

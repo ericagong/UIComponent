@@ -1,4 +1,4 @@
-import { ReactNode, RefObject } from 'react'
+import { ReactNode } from 'react'
 
 type AccordionActions = {
     open: (id: string) => void

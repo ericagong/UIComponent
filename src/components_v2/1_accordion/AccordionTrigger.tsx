@@ -4,16 +4,17 @@ import cx from './cx'
 import { AccordionTriggerProps } from './types'
 
 const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
-    const { openedItemId } = useAccordionStateContext()
+    const { openId } = useAccordionStateContext()
     const { id, triggerId, contentId } = useAccordionItemStateContext()
 
-    const isOpened = openedItemId === id
+    const isOpen = openId === id
 
-    const { toggle } = useAccordionActionsContext()
+    const { open, close } = useAccordionActionsContext()
 
     const handleClick = () => {
         if (!id) return
-        toggle(isOpened ? null : id)
+        if (!isOpen) open(id)
+        else close()
     }
 
     return (
@@ -21,7 +22,7 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
             className={cx('trigger')}
             id={triggerId}
             aria-controls={contentId}
-            aria-expanded={isOpened}
+            aria-expanded={isOpen}
             onClick={handleClick}
         >
             {children}

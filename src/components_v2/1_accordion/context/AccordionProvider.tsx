@@ -1,11 +1,11 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo } from 'react'
 
 import ContextError from '@/utils/ContextError'
 
 import type { AccordionActions, AccordionProviderProps, AccordionState } from '../types'
 
-const AccordionActionsContext = createContext<AccordionActions | null>(null)
 const AccordionStateContext = createContext<AccordionState | null>(null)
+const AccordionActionsContext = createContext<AccordionActions | null>(null)
 
 const useAccordionActionsContext = (): AccordionActions => {
     const context = useContext(AccordionActionsContext)
@@ -27,22 +27,19 @@ const useAccordionStateContext = (): AccordionState => {
     return context
 }
 
-const AccordionProvider = ({ children }: AccordionProviderProps) => {
-    const [openedItemId, setOpenedItemId] = useState<string | null>(null)
+const AccordionProvider = ({ children, openId, setOpenId }: AccordionProviderProps) => {
+    const open = useCallback((id: string) => setOpenId(id), [setOpenId])
+    const close = useCallback(() => setOpenId(null), [setOpenId])
 
-    const open = useCallback((id: string) => setOpenedItemId(id), [])
-    const close = useCallback(() => setOpenedItemId(null), [])
-    const toggle = useCallback((id: string | null) => setOpenedItemId(id), [])
-
-    const actionsValue = useMemo(() => ({ open, close, toggle }), [open, close, toggle])
-    const stateValue = useMemo(() => ({ openedItemId }), [openedItemId])
+    const actionsValue = useMemo(() => ({ open, close }), [open, close])
+    const stateValue = useMemo(() => ({ openId }), [openId])
 
     return (
-        <AccordionActionsContext.Provider value={actionsValue}>
-            <AccordionStateContext.Provider value={stateValue}>
+        <AccordionStateContext.Provider value={stateValue}>
+            <AccordionActionsContext.Provider value={actionsValue}>
                 {children}
-            </AccordionStateContext.Provider>
-        </AccordionActionsContext.Provider>
+            </AccordionActionsContext.Provider>
+        </AccordionStateContext.Provider>
     )
 }
 AccordionProvider.displayName = 'AccordionProvider'

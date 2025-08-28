@@ -8,13 +8,19 @@ import cx from './cx'
 import { AccordionContentProps } from './types'
 
 const AccordionContent = ({ children }: AccordionContentProps) => {
-    const { openedItemId } = useAccordionStateContext()
+    const { openId } = useAccordionStateContext()
     const { id, triggerId, contentId } = useAccordionItemStateContext()
 
     const contentRef = useRef<HTMLDivElement>(null)
-    const { toggle } = useAccordionActionsContext()
-    const isOpened = openedItemId === id
-    useHiddenFound(contentRef, isOpened, () => toggle(id))
+    const { open } = useAccordionActionsContext()
+    const isOpen = openId === id
+
+    const handleFound = () => {
+        if (!id) return
+        open(id)
+    }
+
+    useHiddenFound(contentRef, isOpen, handleFound)
 
     return (
         <div
@@ -22,7 +28,7 @@ const AccordionContent = ({ children }: AccordionContentProps) => {
             ref={contentRef}
             id={contentId}
             aria-labelledby={triggerId}
-            aria-hidden={!isOpened}
+            aria-hidden={!isOpen}
         >
             {children}
         </div>

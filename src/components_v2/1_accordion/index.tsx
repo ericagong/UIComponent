@@ -3,13 +3,13 @@ import { useState } from 'react'
 import Accordion from './Accordion'
 import data from './data'
 
-const SingleOpenAccordion = () => {
+const UncontrolledAccordion = () => {
     const [items] = useState(data)
 
     return (
         <>
-            <h3>#1-1. 단일 열림 정책 아코디언</h3>
-            <Accordion>
+            <h3>#1-1. 단일 열림 정책 아코디언 (Uncontrolled)</h3>
+            <Accordion defaultValue={items[0].id}>
                 {items.map(item => (
                     <Accordion.Item key={item.id} id={item.id}>
                         <Accordion.Trigger>{item.title}</Accordion.Trigger>
@@ -21,32 +21,31 @@ const SingleOpenAccordion = () => {
     )
 }
 
-// const MultipleOpenAccordion = () => {
-//     const [items] = useState(data)
+const ControlledAccordion = () => {
+    const [items] = useState(data)
+    const [openId, setOpenId] = useState<string | null>(null)
 
-//     return (
-//         <>
-//             <h3>#1-2. 다중 열림 정책 아코디언</h3>
-//             <Accordion defaultOpenId={items[0].id} multiple>
-//                 {items.map(item => (
-//                     <Accordion.Item key={item.id} id={item.id}>
-//                         <Accordion.Trigger>{item.title}</Accordion.Trigger>
-//                         <Accordion.Content>{item.content}</Accordion.Content>
-//                     </Accordion.Item>
-//                 ))}
-//             </Accordion>
-//         </>
-//     )
-// }
+    return (
+        <>
+            <h3>#1-2. 단일 열림 정책 아코디언 (Controlled)</h3>
+            <div>{`열린 Item ID(string | null): ${openId}`}</div>
+            <Accordion value={openId} onValueChange={setOpenId}>
+                {items.map(item => (
+                    <Accordion.Item key={item.id} id={item.id}>
+                        <Accordion.Trigger>{item.title}</Accordion.Trigger>
+                        <Accordion.Content>{item.content}</Accordion.Content>
+                    </Accordion.Item>
+                ))}
+            </Accordion>
+        </>
+    )
+}
 
-// TODO 완전한 Headless UI로 확장: asChild
-// TODO 외부 상태 제어 기능 추가: Controlled Accordion 추가
 const Examples = () => {
     return (
         <>
-            <SingleOpenAccordion />
-            {/* <MultipleOpenAccordion /> */}
-            {/* <ControlledAccordion /> */}
+            <UncontrolledAccordion />
+            <ControlledAccordion />
         </>
     )
 }

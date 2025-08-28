@@ -4,13 +4,13 @@ import cx from './cx'
 import { AccordionItemProps } from './types'
 
 const AccordionItem = ({ id, children }: AccordionItemProps) => {
-    const { openedItemId } = useAccordionStateContext()
+    const { openId } = useAccordionStateContext()
 
-    const isOpened = openedItemId === id
+    const isOpen = openId === id
 
     return (
         <AccordionItemProvider id={id}>
-            <li className={cx('item', { 'is-open': isOpened })}>{children}</li>
+            <li className={cx('item', { 'is-open': isOpen })}>{children}</li>
         </AccordionItemProvider>
     )
 }

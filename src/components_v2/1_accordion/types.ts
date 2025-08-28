@@ -1,21 +1,25 @@
 import { ReactNode } from 'react'
 
-type AccordionActions = {
-    open: (id: string) => void
-    close: () => void
-    toggle: (id: string | null) => void
-}
-
-type AccordionState = {
-    openedItemId: string | null
+type AccordionRootProps = {
+    value?: string | null
+    defaultValue?: string | null
+    onValueChange?: (value: string | null) => void
+    children: ReactNode
 }
 
 type AccordionProviderProps = {
+    openId?: string | null
+    setOpenId: (id: string | null) => void
     children: ReactNode
 }
 
-type AccordionRootProps = {
-    children: ReactNode
+type AccordionState = {
+    openId?: string | null
+}
+
+type AccordionActions = {
+    open: (id: string) => void
+    close: () => void
 }
 
 type AccordionItemState = {

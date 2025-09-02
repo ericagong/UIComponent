@@ -1,25 +1,17 @@
-import useControllableState from '@/hooks_v2/level1/useControllableState'
+import SelectionRoot from '@/features/selection/components/SelectionRoot'
+import type { SelectionRootProps } from '@/features/selection/types'
 
-import AccordionProvider from './context/AccordionProvider'
 import cx from './cx'
-import { AccordionRootProps } from './types'
 
-const AccordionRoot = ({
-    value,
-    defaultValue = null,
-    onValueChange,
-    children,
-}: AccordionRootProps) => {
-    const [openId, setOpenId] = useControllableState({
-        value,
-        defaultValue,
-        onValueChange,
-    })
+type AccordionRootProps<T> = SelectionRootProps<T>
+
+function AccordionRoot<T>(props: AccordionRootProps<T>) {
+    const { ...selectionProps } = props
 
     return (
-        <AccordionProvider openId={openId} setOpenId={setOpenId}>
-            <ul className={cx('root')}>{children}</ul>
-        </AccordionProvider>
+        <SelectionRoot<T> {...selectionProps}>
+            <ul className={cx('root')}>{props.children}</ul>
+        </SelectionRoot>
     )
 }
 

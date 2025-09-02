@@ -1,12 +1,13 @@
+import type { Dispatch, SetStateAction } from 'react'
 import { useCallback, useState } from 'react'
 
 type UseControllableStateParams<T> = {
     value?: T
     defaultValue?: T
-    onValueChange?: (newValue: T) => void
+    onValueChange?: (next: T) => void
 }
 
-type UseControllableStateReturn<T> = [T, (newValue: T) => void]
+type UseControllableStateReturn<T> = [T, Dispatch<SetStateAction<T>>]
 
 const useControllableState = <T>({
     value,
@@ -16,20 +17,33 @@ const useControllableState = <T>({
     const [uncontrolledState, setUncontrolledState] = useState<T | undefined>(defaultValue)
 
     const isControlled = value !== undefined
+    // TODO 이 부분 에러 잡기
+    // console.log(
+    //     'uncontrolledState',
+    //     uncontrolledState,
+    //     defaultValue,
+    //     isControlled,
+    //     value,
+    //     value === null
+    // )
 
     const currentState = isControlled ? (value as T) : (uncontrolledState as T)
 
-    const setCurrentState = useCallback(
-        (newValue: T) => {
+    const setCurrentState = useCallback<Dispatch<SetStateAction<T>>>(
+        next => {
+            const nextValue = next instanceof Function ? next(currentState) : next
+
             if (!isControlled) {
-                setUncontrolledState(newValue)
+                setUncontrolledState(nextValue)
             }
-            onValueChange?.(newValue)
+            onValueChange?.(nextValue)
         },
-        [isControlled, onValueChange]
+        [isControlled, onValueChange, currentState]
     )
 
     return [currentState, setCurrentState]
 }
 
 export default useControllableState
+
+export type { UseControllableStateParams }

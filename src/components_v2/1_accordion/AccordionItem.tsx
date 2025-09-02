@@ -1,18 +1,14 @@
-import AccordionItemProvider from './context/AccordionItemProvider'
-import { useAccordionStateContext } from './context/AccordionProvider'
+import SelectionItem from '@/features/selection/components/SelectionItem'
+import type { SelectionItemProps } from '@/features/selection/types'
+
 import cx from './cx'
-import { AccordionItemProps } from './types'
 
-const AccordionItem = ({ id, children }: AccordionItemProps) => {
-    const { openId } = useAccordionStateContext()
+type AccordionItemProps<T> = SelectionItemProps<T>
 
-    const isOpen = openId === id
+const AccordionItem = <T,>(props: AccordionItemProps<T>) => {
+    const { ...selectionItemProps } = props
 
-    return (
-        <AccordionItemProvider id={id}>
-            <li className={cx('item', { 'is-open': isOpen })}>{children}</li>
-        </AccordionItemProvider>
-    )
+    return <SelectionItem<T> {...selectionItemProps} className={cx('item')} />
 }
 
 export default AccordionItem

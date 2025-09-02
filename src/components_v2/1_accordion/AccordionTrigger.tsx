@@ -1,33 +1,14 @@
-import { useAccordionItemStateContext } from './context/AccordionItemProvider'
-import { useAccordionActionsContext, useAccordionStateContext } from './context/AccordionProvider'
+import SelectionTrigger from '@/features/selection/components/SelectionTrigger'
+import type { SelectionTriggerProps } from '@/features/selection/types'
+
 import cx from './cx'
-import { AccordionTriggerProps } from './types'
 
-const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
-    const { openId } = useAccordionStateContext()
-    const { id, triggerId, contentId } = useAccordionItemStateContext()
+type AccordionTriggerProps = SelectionTriggerProps
 
-    const isOpen = openId === id
+const AccordionTrigger = (props: AccordionTriggerProps) => {
+    const { ...triggerProps } = props
 
-    const { open, close } = useAccordionActionsContext()
-
-    const handleClick = () => {
-        if (!id) return
-        if (!isOpen) open(id)
-        else close()
-    }
-
-    return (
-        <button
-            className={cx('trigger')}
-            id={triggerId}
-            aria-controls={contentId}
-            aria-expanded={isOpen}
-            onClick={handleClick}
-        >
-            {children}
-        </button>
-    )
+    return <SelectionTrigger {...triggerProps} className={cx('trigger')} />
 }
 
 export default AccordionTrigger

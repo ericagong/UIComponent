@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Accordion from './Accordion'
 import data from './data'
 
-const UncontrolledAccordion = () => {
+const UncontrolledSingleAccordion = () => {
     const [items] = useState(data)
 
     return (
@@ -11,7 +11,7 @@ const UncontrolledAccordion = () => {
             <h3>#1-1. 단일 열림 정책 아코디언 (Uncontrolled)</h3>
             <Accordion defaultValue={items[0].id}>
                 {items.map(item => (
-                    <Accordion.Item key={item.id} id={item.id}>
+                    <Accordion.Item key={item.id} value={item.id}>
                         <Accordion.Trigger>{item.title}</Accordion.Trigger>
                         <Accordion.Content>{item.content}</Accordion.Content>
                     </Accordion.Item>
@@ -21,7 +21,7 @@ const UncontrolledAccordion = () => {
     )
 }
 
-const ControlledAccordion = () => {
+const ControlledSingleAccordion = () => {
     const [items] = useState(data)
     const [openId, setOpenId] = useState<string | null>(null)
 
@@ -31,7 +31,7 @@ const ControlledAccordion = () => {
             <div>{`열린 Item ID(string | null): ${openId}`}</div>
             <Accordion value={openId} onValueChange={setOpenId}>
                 {items.map(item => (
-                    <Accordion.Item key={item.id} id={item.id}>
+                    <Accordion.Item key={item.id} value={item.id}>
                         <Accordion.Trigger>{item.title}</Accordion.Trigger>
                         <Accordion.Content>{item.content}</Accordion.Content>
                     </Accordion.Item>
@@ -44,8 +44,8 @@ const ControlledAccordion = () => {
 const Examples = () => {
     return (
         <>
-            <UncontrolledAccordion />
-            <ControlledAccordion />
+            <UncontrolledSingleAccordion />
+            {/* <ControlledSingleAccordion /> */}
         </>
     )
 }

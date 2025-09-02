@@ -1,34 +1,34 @@
 import { useCallback, useMemo } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import type { SelectionProviderProps, SelectionRootProps } from '../types'
 
-const useSelectionAdaptor = <T>(props: SelectionRootProps<T>): SelectionProviderProps<T> => {
-    const { multiple = false, value, defaultValue, onValueChange, children } = props
+// TODO : SRP에 따른 역할 분리
+// useSelectionSetState: Set 기반 상태 관리
+// useSelectionAction: add/remove/has 동작 정의
+// useSelectionAdaptor: RootProps → ProviderProps 변환기
 
-    const normalizedValue = value ?? null
-    const normalizedDefaultValue = defaultValue ?? null
+const useSelectionAdaptor = <T, M extends boolean>(
+    props: SelectionRootProps<T, M>
+): SelectionProviderProps<T> => {
+    const { multiple = false, value, defaultValue, onValueChange } = props
 
-    const normalizedHandler = useCallback(
-        (next: T | T[] | null) => {
+    const adaptedOnValueChange = useCallback<Dispatch<SetStateAction<T | T[] | null>>>(
+        next => {
             if (!onValueChange) return
-            if (multiple) {
-                ;(onValueChange as (v: T[] | null) => void)(next as T[] | null)
-            } else {
-                ;(onValueChange as (v: T | null) => void)(next as T | null)
-            }
+            ;(onValueChange as Dispatch<SetStateAction<T | T[] | null>>)(next)
         },
-        [multiple, onValueChange]
+        [onValueChange]
     )
 
     const contextValue = useMemo(
         () => ({
             multiple,
-            value: normalizedValue,
-            defaultValue: normalizedDefaultValue,
-            onValueChange: normalizedHandler,
-            children,
+            value,
+            defaultValue,
+            onValueChange: adaptedOnValueChange,
         }),
-        [multiple, normalizedValue, normalizedDefaultValue, normalizedHandler, children]
+        [multiple, value, defaultValue, adaptedOnValueChange]
     )
 
     return contextValue

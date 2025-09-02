@@ -1,11 +1,9 @@
-import cx from 'clsx'
-
 import { useSelectionContext } from '../context/SelectionContext'
 import { useSelectionItemContext } from '../context/SelectionItemContext'
 import type { SelectionTriggerProps } from '../types'
 
-const SelectionTrigger = ({ children, className, ...rest }: SelectionTriggerProps) => {
-    const { has, add, remove, value: selectedValue } = useSelectionContext()
+const SelectionTrigger = ({ children }: SelectionTriggerProps) => {
+    const { has, add, remove } = useSelectionContext()
     const { value } = useSelectionItemContext()
     const isSelected = has(value)
 
@@ -16,11 +14,7 @@ const SelectionTrigger = ({ children, className, ...rest }: SelectionTriggerProp
         }
     }
 
-    return (
-        <button className={cx(className)} {...rest} onClick={handleClick}>
-            {children}
-        </button>
-    )
+    return <>{children({ onClick: handleClick })}</>
 }
 
 export default SelectionTrigger

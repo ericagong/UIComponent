@@ -4,7 +4,7 @@ import SelectionProvider from '../context/SelectionProvider'
 import useSelectionAdaptor from '../hooks/useSelectionAdaptor'
 import { SelectionRootProps } from '../types'
 
-function SelectionRoot<T>(props: SelectionRootProps<T>): JSX.Element {
+const SelectionRoot = <T, M extends boolean>(props: SelectionRootProps<T, M>): JSX.Element => {
     const providerProps = useSelectionAdaptor(props)
 
     return <SelectionProvider {...providerProps}>{props.children}</SelectionProvider>

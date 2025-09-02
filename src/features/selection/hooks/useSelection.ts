@@ -5,14 +5,13 @@ import type { UseSelectionParams } from '../types'
 const normalizeToSet = <T>(value: T | T[] | null | undefined): Set<T> | undefined => {
     if (value === undefined) return undefined
     if (value === null) return new Set()
-    const result = new Set(Array.isArray(value) ? value : [value])
     return new Set(Array.isArray(value) ? value : [value])
 }
 
 const serializeFromSet = <T>(set: Set<T>, multiple: boolean): T | T[] | null => {
     const values = [...set]
-    if (values.length === 0) return null
     if (multiple) return values
+    if (values.length === 0) return null
     return values[0]
 }
 

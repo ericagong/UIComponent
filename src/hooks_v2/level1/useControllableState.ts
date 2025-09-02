@@ -17,15 +17,6 @@ const useControllableState = <T>({
     const [uncontrolledState, setUncontrolledState] = useState<T | undefined>(defaultValue)
 
     const isControlled = value !== undefined
-    // TODO 이 부분 에러 잡기
-    // console.log(
-    //     'uncontrolledState',
-    //     uncontrolledState,
-    //     defaultValue,
-    //     isControlled,
-    //     value,
-    //     value === null
-    // )
 
     const currentState = isControlled ? (value as T) : (uncontrolledState as T)
 

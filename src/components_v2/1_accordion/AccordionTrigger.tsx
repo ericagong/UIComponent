@@ -1,14 +1,18 @@
 import SelectionTrigger from '@/features/selection/components/SelectionTrigger'
-import type { SelectionTriggerProps } from '@/features/selection/types'
 
 import cx from './cx'
-
-type AccordionTriggerProps = SelectionTriggerProps
+import type { AccordionTriggerProps } from './types'
 
 const AccordionTrigger = (props: AccordionTriggerProps) => {
-    const { ...triggerProps } = props
-
-    return <SelectionTrigger {...triggerProps} className={cx('trigger')} />
+    return (
+        <SelectionTrigger>
+            {({ onClick }) => (
+                <button {...props} onClick={onClick} className={cx('trigger')}>
+                    {props.children}
+                </button>
+            )}
+        </SelectionTrigger>
+    )
 }
 
 export default AccordionTrigger

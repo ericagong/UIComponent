@@ -16,4 +16,17 @@ const isStandardMouseLeftClick = (e: MouseEvent | PointerEvent): boolean => {
     return e.button === 0 && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey
 }
 
-export { isEventInTargets, isStandardMouseLeftClick }
+const isFocusable = (el: HTMLElement | null): el is HTMLElement => {
+    if (!el) return false
+    const focusableSelectors = [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'textarea:not([disabled])',
+        'select:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])',
+    ]
+    return el.matches(focusableSelectors.join(','))
+}
+
+export { isEventInTargets, isFocusable, isStandardMouseLeftClick }

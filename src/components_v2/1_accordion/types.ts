@@ -1,11 +1,24 @@
 import { ReactNode } from 'react'
 
-type AccordionRootProps<T> = {
-    value?: T | T[] | null
-    defaultValue?: T | T[] | null
-    onValueChange?: (value: T | T[] | null) => void
-    multiple?: boolean
+import {
+    SelectionContentProps,
+    SelectionItemProps,
+    SelectionRootProps,
+    SelectionTriggerProps,
+} from '@/features/selection/types'
+
+type AccordionRootProps<T, M extends boolean> = SelectionRootProps<T, M>
+
+type AccordionItemProps<T> = Omit<SelectionItemProps<T>, 'children'> & {
     children: ReactNode
 }
 
-export type { AccordionRootProps }
+type AccordionTriggerProps = Omit<SelectionTriggerProps, 'children'> & {
+    children: React.ReactNode
+}
+
+type AccordionContentProps = Omit<SelectionContentProps, 'children'> & {
+    children: ReactNode
+}
+
+export type { AccordionContentProps, AccordionItemProps, AccordionRootProps, AccordionTriggerProps }

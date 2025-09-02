@@ -1,14 +1,18 @@
 import SelectionContent from '@/features/selection/components/SelectionContent'
-import type { SelectionContentProps } from '@/features/selection/types'
 
 import cx from './cx'
-
-type AccordionContentProps = SelectionContentProps
+import type { AccordionContentProps } from './types'
 
 const AccordionContent = (props: AccordionContentProps) => {
-    const { ...contentProps } = props
-
-    return <SelectionContent {...contentProps} className={cx('content')} />
+    return (
+        <SelectionContent {...props}>
+            {({ ref }) => (
+                <div ref={ref} className={cx('content')}>
+                    {props.children}
+                </div>
+            )}
+        </SelectionContent>
+    )
 }
 
 export default AccordionContent

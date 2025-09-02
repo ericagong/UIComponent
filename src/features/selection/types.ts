@@ -1,36 +1,27 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { Dispatch, ReactNode, RefObject, SetStateAction } from 'react'
 
-type SingleSelectionRootProps<T> = {
-    multiple?: false
-    value?: T | null
-    defaultValue?: T | null
-    onValueChange?: (value: T | null) => void
+type SelectionRootProps<T, M extends boolean> = {
+    multiple?: M
+    value?: M extends true ? T[] : T | null
+    defaultValue?: M extends true ? T[] : T | null
+    onValueChange?: M extends true
+        ? Dispatch<SetStateAction<T[]>>
+        : Dispatch<SetStateAction<T | null>>
     children: ReactNode
 }
-
-type MultiSelectionRootProps<T> = {
-    multiple: true
-    value?: T[] | null
-    defaultValue?: T[] | null
-    onValueChange?: (value: T[] | null) => void
-    children: ReactNode
-}
-
-type SelectionRootProps<T> = SingleSelectionRootProps<T> | MultiSelectionRootProps<T>
 
 type SelectionProviderProps<T> = {
     multiple: boolean
-    value: T | T[] | null
-    defaultValue: T | T[] | null
-    onValueChange?: (value: T | T[] | null) => void
-    children: ReactNode
+    value?: T | T[] | null
+    defaultValue?: T | T[] | null
+    onValueChange?: Dispatch<SetStateAction<T | T[] | null>>
 }
 
 type UseSelectionParams<T> = {
     multiple?: boolean
     value?: T | T[] | null
     defaultValue?: T | T[] | null
-    onValueChange?: (next: T | T[] | null) => void
+    onValueChange?: Dispatch<SetStateAction<T | T[] | null>>
 }
 
 type SelectionContextValue<T> = {
@@ -50,25 +41,42 @@ type SelectionItemContextValue<T> = {
     value: T
 }
 
+type SelectionItemRenderProps = {
+    isSelected: boolean
+}
+
 type SelectionItemProps<T> = {
     value: T
-    children: ReactNode
-} & ComponentPropsWithoutRef<'div'>
+    children: (props: SelectionItemRenderProps) => ReactNode
+}
 
-type SelectionTriggerProps = ComponentPropsWithoutRef<'button'>
+type SelectionTriggerRenderProps = {
+    onClick: () => void
+    // isSelected: boolean
+}
 
-type SelectionContentProps = ComponentPropsWithoutRef<'div'>
+type SelectionTriggerProps = {
+    children: (props: SelectionTriggerRenderProps) => ReactNode
+}
+
+type SelectionContentRenderProps = {
+    ref: RefObject<HTMLDivElement | null>
+    // isSelected: boolean
+}
+
+type SelectionContentProps = {
+    children: (props: SelectionContentRenderProps) => ReactNode
+}
 
 export type {
-    MultiSelectionRootProps,
     SelectionContentProps,
     SelectionContextValue,
     SelectionItemContextValue,
     SelectionItemProps,
     SelectionItemProviderProps,
+    SelectionItemRenderProps,
     SelectionProviderProps,
     SelectionRootProps,
     SelectionTriggerProps,
-    SingleSelectionRootProps,
     UseSelectionParams,
 }

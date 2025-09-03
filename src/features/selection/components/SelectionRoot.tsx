@@ -1,13 +1,16 @@
+import type { ReactNode } from 'react'
 import { JSX } from 'react'
 
-import SelectionProvider from '../context/SelectionProvider'
-import useSelectionAdaptor from '../hooks/useSelectionAdaptor'
-import { SelectionRootProps } from '../types'
+import ActionsProvider from '../context/ActionsProvider'
+import type { Options } from '../types'
 
-const SelectionRoot = <T, M extends boolean>(props: SelectionRootProps<T, M>): JSX.Element => {
-    const providerProps = useSelectionAdaptor(props)
+type SelectionRootProps<T> = Options<T> & {
+    children: ReactNode
+}
 
-    return <SelectionProvider {...providerProps}>{props.children}</SelectionProvider>
+const SelectionRoot = <T,>(props: SelectionRootProps<T>): JSX.Element => {
+    return <ActionsProvider {...props} />
 }
 
 export default SelectionRoot
+export type { SelectionRootProps }

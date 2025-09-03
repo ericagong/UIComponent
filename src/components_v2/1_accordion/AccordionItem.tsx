@@ -1,15 +1,22 @@
+import type { ReactNode } from 'react'
+
+import type {
+    SelectionItemProps,
+    SelectionItemRendererProps,
+} from '@/features/selection/components/SelectionItem'
 import SelectionItem from '@/features/selection/components/SelectionItem'
 
 import cx from './cx'
-import type { AccordionItemProps } from './types'
 
-const AccordionItem = <T,>(props: AccordionItemProps<T>) => {
-    const { ...selectionItemProps } = props
+type AccordionItemProps<T> = Omit<SelectionItemProps<T>, 'children'> & {
+    children: ReactNode
+}
 
+const AccordionItem = <T,>({ value, children }: AccordionItemProps<T>) => {
     return (
-        <SelectionItem {...selectionItemProps}>
-            {({ isSelected }) => (
-                <li className={cx('item', { 'is-open': isSelected })}>{props.children}</li>
+        <SelectionItem value={value}>
+            {({ isSelected }: SelectionItemRendererProps) => (
+                <li className={cx('item', { 'is-open': isSelected })}>{children}</li>
             )}
         </SelectionItem>
     )

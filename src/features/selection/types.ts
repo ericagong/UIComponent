@@ -1,82 +1,58 @@
-import type { Dispatch, ReactNode, RefObject, SetStateAction } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
-type SelectionRootProps<T, M extends boolean> = {
-    multiple?: M
-    value?: M extends true ? T[] : T | null
-    defaultValue?: M extends true ? T[] : T | null
-    onValueChange?: M extends true
-        ? Dispatch<SetStateAction<T[]>>
-        : Dispatch<SetStateAction<T | null>>
+type SingleOptions<T> = {
+    multiple: false
+    defaultValue?: T | null
+    value?: T | null
+    onValueChange?: Dispatch<SetStateAction<T | null>>
     children: ReactNode
 }
 
-type SelectionProviderProps<T> = {
-    multiple: boolean
-    value?: T | T[] | null
-    defaultValue?: T | T[] | null
-    onValueChange?: Dispatch<SetStateAction<T | T[] | null>>
-}
-
-type UseSelectionParams<T> = {
-    multiple?: boolean
-    value?: T | T[] | null
-    defaultValue?: T | T[] | null
-    onValueChange?: Dispatch<SetStateAction<T | T[] | null>>
-}
-
-type SelectionContextValue<T> = {
-    // multiple: boolean
-    value: T | T[] | null
-    has: (target: T) => boolean
-    add: (target: T) => void
-    remove: (target: T) => void
-}
-
-type SelectionItemProviderProps<T> = {
-    value: T
+type MultiOptions<T> = {
+    multiple: true
+    defaultValue?: T[]
+    value?: T[]
+    onValueChange?: Dispatch<SetStateAction<T[]>>
     children: ReactNode
 }
 
-type SelectionItemContextValue<T> = {
+type Options<T> = SingleOptions<T> | MultiOptions<T>
+
+type SingleStrategy<T> = {
+    getInternalValue: (externalState: T | null | undefined) => Set<T> | undefined
+    getExternalValue: (state: Set<T>) => T | null
+    has: (state: Set<T>, value: T) => boolean
+    add: (state: Set<T>, value: T) => Set<T>
+    remove: (state: Set<T>, value: T) => Set<T>
+}
+
+type MultiStrategy<T> = {
+    getInternalValue: (externalState: T[] | undefined) => Set<T> | undefined
+    getExternalValue: (state: Set<T>) => T[]
+    has: (state: Set<T>, value: T) => boolean
+    add: (state: Set<T>, value: T) => Set<T>
+    remove: (state: Set<T>, value: T) => Set<T>
+}
+
+type Strategy<T> = SingleStrategy<T> | MultiStrategy<T>
+
+type Actions<T> = {
+    isSelected: (value: T) => boolean
+    select: (value: T) => void
+    unselect: (value: T) => void
+}
+
+type Identifier<T> = {
     value: T
-}
-
-type SelectionItemRenderProps = {
-    isSelected: boolean
-}
-
-type SelectionItemProps<T> = {
-    value: T
-    children: (props: SelectionItemRenderProps) => ReactNode
-}
-
-type SelectionTriggerRenderProps = {
-    onClick: () => void
-    // isSelected: boolean
-}
-
-type SelectionTriggerProps = {
-    children: (props: SelectionTriggerRenderProps) => ReactNode
-}
-
-type SelectionContentRenderProps = {
-    ref: RefObject<HTMLDivElement | null>
-    // isSelected: boolean
-}
-
-type SelectionContentProps = {
-    children: (props: SelectionContentRenderProps) => ReactNode
 }
 
 export type {
-    SelectionContentProps,
-    SelectionContextValue,
-    SelectionItemContextValue,
-    SelectionItemProps,
-    SelectionItemProviderProps,
-    SelectionItemRenderProps,
-    SelectionProviderProps,
-    SelectionRootProps,
-    SelectionTriggerProps,
-    UseSelectionParams,
+    Actions,
+    Identifier,
+    MultiOptions,
+    MultiStrategy,
+    Options,
+    SingleOptions,
+    SingleStrategy,
+    Strategy,
 }

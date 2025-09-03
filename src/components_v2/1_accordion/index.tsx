@@ -9,7 +9,7 @@ const UncontrolledSingleAccordion = () => {
     return (
         <>
             <h3>#1. 단일 열림 정책 아코디언 (Uncontrolled)</h3>
-            <Accordion defaultValue={items[0].id}>
+            <Accordion multiple={false} defaultValue={items[0].id}>
                 {items.map(item => (
                     <Accordion.Item key={item.id} value={item.id}>
                         <Accordion.Trigger>{item.title}</Accordion.Trigger>
@@ -29,7 +29,7 @@ const ControlledSingleAccordion = () => {
         <>
             <h3>#2. 단일 열림 정책 아코디언 (Controlled)</h3>
             <div>{`열린 Item ID(string | null): ${openId}`}</div>
-            <Accordion value={openId} onValueChange={setOpenId}>
+            <Accordion multiple={false} value={openId} onValueChange={setOpenId}>
                 {items.map(item => (
                     <Accordion.Item key={item.id} value={item.id}>
                         <Accordion.Trigger>{item.title}</Accordion.Trigger>

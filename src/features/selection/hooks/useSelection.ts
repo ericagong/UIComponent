@@ -1,61 +1,52 @@
+import { useMemo } from 'react'
+
 import useControllableState from '@/hooks_v2/level1/useControllableState'
 
-import type { UseSelectionParams } from '../types'
+import createSelectionStrategy from '../createSelectionStrategy'
+import type { Actions, MultiOptions, Options, SingleOptions } from '../types'
 
-const normalizeToSet = <T>(value: T | T[] | null | undefined): Set<T> | undefined => {
-    if (value === undefined) return undefined
-    if (value === null) return new Set()
-    return new Set(Array.isArray(value) ? value : [value])
-}
+type SingleUseSelectionParams<T> = SingleOptions<T>
+type MultiUseSelectionParams<T> = MultiOptions<T>
+type UseSelectionParams<T> = Options<T>
 
-const serializeFromSet = <T>(set: Set<T>, multiple: boolean): T | T[] | null => {
-    const values = [...set]
-    if (multiple) return values
-    if (values.length === 0) return null
-    return values[0]
-}
+type UseSelectionReturn<T> = Actions<T>
 
-// level2
-const useSelection = <T>({
-    multiple = false,
+function useSelection<T>(params: SingleUseSelectionParams<T>): UseSelectionReturn<T>
+function useSelection<T>(params: MultiUseSelectionParams<T>): UseSelectionReturn<T>
+
+function useSelection<T>({
+    multiple,
     value,
     defaultValue,
     onValueChange,
-}: UseSelectionParams<T>) => {
-    const [state, setState] = useControllableState<Set<T>>({
-        value: normalizeToSet(value),
-        defaultValue: normalizeToSet(defaultValue),
-        onValueChange: nextSet => {
-            onValueChange?.(serializeFromSet(nextSet, multiple))
-        },
+}: UseSelectionParams<T>): UseSelectionReturn<T> {
+    const strategy = useMemo(
+        () => (multiple ? createSelectionStrategy<T>(true) : createSelectionStrategy<T>(false)),
+        [multiple]
+    )
+
+    const bridgeOnValueChange = (nextSelected: Set<T>) => {
+        const externalState = strategy.getExternalValue(nextSelected)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        onValueChange?.(externalState as any)
+    }
+
+    const [selected, setSelected] = useControllableState<Set<T>>({
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        defaultValue: strategy.getInternalValue(defaultValue as any),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        value: strategy.getInternalValue(value as any),
+        onValueChange: bridgeOnValueChange,
     })
 
-    const has = (target: T) => state.has(target)
-
-    const add = (target: T) => {
-        setState(prev => {
-            const nextState = new Set(prev)
-            if (multiple) {
-                nextState.add(target)
-                return nextState
-            }
-            return new Set([target])
-        })
-    }
-
-    const remove = (target: T) => {
-        setState(prev => {
-            const nextState = new Set(prev)
-            nextState.delete(target)
-            return nextState
-        })
-    }
+    const isSelected = (target: T) => selected.has(target)
+    const select = (target: T) => setSelected(prev => strategy.add(prev, target))
+    const unselect = (target: T) => setSelected(prev => strategy.remove(prev, target))
 
     return {
-        value: serializeFromSet(state, multiple),
-        has,
-        add,
-        remove,
+        isSelected,
+        select,
+        unselect,
     }
 }
 

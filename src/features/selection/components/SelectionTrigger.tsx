@@ -1,16 +1,25 @@
-import { useSelectionContext } from '../context/SelectionContext'
-import { useSelectionItemContext } from '../context/SelectionItemContext'
-import type { SelectionTriggerProps } from '../types'
+import type { ReactNode } from 'react'
+
+import { useActionsContext } from '../context/ActionsContext'
+import { useIdentifierContext } from '../context/IdentifierContext'
+
+type SelectionTriggerRenderProps = {
+    onClick: () => void
+    // isSelected: boolean
+}
+
+type SelectionTriggerProps = {
+    children: (props: SelectionTriggerRenderProps) => ReactNode
+}
 
 const SelectionTrigger = ({ children }: SelectionTriggerProps) => {
-    const { has, add, remove } = useSelectionContext()
-    const { value } = useSelectionItemContext()
-    const isSelected = has(value)
+    const { isSelected, select, unselect } = useActionsContext()
+    const { value } = useIdentifierContext()
 
     const handleClick = () => {
-        if (isSelected) remove(value)
+        if (isSelected(value)) unselect(value)
         else {
-            add(value)
+            select(value)
         }
     }
 
@@ -18,3 +27,4 @@ const SelectionTrigger = ({ children }: SelectionTriggerProps) => {
 }
 
 export default SelectionTrigger
+export type { SelectionTriggerProps, SelectionTriggerRenderProps }

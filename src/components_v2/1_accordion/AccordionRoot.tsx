@@ -1,19 +1,15 @@
 import { JSX } from 'react'
 
+import type { SelectionRootProps } from '@/features/selection/components/SelectionRoot'
 import SelectionRoot from '@/features/selection/components/SelectionRoot'
 
 import cx from './cx'
-import type { AccordionRootProps } from './types'
 
-function AccordionRoot<T>(props: AccordionRootProps<T, true>): JSX.Element
+type AccordionRootProps<T> = SelectionRootProps<T>
 
-function AccordionRoot<T>(props: AccordionRootProps<T, false>): JSX.Element
-
-function AccordionRoot<T, M extends boolean>(props: AccordionRootProps<T, M>): JSX.Element {
-    const { ...selectionProps } = props
-
+const AccordionRoot = <T,>(props: AccordionRootProps<T>): JSX.Element => {
     return (
-        <SelectionRoot {...selectionProps}>
+        <SelectionRoot {...props}>
             <ul className={cx('root')}>{props.children}</ul>
         </SelectionRoot>
     )

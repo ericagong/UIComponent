@@ -1,23 +1,31 @@
+import type { ReactNode, RefObject } from 'react'
 import { useRef } from 'react'
 
 import useHiddenFound from '@/hooks_v2/level2/useHiddenFound'
 import { isFocusable } from '@/utils/events'
 
-import { useSelectionContext } from '../context/SelectionContext'
-import { useSelectionItemContext } from '../context/SelectionItemContext'
-import { SelectionContentProps } from '../types'
+import { useActionsContext } from '../context/ActionsContext'
+import { useIdentifierContext } from '../context/IdentifierContext'
+
+type SelectionContentRenderProps = {
+    ref: RefObject<HTMLDivElement | null>
+    // isSelected: boolean
+}
+
+type SelectionContentProps = {
+    children: (props: SelectionContentRenderProps) => ReactNode
+}
 
 const SelectionContent = ({ children }: SelectionContentProps) => {
-    const { has, add } = useSelectionContext()
-    const { value } = useSelectionItemContext()
+    const { isSelected, select } = useActionsContext()
+    const { value } = useIdentifierContext()
 
     const contentRef = useRef<HTMLDivElement | null>(null)
-    const isSelected = has(value)
 
     const handleFound = () => {
-        if (isSelected) return
+        if (isSelected(value)) return
 
-        add(value)
+        select(value)
 
         const target = contentRef.current
         if (isFocusable(target)) {
@@ -25,9 +33,11 @@ const SelectionContent = ({ children }: SelectionContentProps) => {
         }
     }
 
-    useHiddenFound(contentRef, isSelected, handleFound)
+    // TODO check 함수?
+    useHiddenFound(contentRef, isSelected(value), handleFound)
 
     return <>{children({ ref: contentRef })}</>
 }
 
 export default SelectionContent
+export type { SelectionContentProps, SelectionContentRenderProps }

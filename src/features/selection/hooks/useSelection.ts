@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import useControllableState from '@/hooks_v2/level1/useControllableState'
+import useControllableState from '@/features/common/atomic/useControllableState'
 
 import createSelectionStrategy from '../createSelectionStrategy'
 import type { Actions, MultiOptions, Options, SingleOptions } from '../types'
@@ -25,8 +25,8 @@ function useSelection<T>({
         [multiple]
     )
 
-    const bridgeOnValueChange = (nextSelected: Set<T>) => {
-        const externalState = strategy.getExternalValue(nextSelected)
+    const bridgeOnValueChange = (nextSelected: Set<T> | null) => {
+        const externalState = strategy.getExternalValue(nextSelected!)
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         onValueChange?.(externalState as any)
     }
@@ -39,9 +39,9 @@ function useSelection<T>({
         onValueChange: bridgeOnValueChange,
     })
 
-    const isSelected = (target: T) => selected.has(target)
-    const select = (target: T) => setSelected(prev => strategy.add(prev, target))
-    const unselect = (target: T) => setSelected(prev => strategy.remove(prev, target))
+    const isSelected = (target: T) => selected!.has(target)
+    const select = (target: T) => setSelected(prev => strategy.add(prev!, target))
+    const unselect = (target: T) => setSelected(prev => strategy.remove(prev!, target))
 
     return {
         isSelected,

@@ -1,7 +1,7 @@
 import type { ReactNode, RefObject } from 'react'
 import { useRef } from 'react'
 
-import useHiddenFound from '@/hooks_v2/level2/useHiddenFound'
+import useFoundReveal from '@/features/common/combined/useFoundReveal'
 import { isFocusable } from '@/utils/events'
 
 import { useActionsContext } from '../context/ActionsContext'
@@ -33,8 +33,7 @@ const SelectionContent = ({ children }: SelectionContentProps) => {
         }
     }
 
-    // TODO check 함수?
-    useHiddenFound(contentRef, isSelected(value), handleFound)
+    useFoundReveal(contentRef, isSelected(value), handleFound)
 
     return <>{children({ ref: contentRef })}</>
 }

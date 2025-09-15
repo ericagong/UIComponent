@@ -44,19 +44,17 @@ $marker-open: '- ';
     border-bottom-width: 0;
 }
 
-.item.is-open {
-    .trigger {
-        background-color: $current-tab;
+.trigger[data-state='open'] {
+    background-color: $current-tab;
 
-        &::before {
-            content: $marker-open;
-        }
+    &::before {
+        content: $marker-open;
     }
+}
 
-    .content {
-        padding: 15px;
-        max-height: 500px;
-        background-color: $current-description;
-        border-bottom: 1px solid $border-gray;
-    }
+.content[data-state='open'] {
+    padding: 15px;
+    max-height: 300px;
+    background-color: $current-description;
+    border-bottom: 1px solid $border-gray;
 }

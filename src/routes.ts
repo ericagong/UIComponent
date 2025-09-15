@@ -25,8 +25,8 @@ import PortalSnackbars from '@/components/snackbar/2_createPortal'
 import TabMenus from '@/components/tabs'
 import TextBoxes from '@/components/textBox'
 import Tooltips from '@/components/tooltip'
-// v2
-import Accordions from '@/components_v2/1_accordion'
+// v3
+import Accordions from '@/UI/accordion'
 
 export const routePaths = [
     '/',

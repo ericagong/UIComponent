@@ -4,11 +4,14 @@ import useControllableState from '@/features/common/useControllableState'
 import useMultiSelectionActions from '@/features/selection/useMultiSelectionActions'
 import { SelectionContext } from '@/features/selection/useSelectionActions'
 
+import cx from './cx'
 type AccordionMultiRootProps<T> = {
     value?: T[]
     defaultValue?: T[]
     onValueChange?: (next: T[]) => void
     children: ReactNode
+} & {
+    className?: string
 }
 
 const AccordionMultiRoot = <T,>({
@@ -16,6 +19,7 @@ const AccordionMultiRoot = <T,>({
     defaultValue,
     onValueChange,
     children,
+    className,
 }: AccordionMultiRootProps<T>) => {
     const [state, setState] = useControllableState<T[]>({
         value,
@@ -29,7 +33,7 @@ const AccordionMultiRoot = <T,>({
 
     return (
         <SelectionContext.Provider value={context}>
-            <div role="presentation">{children}</div>
+            <ul className={cx('root', className)}>{children}</ul>
         </SelectionContext.Provider>
     )
 }

@@ -1,8 +1,7 @@
 import type { RefObject } from 'react'
 
-import useEventListener from '@/features/common/atomic/useEventListener'
-
-import useAttribute from '../atomic/useAttribute'
+import useAttribute from '@/features/common/useAttribute'
+import useEventListener from '@/features/common/useEventListener'
 
 const useFoundReveal = (
     targetRef: RefObject<HTMLElement | null>,

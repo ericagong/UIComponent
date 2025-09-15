@@ -3,9 +3,13 @@ import { ButtonHTMLAttributes } from 'react'
 import useItemIdentifier from '@/features/common/useItemIdentifier'
 import useSelectionActions from '@/features/selection/useSelectionActions'
 
-type AccordionTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>
+import cx from './cx'
 
-const AccordionTrigger = ({ children, ...props }: AccordionTriggerProps) => {
+type AccordionTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string
+}
+
+const AccordionTrigger = ({ children, className, ...props }: AccordionTriggerProps) => {
     const { isSelected, select, unselect } = useSelectionActions()
     const { id } = useItemIdentifier()
 
@@ -18,6 +22,7 @@ const AccordionTrigger = ({ children, ...props }: AccordionTriggerProps) => {
     return (
         <button
             {...props}
+            className={cx('trigger', className)}
             type="button"
             id={`trigger-${String(id)}`}
             aria-expanded={isOpen}

@@ -10,13 +10,13 @@ const AccordionRoot = <T,>(props: AccordionRootProps<T>) => {
         const { multiple, ...rest } = props as { multiple: true } & React.ComponentProps<
             typeof AccordionMultiRoot<T>
         >
-        return <AccordionMultiRoot {...rest} />
+        return <AccordionMultiRoot {...rest}>{props.children}</AccordionMultiRoot>
     }
 
     const { multiple, ...rest } = props as { multiple?: false } & React.ComponentProps<
         typeof AccordionSingleRoot<T>
     >
-    return <AccordionSingleRoot {...rest} />
+    return <AccordionSingleRoot {...rest}>{props.children}</AccordionSingleRoot>
 }
 
 export default AccordionRoot

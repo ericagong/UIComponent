@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import Accordion from './compound/Accordion'
+import Accordion from './Accordion'
 import data from './data'
 
 const UncontrolledSingleAccordion = () => {
